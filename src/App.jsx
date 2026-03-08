@@ -116,21 +116,21 @@ const Navbar = () => {
             alt="Gallery Design Logo" 
             className={`h-8 w-auto transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`} 
           />
-          <span className="hidden sm:inline">Gallery Design</span>
+          <span className="inline">Gallery Design</span>
         </Link>
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <Link to="/#services" className="hover:-translate-y-[1px] transition-transform">Services</Link>
-          <Link to="/#work" className="hover:-translate-y-[1px] transition-transform">Our Work</Link>
-          <Link to="/#process" className="hover:-translate-y-[1px] transition-transform">Process</Link>
+          <a href="/#services" className="hover:-translate-y-[1px] transition-transform">Services</a>
+          <a href="/#work" className="hover:-translate-y-[1px] transition-transform">Our Work</a>
+          <a href="/#process" className="hover:-translate-y-[1px] transition-transform">Process</a>
           <Link to="/faq" className="hover:-translate-y-[1px] transition-transform">FAQ</Link>
         </div>
 
-        <Link to="/#contact" className="hidden md:block">
+        <a href="/#contact" className="hidden md:block">
           <MagneticButton className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${scrolled || menuOpen ? 'bg-primary text-bone' : 'bg-bone text-black'}`}>
             Contact Us
           </MagneticButton>
-        </Link>
+        </a>
 
         <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X size={24} className="text-black" /> : <Menu size={24} className={scrolled ? "text-black" : "text-white"} />}
@@ -177,7 +177,7 @@ const Hero = () => {
     <section ref={scope} className="relative h-[100dvh] w-full flex items-end pb-20 pt-32 px-6 lg:px-12 bg-black overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
-          src="/hero image.png" 
+          src="/hero image2.jpg" 
           alt="Custom built walk in wardrobe" 
           className="w-full h-full object-cover opacity-60"
           fetchpriority="high"
@@ -197,16 +197,16 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-wrap items-center gap-4 hero-element">
-            <Link to="/#contact">
+            <a href="#contact">
               <MagneticButton className="px-8 py-4 bg-primary text-bone rounded-full font-medium inline-flex items-center gap-2">
                 Contact Us <ArrowRight size={18} />
               </MagneticButton>
-            </Link>
-            <Link to="/#services">
+            </a>
+            <a href="#services">
               <MagneticButton className="px-8 py-4 bg-white/10 backdrop-blur-md text-bone rounded-full font-medium hover:bg-white/20 transition-colors">
                 View Services
               </MagneticButton>
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -254,7 +254,7 @@ const Services = () => {
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="py-24 px-6 lg:px-12 bg-bone">
+    <section id="services" ref={sectionRef} className="pt-10 pb-4 px-6 lg:px-12 bg-bone">
       <div className="max-w-7xl mx-auto">
         <div className="mb-4 max-w-3xl">
           <h2 className="font-heading text-4xl mb-4 text-black">Beautiful Solutions</h2>
@@ -268,7 +268,7 @@ const Services = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-48">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Card 1: Static layout of offerings */}
           <div className="service-card bg-concrete/30 p-8 rounded-[2rem] border border-concrete flex flex-col justify-between h-[400px] hover:-translate-y-1 transition-transform">
             <div>
@@ -326,7 +326,7 @@ const Services = () => {
 
 const Work = () => {
   return (
-    <section id="work" className="py-24 px-6 lg:px-12 bg-black text-bone mb-48">
+    <section id="work" className="py-10 px-6 lg:px-12 bg-black text-bone">
       <div className="max-w-7xl mx-auto">
         <h2 className="font-drama font-bold text-5xl md:text-7xl mb-12">Our Recent Work</h2>
         
@@ -423,13 +423,13 @@ const Process = () => {
   }, []);
 
   return (
-    <section id="process" ref={containerRef} className="py-24 px-6 lg:px-12 bg-bone">
+    <section id="process" ref={containerRef} className="pt-4 pb-10 px-6 lg:px-12 bg-bone">
       <div className="max-w-3xl mx-auto">
-        <h2 className="font-heading text-4xl mb-16 text-center">How It Works</h2>
+        <h2 className="font-heading text-4xl mb-10 text-center">How It Works</h2>
         
         <div className="relative">
           {/* Card 1 */}
-          <div className="process-card bg-white p-8 md:p-12 rounded-[2rem] border border-concrete shadow-premium mb-[10vh] flex flex-col md:flex-row gap-8 items-start relative z-10 w-full">
+          <div className="process-card bg-white p-8 md:p-12 rounded-[2rem] border border-concrete shadow-premium mb-[5vh] flex flex-col md:flex-row gap-8 items-start relative z-10 w-full">
             <div className="font-data text-4xl text-concrete font-bold leading-none">01</div>
             <div>
               <h3 className="font-heading text-2xl mb-3">Visit Our Showroom</h3>
@@ -443,7 +443,7 @@ const Process = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="process-card bg-concrete/40 p-8 md:p-12 rounded-[2rem] border border-concrete shadow-premium mb-[10vh] flex flex-col md:flex-row gap-8 items-start relative z-20 w-full backdrop-blur-sm">
+          <div className="process-card bg-concrete/40 p-8 md:p-12 rounded-[2rem] border border-concrete shadow-premium mb-[5vh] flex flex-col md:flex-row gap-8 items-start relative z-20 w-full backdrop-blur-sm">
             <div className="font-data text-4xl text-white font-bold leading-none mix-blend-difference">02</div>
             <div>
               <h3 className="font-heading text-2xl mb-3">Home Measure & Design</h3>
@@ -495,7 +495,7 @@ const Reviews = () => {
   ];
 
   return (
-    <section className="py-24 px-6 lg:px-12 bg-bone border-t border-concrete/20">
+    <section className="py-10 px-6 lg:px-12 bg-bone border-t border-concrete/20">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="max-w-xl">
@@ -550,7 +550,7 @@ const Reviews = () => {
 
 const Trust = () => {
   return (
-    <section className="bg-black text-white py-32 px-6 relative overflow-hidden flex items-center justify-center min-h-[60vh]">
+    <section className="bg-black text-white py-16 px-6 relative overflow-hidden flex items-center justify-center min-h-[40vh]">
       <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?q=80&w=2672&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity grayscale" />
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <p className="font-heading text-lg md:text-xl text-concrete/70 mb-6">Many companies just want to get the job done quickly.</p>
@@ -588,7 +588,7 @@ const Credentials = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 px-6 lg:px-12 bg-concrete/20 border-y border-concrete">
+    <section ref={sectionRef} className="py-10 px-6 lg:px-12 bg-concrete/20 border-y border-concrete">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-x divide-concrete/50">
           <div className="text-center px-4">
@@ -646,7 +646,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-24 px-6 lg:px-12 bg-bone">
+    <section className="py-10 px-6 lg:px-12 bg-bone">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-heading text-4xl mb-4 text-black">Common Questions</h2>
@@ -678,8 +678,10 @@ const FAQPage = () => {
     <div className="pt-24 bg-bone min-h-screen">
       <div className="relative w-full h-[50vh] min-h-[400px] overflow-hidden mb-16">
         <img src="/FAQ HERO.png" alt="Frequently Asked Questions" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-          <h1 className="text-bone font-drama text-5xl md:text-7xl font-bold">Frequently Asked Questions</h1>
+        <div className="absolute inset-0 bg-black/40 flex flex-col justify-end pb-10 px-6 lg:px-12">
+          <div className="max-w-7xl mx-auto w-full">
+            <h1 className="text-bone font-drama text-5xl md:text-7xl font-bold">Frequently Asked Questions</h1>
+          </div>
         </div>
       </div>
       <FAQ />
@@ -688,8 +690,10 @@ const FAQPage = () => {
 };
 
 const Booking = () => {
+  const [showHours, setShowHours] = useState(false);
+
   return (
-    <section id="contact" className="py-24 px-6 lg:px-12 bg-bone">
+    <section id="contact" className="py-10 px-6 lg:px-12 bg-bone relative">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           
@@ -735,7 +739,11 @@ const Booking = () => {
               <h2 className="font-drama font-bold text-5xl mb-4">Come Say Hello</h2>
               <p className="text-black/70 max-w-md mb-8">If you are still unsure, we can give you more information before you schedule an appointment, speak with our team today.</p>
               
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-100 text-red-700 font-data text-xs border border-red-200 mb-6 w-fit">
+              <div 
+                onClick={() => setShowHours(true)}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-100 text-red-700 font-data text-xs border border-red-200 mb-6 w-fit cursor-pointer hover:bg-red-200 transition-colors"
+                title="View full opening hours"
+              >
                 <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
                 <span className="font-bold">Closed</span> 
                 <span className="opacity-70 mx-1">•</span> 
@@ -780,6 +788,47 @@ const Booking = () => {
 
         </div>
       </div>
+
+      {/* Opening Hours Modal */}
+      {showHours && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-6" 
+          onClick={() => setShowHours(false)}
+        >
+          <div 
+            className="bg-white p-8 rounded-[2rem] max-w-md w-full border border-concrete shadow-premium relative animate-in fade-in zoom-in duration-200" 
+            onClick={e => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setShowHours(false)} 
+              className="absolute top-6 right-6 text-black/50 hover:text-black transition-colors"
+            >
+              <X size={24} />
+            </button>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-3 bg-concrete/50 rounded-full"><Clock size={24} className="text-primary" /></div>
+              <h3 className="font-heading text-2xl font-bold">Opening Hours</h3>
+            </div>
+            
+            <div className="space-y-1 font-body text-black/80 font-medium">
+              {[
+                { day: 'Monday', hours: '9:00 AM - 5:00 PM' },
+                { day: 'Tuesday', hours: '9:00 AM - 5:00 PM' },
+                { day: 'Wednesday', hours: '9:00 AM - 5:00 PM' },
+                { day: 'Thursday', hours: '9:00 AM - 5:00 PM' },
+                { day: 'Friday', hours: '9:00 AM - 5:00 PM' },
+                { day: 'Saturday', hours: 'Closed', closed: true },
+                { day: 'Sunday', hours: 'Closed', closed: true }
+              ].map(({ day, hours, closed }) => (
+                <div key={day} className={`flex justify-between items-center py-3 border-b border-concrete/40 last:border-0 ${closed ? 'text-black/40' : ''}`}>
+                  <span>{day}</span>
+                  <span className={closed ? 'font-normal' : 'text-black'}>{hours}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
@@ -845,23 +894,21 @@ export default function App() {
         <ScrollToTop />
         <div className="noise-overlay" />
         <Navbar />
-        
         <Routes>
           <Route path="/" element={
-            <>
+            <main>
               <Hero />
-              <Credentials />
               <Services />
               <Work />
               <Process />
               <Reviews />
               <Trust />
+              <Credentials />
               <Booking />
-            </>
+            </main>
           } />
           <Route path="/faq" element={<FAQPage />} />
         </Routes>
-        
         <Footer />
       </div>
     </Router>
