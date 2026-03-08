@@ -79,6 +79,7 @@ const MagneticButton = ({ children, className = '', onClick }) => {
 const Navbar = () => {
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -88,41 +89,70 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [menuOpen]);
+
   return (
-    <nav
-      ref={navRef}
-      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[2rem] transition-all duration-300 w-[90%] max-w-5xl ${
-        scrolled
-          ? 'bg-bone/80 backdrop-blur-xl border border-concrete text-black shadow-premium'
-          : 'bg-black/20 backdrop-blur-md text-bone shadow-lg'
-      }`}
-    >
-      <Link to="/" className="flex items-center gap-3 font-heading font-bold text-xl tracking-tight">
-        <img 
-          src="/GalleryDesignLogo.svg" 
-          alt="Gallery Design Logo" 
-          className={`h-8 w-auto transition-all duration-300 ${scrolled ? 'brightness-0' : 'brightness-0 invert'}`} 
-        />
-        <span className="hidden sm:inline">Gallery Design</span>
-      </Link>
-      
-      <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-        <Link to="/#services" className="hover:-translate-y-[1px] transition-transform">Services</Link>
-        <Link to="/#work" className="hover:-translate-y-[1px] transition-transform">Our Work</Link>
-        <Link to="/#process" className="hover:-translate-y-[1px] transition-transform">Process</Link>
-        <Link to="/faq" className="hover:-translate-y-[1px] transition-transform">FAQ</Link>
+    <>
+      <nav
+        ref={navRef}
+        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[2rem] transition-all duration-300 w-[90%] max-w-5xl ${
+          scrolled || menuOpen
+            ? 'bg-bone/80 backdrop-blur-xl border border-concrete text-black shadow-premium'
+            : 'bg-black/20 backdrop-blur-md text-bone shadow-lg'
+        }`}
+      >
+        <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 font-heading font-bold text-xl tracking-tight">
+          <img 
+            src="/GalleryDesignLogo.svg" 
+            alt="Gallery Design Logo" 
+            className={`h-8 w-auto transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`} 
+          />
+          <span className="hidden sm:inline">Gallery Design</span>
+        </Link>
+        
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <Link to="/#services" className="hover:-translate-y-[1px] transition-transform">Services</Link>
+          <Link to="/#work" className="hover:-translate-y-[1px] transition-transform">Our Work</Link>
+          <Link to="/#process" className="hover:-translate-y-[1px] transition-transform">Process</Link>
+          <Link to="/faq" className="hover:-translate-y-[1px] transition-transform">FAQ</Link>
+        </div>
+
+        <Link to="/#contact" className="hidden md:block">
+          <MagneticButton className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${scrolled || menuOpen ? 'bg-primary text-bone' : 'bg-bone text-black'}`}>
+            Contact Us
+          </MagneticButton>
+        </Link>
+
+        <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <X size={24} className="text-black" /> : <Menu size={24} className={scrolled ? "text-black" : "text-white"} />}
+        </button>
+      </nav>
+
+      <div 
+        className={`fixed inset-0 z-40 bg-bone transition-transform duration-500 ease-in-out flex flex-col items-center justify-center gap-8 md:hidden ${
+          menuOpen ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
+        <a href="/#services" onClick={() => setMenuOpen(false)} className="text-3xl font-heading text-black hover:text-primary transition-colors">Services</a>
+        <a href="/#work" onClick={() => setMenuOpen(false)} className="text-3xl font-heading text-black hover:text-primary transition-colors">Our Work</a>
+        <a href="/#process" onClick={() => setMenuOpen(false)} className="text-3xl font-heading text-black hover:text-primary transition-colors">Process</a>
+        <Link to="/faq" onClick={() => setMenuOpen(false)} className="text-3xl font-heading text-black hover:text-primary transition-colors">FAQ</Link>
+        <a href="/#contact" onClick={() => setMenuOpen(false)} className="mt-8">
+          <MagneticButton className="px-8 py-4 bg-primary text-bone rounded-full text-lg font-medium">
+            Contact Us
+          </MagneticButton>
+        </a>
       </div>
-
-      <Link to="/#contact">
-        <MagneticButton className={`hidden md:flex px-5 py-2 rounded-full text-sm font-medium transition-colors ${scrolled ? 'bg-primary text-bone' : 'bg-bone text-black'}`}>
-          Contact Us
-        </MagneticButton>
-      </Link>
-
-      <button className="md:hidden">
-        <Menu size={24} />
-      </button>
-    </nav>
+    </>
   );
 };
 
@@ -304,7 +334,7 @@ const Work = () => {
           <div className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10">
             <img src="/walkinwardrobe3.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Walk in wardrobe" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
-              <span className="font-data text-primary text-xs mb-2 uppercase">Beautiful Transformation</span>
+              <span className="font-data text-white text-xs mb-2 uppercase">Beautiful Transformation</span>
               <h3 className="font-heading text-2xl md:text-3xl">Elegant Walk-in Wardrobe, Edinburgh</h3>
             </div>
           </div>
@@ -313,14 +343,14 @@ const Work = () => {
             <div className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10">
               <img src="/tvunit3.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Living room storage" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <span className="font-data text-primary text-xs mb-1 uppercase">Living Space</span>
+                <span className="font-data text-white text-xs mb-1 uppercase">Living Space</span>
                 <h3 className="font-heading text-xl">Beautiful TV Media Wall</h3>
               </div>
             </div>
             <div className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10">
               <img src="/warm room.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Home office" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <span className="font-data text-primary text-xs mb-1 uppercase">Bedroom Storage</span>
+                <span className="font-data text-white text-xs mb-1 uppercase">Bedroom Storage</span>
                 <h3 className="font-heading text-xl">Cozy Fitted Wardrobes</h3>
               </div>
             </div>
@@ -330,14 +360,14 @@ const Work = () => {
             <div className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10">
               <img src="/backboard.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Bedroom features" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <span className="font-data text-primary text-xs mb-1 uppercase">Beautiful Finishes</span>
+                <span className="font-data text-white text-xs mb-1 uppercase">Beautiful Finishes</span>
                 <h3 className="font-heading text-xl">Custom Headboards</h3>
               </div>
             </div>
             <div className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10">
               <img src="/walkinwardrobe2.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Walk in wardrobe detail" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <span className="font-data text-primary text-xs mb-1 uppercase">Smart Storage</span>
+                <span className="font-data text-white text-xs mb-1 uppercase">Smart Storage</span>
                 <h3 className="font-heading text-xl">Shoe Display Solutions</h3>
               </div>
             </div>
@@ -346,7 +376,7 @@ const Work = () => {
           <div className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10">
             <img src="/Walkinwardrobe.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Walk in wardrobe" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
-              <span className="font-data text-primary text-xs mb-2 uppercase">Complete Room Fit-Out</span>
+              <span className="font-data text-white text-xs mb-2 uppercase">Complete Room Fit-Out</span>
               <h3 className="font-heading text-2xl md:text-3xl">Bespoke Dressing Room</h3>
             </div>
           </div>
