@@ -113,9 +113,11 @@ const Navbar = () => {
         <Link to="/faq" className="hover:-translate-y-[1px] transition-transform">FAQ</Link>
       </div>
 
-      <MagneticButton className={`hidden md:flex px-5 py-2 rounded-full text-sm font-medium transition-colors ${scrolled ? 'bg-primary text-bone' : 'bg-bone text-black'}`}>
-        Book Appointment
-      </MagneticButton>
+      <Link to="/#contact">
+        <MagneticButton className={`hidden md:flex px-5 py-2 rounded-full text-sm font-medium transition-colors ${scrolled ? 'bg-primary text-bone' : 'bg-bone text-black'}`}>
+          Contact Us
+        </MagneticButton>
+      </Link>
 
       <button className="md:hidden">
         <Menu size={24} />
@@ -653,7 +655,7 @@ const FAQPage = () => {
 
 const Booking = () => {
   return (
-    <section className="py-24 px-6 lg:px-12 bg-bone">
+    <section id="contact" className="py-24 px-6 lg:px-12 bg-bone">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           
