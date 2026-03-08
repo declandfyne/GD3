@@ -167,12 +167,16 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-wrap items-center gap-4 hero-element">
-            <MagneticButton className="px-8 py-4 bg-primary text-bone rounded-full font-medium inline-flex items-center gap-2">
-              Book Showroom Visit <ArrowRight size={18} />
-            </MagneticButton>
-            <MagneticButton className="px-8 py-4 bg-white/10 backdrop-blur-md text-bone rounded-full font-medium hover:bg-white/20 transition-colors">
-              View Services
-            </MagneticButton>
+            <Link to="/#contact">
+              <MagneticButton className="px-8 py-4 bg-primary text-bone rounded-full font-medium inline-flex items-center gap-2">
+                Contact Us <ArrowRight size={18} />
+              </MagneticButton>
+            </Link>
+            <Link to="/#services">
+              <MagneticButton className="px-8 py-4 bg-white/10 backdrop-blur-md text-bone rounded-full font-medium hover:bg-white/20 transition-colors">
+                View Services
+              </MagneticButton>
+            </Link>
           </div>
         </div>
 
