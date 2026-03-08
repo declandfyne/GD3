@@ -199,7 +199,7 @@ const Services = () => {
           <div className="service-card bg-black text-bone p-8 rounded-[2rem] h-[400px] flex flex-col justify-between hover:-translate-y-1 transition-transform relative overflow-hidden">
             <div className="relative z-10">
               <div className="font-data text-xs text-primary mb-4">[02] LIVING & OFFICE</div>
-              <h3 className="font-heading text-2xl mb-2">TV Units & Desks</h3>
+              <h3 className="font-heading text-2xl mb-2">Custom TV Units & Desks</h3>
               <p className="text-bone/60 font-body">TV units, shelving, and comfortable home office spaces designed to blend seamlessly with your home's unique style.</p>
             </div>
 
