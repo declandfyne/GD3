@@ -200,8 +200,9 @@ const Services = () => {
             <div className="relative z-10">
               <div className="font-data text-xs text-primary mb-4">[02] LIVING & OFFICE</div>
               <h3 className="font-heading text-2xl mb-2">TV Units & Desks</h3>
-              <p className="text-bone/60 font-body">Custom TV units, shelving, and comfortable home office spaces designed to blend seamlessly with your home's unique style.</p>
+              <p className="text-bone/60 font-body">TV units, shelving, and comfortable home office spaces designed to blend seamlessly with your home's unique style.</p>
             </div>
+
             <div className="font-data text-sm flex flex-col gap-2 relative z-10">
               {feedLogs.map((log, i) => (
                 <div key={i} className={`flex items-center gap-2 ${i === feedLogs.length - 1 ? 'text-concrete' : 'text-concrete/40'}`}>
