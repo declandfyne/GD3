@@ -254,7 +254,7 @@ const Services = () => {
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="pt-10 pb-12 md:pb-4 px-6 lg:px-12 bg-bone">
+    <section id="services" ref={sectionRef} className="pt-10 pb-20 md:pb-24 px-6 lg:px-12 bg-bone">
       <div className="max-w-7xl mx-auto">
         <div className="mb-4 max-w-3xl">
           <h2 className="font-heading text-4xl mb-4 text-black">Beautiful Solutions</h2>
@@ -898,12 +898,12 @@ export default function App() {
           <Route path="/" element={
             <main>
               <Hero />
+              <Credentials />
               <Services />
               <Work />
               <Process />
               <Reviews />
               <Trust />
-              <Credentials />
               <Booking />
             </main>
           } />
