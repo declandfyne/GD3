@@ -6,6 +6,56 @@ import { ArrowRight, Calendar, MapPin, Phone, CheckCircle2, ChevronRight, Menu, 
 
 gsap.registerPlugin(ScrollTrigger);
 
+const AppSkeleton = () => (
+  <div className="min-h-screen bg-bone pt-32 px-6 lg:px-12 animate-pulse">
+    {/* Navbar Skeleton */}
+    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[2rem] w-[90%] max-w-5xl bg-concrete/20 border border-concrete/30">
+      <div className="w-32 h-8 bg-concrete/30 rounded-full" />
+      <div className="hidden md:flex gap-8">
+        <div className="w-16 h-4 bg-concrete/30 rounded-full" />
+        <div className="w-20 h-4 bg-concrete/30 rounded-full" />
+        <div className="w-16 h-4 bg-concrete/30 rounded-full" />
+      </div>
+      <div className="w-32 h-10 bg-concrete/30 rounded-full" />
+    </div>
+
+    {/* Hero Skeleton */}
+    <div className="max-w-7xl mx-auto h-[70vh] bg-concrete/20 rounded-[2rem] mb-24 flex flex-col justify-end p-12">
+      <div className="w-1/2 h-8 bg-concrete/30 rounded-full mb-4" />
+      <div className="w-3/4 h-16 bg-concrete/30 rounded-full mb-8" />
+      <div className="w-1/3 h-4 bg-concrete/30 rounded-full mb-2" />
+      <div className="w-1/4 h-4 bg-concrete/30 rounded-full mb-8" />
+      <div className="flex gap-4">
+        <div className="w-48 h-12 bg-concrete/30 rounded-full" />
+        <div className="w-36 h-12 bg-concrete/30 rounded-full" />
+      </div>
+    </div>
+
+    {/* Section Skeleton */}
+    <div className="max-w-7xl mx-auto">
+      <div className="w-1/3 h-10 bg-concrete/30 rounded-full mb-4" />
+      <div className="w-2/3 h-4 bg-concrete/30 rounded-full mb-12" />
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+        {[1, 2, 3].map(i => (
+          <div key={i} className="h-96 bg-concrete/20 rounded-[2rem] p-8 flex flex-col justify-between border border-concrete/10">
+            <div>
+              <div className="w-20 h-4 bg-concrete/30 rounded-full mb-6" />
+              <div className="w-3/4 h-8 bg-concrete/30 rounded-full mb-4" />
+              <div className="w-full h-4 bg-concrete/30 rounded-full mb-2" />
+              <div className="w-5/6 h-4 bg-concrete/30 rounded-full" />
+            </div>
+            <div className="flex gap-2 mt-6">
+              <div className="w-20 h-6 bg-concrete/30 rounded-full" />
+              <div className="w-16 h-6 bg-concrete/30 rounded-full" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
 // Scroll to top on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -98,6 +148,8 @@ const Hero = () => {
           src="/hero image.png" 
           alt="Custom built walk in wardrobe" 
           className="w-full h-full object-cover opacity-60"
+          fetchpriority="high"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent mix-blend-multiply" />
       </div>
@@ -737,6 +789,20 @@ const Footer = () => {
 };
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate initial loading sequence for all assets and components
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <AppSkeleton />;
+  }
+
   return (
     <Router>
       <div className="relative min-h-screen bg-bone scroll-smooth">
