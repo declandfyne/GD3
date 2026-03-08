@@ -424,7 +424,7 @@ const Process = () => {
 
   return (
     <section id="process" ref={containerRef} className="pt-32 md:pt-40 pb-10 px-6 lg:px-12 bg-bone">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <h2 className="font-heading text-4xl mb-10 text-center">How It Works</h2>
         
         <div className="relative">
