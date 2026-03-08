@@ -254,7 +254,7 @@ const Services = () => {
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="pt-10 pb-4 px-6 lg:px-12 bg-bone">
+    <section id="services" ref={sectionRef} className="pt-10 pb-12 md:pb-4 px-6 lg:px-12 bg-bone">
       <div className="max-w-7xl mx-auto">
         <div className="mb-4 max-w-3xl">
           <h2 className="font-heading text-4xl mb-4 text-black">Beautiful Solutions</h2>
@@ -270,7 +270,7 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Card 1: Static layout of offerings */}
-          <div className="service-card bg-concrete/30 p-8 rounded-[2rem] border border-concrete flex flex-col justify-between h-[400px] hover:-translate-y-1 transition-transform">
+          <div className="service-card bg-concrete/30 p-8 rounded-[2rem] border border-concrete flex flex-col justify-between min-h-[400px] hover:-translate-y-1 transition-transform">
             <div>
               <div className="font-data text-xs text-primary mb-4">[01] BEDROOM STORAGE</div>
               <h3 className="font-heading text-2xl mb-2 text-black">Fitted & Walk-In</h3>
@@ -284,7 +284,7 @@ const Services = () => {
           </div>
 
           {/* Card 2: Live Feed */}
-          <div className="service-card bg-black text-bone p-8 rounded-[2rem] h-[400px] flex flex-col justify-between hover:-translate-y-1 transition-transform relative overflow-hidden">
+          <div className="service-card bg-black text-bone p-8 rounded-[2rem] min-h-[400px] flex flex-col justify-between hover:-translate-y-1 transition-transform relative overflow-hidden">
             <div className="relative z-10">
               <div className="font-data text-xs text-primary mb-4">[02] LIVING & OFFICE</div>
               <h3 className="font-heading text-2xl mb-2">Custom TV Units & Desks</h3>
@@ -302,7 +302,7 @@ const Services = () => {
           </div>
 
           {/* Card 3: Booking Route */}
-          <div className="service-card bg-concrete/30 p-8 rounded-[2rem] border border-concrete flex flex-col justify-between h-[400px] hover:-translate-y-1 transition-transform">
+          <div className="service-card bg-concrete/30 p-8 rounded-[2rem] border border-concrete flex flex-col justify-between min-h-[400px] hover:-translate-y-1 transition-transform">
             <div>
               <div className="font-data text-xs text-primary mb-4">[03] THE OUTCOME</div>
               <h3 className="font-heading text-2xl mb-2 text-black">A Simple Process</h3>
@@ -461,7 +461,7 @@ const Process = () => {
             <div>
               <h3 className="font-heading text-2xl mb-3 text-bone">Clear Quote & Installation</h3>
               <p className="text-bone/70 font-body mb-6">We'll provide a clear, easy-to-understand price for your design. Once you're happy, our skilled and polite team will install your new furniture with care, leaving your home perfectly tidy.</p>
-              <div className="flex items-center gap-2 text-primary font-data text-sm">
+              <div className="flex items-center gap-2 text-green-400 font-data text-sm">
                 <CheckCircle2 size={16} /> All Beautifully Done
               </div>
             </div>
