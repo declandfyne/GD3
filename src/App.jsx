@@ -233,7 +233,7 @@ const Services = () => {
       benefits: ["Floor-to-ceiling storage", "Custom lighting & mirrors", "Built around your lifestyle"],
     },
     {
-      image: "/warm room.png",
+      image: "/image1.webp",
       label: "Bedroom Storage",
       title: "Fitted Wardrobes",
       hook: "No more clutter. No more wasted space.",
@@ -241,7 +241,7 @@ const Services = () => {
       benefits: ["Maximises every inch of space", "Sliding or hinged door options", "Matches your room perfectly"],
     },
     {
-      image: "/TVUnit2.png",
+      image: "/image2.webp",
       label: "Living Room",
       title: "TV & Media Units",
       hook: "Transform the heart of your home.",
@@ -339,7 +339,7 @@ const Work = () => {
     { src: "/Bedroom2.jpg", alt: "Fitted bedroom", subtitle: "Bedroom Storage", title: "Beautiful Fitted Bedroom" },
     { src: "/tvunit3.png", alt: "Living room storage", subtitle: "Living Space", title: "Beautiful TV Media Wall" },
     { src: "/TVUnit4.webp", alt: "TV media unit", subtitle: "Media Wall", title: "Custom Media Unit" },
-    { src: "/backboard.png", alt: "Bedroom features", subtitle: "Beautiful Finishes", title: "Custom Headboards" },
+    { src: "/image4.webp", alt: "Fitted wardrobes with mirror panels", subtitle: "Fitted Wardrobes", title: "Mirror Panel Wardrobes" },
     { src: "/walkinwardrobe2.png", alt: "Walk in wardrobe detail", subtitle: "Smart Storage", title: "Shoe Display Solutions" },
     { src: "/TVUnit5.webp", alt: "TV unit and shelving", subtitle: "Living Room", title: "Bespoke TV & Shelving Unit" }
   ];
