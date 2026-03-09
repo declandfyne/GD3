@@ -325,63 +325,122 @@ const Services = () => {
 };
 
 const Work = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const images = [
+    { src: "/walkinwardrobe3.png", alt: "Walk in wardrobe", subtitle: "Beautiful Transformation", title: "Elegant Walk-in Wardrobe, Edinburgh" },
+    { src: "/tvunit3.png", alt: "Living room storage", subtitle: "Living Space", title: "Beautiful TV Media Wall" },
+    { src: "/warm room.png", alt: "Home office", subtitle: "Bedroom Storage", title: "Cozy Fitted Wardrobes" },
+    { src: "/backboard.png", alt: "Bedroom features", subtitle: "Beautiful Finishes", title: "Custom Headboards" },
+    { src: "/walkinwardrobe2.png", alt: "Walk in wardrobe detail", subtitle: "Smart Storage", title: "Shoe Display Solutions" },
+    { src: "/Walkinwardrobe.png", alt: "Walk in wardrobe", subtitle: "Complete Room Fit-Out", title: "Bespoke Dressing Room" }
+  ];
+
   return (
     <section id="work" className="py-10 px-6 lg:px-12 bg-black text-bone">
       <div className="max-w-7xl mx-auto">
         <h2 className="font-drama font-bold text-5xl md:text-7xl mb-12">Our Recent Work</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          <div className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10">
-            <img src="/walkinwardrobe3.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Walk in wardrobe" />
+          <div 
+            className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10 cursor-pointer"
+            onClick={() => setSelectedImage(images[0])}
+          >
+            <img src={images[0].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[0].alt} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
-              <span className="font-data text-white text-xs mb-2 uppercase">Beautiful Transformation</span>
-              <h3 className="font-heading text-2xl md:text-3xl">Elegant Walk-in Wardrobe, Edinburgh</h3>
+              <span className="font-data text-white text-xs mb-2 uppercase">{images[0].subtitle}</span>
+              <h3 className="font-heading text-2xl md:text-3xl">{images[0].title}</h3>
             </div>
           </div>
           
           <div className="md:col-span-4 flex flex-col gap-6">
-            <div className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10">
-              <img src="/tvunit3.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Living room storage" />
+            <div 
+              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
+              onClick={() => setSelectedImage(images[1])}
+            >
+              <img src={images[1].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[1].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <span className="font-data text-white text-xs mb-1 uppercase">Living Space</span>
-                <h3 className="font-heading text-xl">Beautiful TV Media Wall</h3>
+                <span className="font-data text-white text-xs mb-1 uppercase">{images[1].subtitle}</span>
+                <h3 className="font-heading text-xl">{images[1].title}</h3>
               </div>
             </div>
-            <div className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10">
-              <img src="/warm room.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Home office" />
+            <div 
+              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
+              onClick={() => setSelectedImage(images[2])}
+            >
+              <img src={images[2].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[2].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <span className="font-data text-white text-xs mb-1 uppercase">Bedroom Storage</span>
-                <h3 className="font-heading text-xl">Cozy Fitted Wardrobes</h3>
+                <span className="font-data text-white text-xs mb-1 uppercase">{images[2].subtitle}</span>
+                <h3 className="font-heading text-xl">{images[2].title}</h3>
               </div>
             </div>
           </div>
           
           <div className="md:col-span-4 flex flex-col gap-6">
-            <div className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10">
-              <img src="/backboard.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Bedroom features" />
+            <div 
+              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
+              onClick={() => setSelectedImage(images[3])}
+            >
+              <img src={images[3].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[3].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <span className="font-data text-white text-xs mb-1 uppercase">Beautiful Finishes</span>
-                <h3 className="font-heading text-xl">Custom Headboards</h3>
+                <span className="font-data text-white text-xs mb-1 uppercase">{images[3].subtitle}</span>
+                <h3 className="font-heading text-xl">{images[3].title}</h3>
               </div>
             </div>
-            <div className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10">
-              <img src="/walkinwardrobe2.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Walk in wardrobe detail" />
+            <div 
+              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
+              onClick={() => setSelectedImage(images[4])}
+            >
+              <img src={images[4].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[4].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                <span className="font-data text-white text-xs mb-1 uppercase">Smart Storage</span>
-                <h3 className="font-heading text-xl">Shoe Display Solutions</h3>
+                <span className="font-data text-white text-xs mb-1 uppercase">{images[4].subtitle}</span>
+                <h3 className="font-heading text-xl">{images[4].title}</h3>
               </div>
             </div>
           </div>
           
-          <div className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10">
-            <img src="/Walkinwardrobe.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Walk in wardrobe" />
+          <div 
+            className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10 cursor-pointer"
+            onClick={() => setSelectedImage(images[5])}
+          >
+            <img src={images[5].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[5].alt} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
-              <span className="font-data text-white text-xs mb-2 uppercase">Complete Room Fit-Out</span>
-              <h3 className="font-heading text-2xl md:text-3xl">Bespoke Dressing Room</h3>
+              <span className="font-data text-white text-xs mb-2 uppercase">{images[5].subtitle}</span>
+              <h3 className="font-heading text-2xl md:text-3xl">{images[5].title}</h3>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Lightbox */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md px-6 animate-in fade-in duration-300 cursor-pointer"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            onClick={() => setSelectedImage(null)}
+            className="absolute top-6 right-6 lg:top-10 lg:right-10 text-white/50 hover:text-white transition-colors"
+          >
+            <X size={32} />
+          </button>
+          
+          <div 
+            className="relative max-w-5xl w-full max-h-[80vh] flex flex-col"
+            onClick={e => e.stopPropagation()}
+          >
+            <img 
+              src={selectedImage.src} 
+              alt={selectedImage.alt}
+              className="w-full h-auto max-h-[70vh] object-contain rounded-lg shadow-2xl"
+            />
+            <div className="mt-6 text-center">
+              <span className="font-data text-white/60 text-xs uppercase tracking-widest block mb-2">{selectedImage.subtitle}</span>
+              <h3 className="font-heading text-white text-2xl md:text-3xl">{selectedImage.title}</h3>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
@@ -391,31 +450,20 @@ const Process = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray('.process-card');
+      const steps = gsap.utils.toArray('.process-step');
       
-      cards.forEach((card, i) => {
-        ScrollTrigger.create({
-          trigger: card,
-          start: "top 20%",
-          endTrigger: containerRef.current,
-          end: "bottom bottom",
-          pin: true,
-          pinSpacing: false,
+      steps.forEach((step, i) => {
+        gsap.from(step, {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: step,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
         });
-
-        if (i < cards.length - 1) {
-          gsap.to(card, {
-            scale: 0.95,
-            opacity: 0.3,
-            filter: "blur(4px)",
-            scrollTrigger: {
-              trigger: cards[i + 1],
-              start: "top 80%",
-              end: "top 20%",
-              scrub: true,
-            }
-          });
-        }
       });
     }, containerRef);
 
@@ -423,46 +471,81 @@ const Process = () => {
   }, []);
 
   return (
-    <section id="process" ref={containerRef} className="pt-32 md:pt-40 pb-10 px-6 lg:px-12 bg-bone">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="font-heading text-4xl mb-10 text-center">How It Works</h2>
+    <section id="process" ref={containerRef} className="py-20 md:py-32 px-6 lg:px-12 bg-bone overflow-hidden">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="font-heading text-4xl mb-16 text-center text-black">How It Works</h2>
         
         <div className="relative">
-          {/* Card 1 */}
-          <div className="process-card bg-white p-8 md:p-12 rounded-[2rem] border border-concrete shadow-premium mb-[5vh] flex flex-col md:flex-row gap-8 items-start relative z-10 w-full">
-            <div className="font-data text-4xl text-concrete font-bold leading-none">01</div>
-            <div>
-              <h3 className="font-heading text-2xl mb-3">Visit Our Showroom</h3>
-              <p className="text-black/70 font-body mb-6">The journey begins with a friendly visit to our showroom. Come and run your hands over our beautiful materials, see our craftsmanship up close, and chat with us about your ideas.</p>
-              <div className="w-16 h-16 rounded-full border border-primary/20 flex items-center justify-center animate-spin-slow">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-primary" />
+          {/* Vertical Line */}
+          <div className="absolute left-8 md:left-1/2 top-4 bottom-4 w-[2px] bg-concrete/50 -translate-x-1/2 hidden md:block" />
+          <div className="absolute left-8 top-4 bottom-4 w-[2px] bg-concrete/50 -translate-x-1/2 md:hidden" />
+
+          <div className="flex flex-col gap-12 md:gap-24">
+            {/* Step 1 */}
+            <div className="process-step relative flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-16">
+              <div className="w-full md:w-1/2 pl-16 md:pl-0 flex justify-end md:pr-8 md:text-right">
+                <div className="bg-white p-8 rounded-[2rem] border border-concrete shadow-sm w-full relative z-10 hover:-translate-y-1 transition-transform">
+                  <span className="font-data text-xs text-primary mb-2 block uppercase tracking-wider">Step 01</span>
+                  <h3 className="font-heading text-2xl mb-4 text-black">Visit Our Showroom</h3>
+                  <p className="text-black/70 font-body text-sm md:text-base">The journey begins with a friendly visit to our showroom. Come and run your hands over our beautiful materials, see our craftsmanship up close, and chat with us about your ideas.</p>
+                </div>
+              </div>
+              <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-primary rounded-full z-20 border-4 border-bone -translate-x-1/2 mt-8 md:mt-0" />
+              <div className="md:w-1/2 w-full pl-16 md:pl-8">
+                <div className="w-full h-48 md:h-64 bg-concrete/30 rounded-[2rem] border border-concrete/50 overflow-hidden flex items-center justify-center group cursor-pointer hover:shadow-lg transition-all duration-300">
+                  <img src="/Step1.png" alt="Showroom detail" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Card 2 */}
-          <div className="process-card bg-concrete/40 p-8 md:p-12 rounded-[2rem] border border-concrete shadow-premium mb-[5vh] flex flex-col md:flex-row gap-8 items-start relative z-20 w-full backdrop-blur-sm">
-            <div className="font-data text-4xl text-white font-bold leading-none mix-blend-difference">02</div>
-            <div>
-              <h3 className="font-heading text-2xl mb-3">Home Measure & Design</h3>
-              <p className="text-black/70 font-body mb-6">Next, one of our lovely designers will visit your home to take careful measurements. We'll then create a beautiful drawing of your new storage solution so you can see exactly how it will look.</p>
-              <div className="w-full h-8 bg-white rounded flex items-center px-2 relative overflow-hidden">
-                <div className="w-full h-[1px] bg-primary/20" />
-                <div className="absolute left-0 top-0 bottom-0 w-8 bg-primary/20 animate-[pulse_2s_infinite]" />
+            {/* Step 2 */}
+            <div className="process-step relative flex flex-col md:flex-row-reverse items-start md:items-center gap-8 md:gap-16">
+              <div className="w-full md:w-1/2 pl-16 md:pl-8 flex justify-start">
+                <div className="bg-white p-8 rounded-[2rem] border border-concrete shadow-sm w-full relative z-10 hover:-translate-y-1 transition-transform">
+                  <span className="font-data text-xs text-primary mb-2 block uppercase tracking-wider">Step 02</span>
+                  <h3 className="font-heading text-2xl mb-4 text-black">Home Measure & Design</h3>
+                  <p className="text-black/70 font-body text-sm md:text-base">Next, one of our lovely designers will visit your home to take careful measurements. We'll then create a beautiful drawing of your new storage solution so you can see exactly how it will look.</p>
+                </div>
+              </div>
+              <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-primary rounded-full z-20 border-4 border-bone -translate-x-1/2 mt-8 md:mt-0" />
+              <div className="md:w-1/2 w-full pl-16 md:pr-8">
+                <div className="w-full h-48 md:h-64 bg-concrete/30 rounded-[2rem] border border-concrete/50 overflow-hidden flex items-center justify-center group cursor-pointer hover:shadow-lg transition-all duration-300">
+                   <img src="/Step2.png" alt="Design planning" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Card 3 */}
-          <div className="process-card bg-black text-bone p-8 md:p-12 rounded-[2rem] border border-black shadow-premium flex flex-col md:flex-row items-start relative z-30 w-full">
-            <div className="font-data text-4xl text-concrete/20 font-bold leading-none">03</div>
-            <div>
-              <h3 className="font-heading text-2xl mb-3 text-bone">Clear Quote & Installation</h3>
-              <p className="text-bone/70 font-body mb-6">We'll provide a clear, easy-to-understand price for your design. Once you're happy, our skilled and polite team will install your new furniture with care, leaving your home perfectly tidy.</p>
-              <div className="flex items-center gap-2 text-green-400 font-data text-sm">
-                <CheckCircle2 size={16} /> All Beautifully Done
+            {/* Step 3 */}
+            <div className="process-step relative flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-16">
+              <div className="w-full md:w-1/2 pl-16 md:pl-0 flex justify-end md:pr-8 md:text-right">
+                <div className="bg-black text-bone p-8 rounded-[2rem] border border-black shadow-premium w-full relative z-10 hover:-translate-y-1 transition-transform">
+                  <span className="font-data text-xs text-primary mb-2 block uppercase tracking-wider">Step 03</span>
+                  <h3 className="font-heading text-2xl mb-4">Fitting Day</h3>
+                  <p className="text-white/70 font-body text-sm md:text-base">The exciting part! Our skilled fitters will arrive on time, lay down strict dust sheets to protect your home, and get straight to work building your gorgeous new wardrobes or units.</p>
+                </div>
+              </div>
+              <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-primary rounded-full z-20 border-4 border-bone -translate-x-1/2 mt-8 md:mt-0" />
+              <div className="md:w-1/2 w-full pl-16 md:pl-8">
+                <div className="w-full h-48 md:h-64 bg-concrete/30 rounded-[2rem] border border-concrete/50 overflow-hidden flex items-center justify-center group cursor-pointer hover:shadow-lg transition-all duration-300">
+                  <img src="/Step3.png" alt="Installation process" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+                </div>
+              </div>
+            </div>
+
+            {/* Step 4 */}
+            <div className="process-step relative flex flex-col md:flex-row-reverse items-start md:items-center gap-8 md:gap-16">
+              <div className="w-full md:w-1/2 pl-16 md:pl-8 flex justify-start">
+                <div className="bg-white p-8 rounded-[2rem] border border-concrete shadow-sm w-full relative z-10 hover:-translate-y-1 transition-transform">
+                  <span className="font-data text-xs text-primary mb-2 block uppercase tracking-wider">Step 04</span>
+                  <h3 className="font-heading text-2xl mb-4 text-black">Clean Up and Enjoy</h3>
+                  <p className="text-black/70 font-body text-sm md:text-base">We never leave a mess behind! We always have our Henry hoover with us to give the floors a good vacuum so you can start enjoying your amazing new storage space straight away.</p>
+                </div>
+              </div>
+              <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-primary rounded-full z-20 border-4 border-bone -translate-x-1/2 mt-8 md:mt-0" />
+              <div className="md:w-1/2 w-full pl-16 md:pr-8">
+                <div className="w-full h-48 md:h-64 bg-concrete/30 rounded-[2rem] border border-concrete/50 overflow-hidden flex items-center justify-center group cursor-pointer hover:shadow-lg transition-all duration-300">
+                   <img src="/Step4.png" alt="Finished beautiful room" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+                </div>
               </div>
             </div>
           </div>
@@ -473,76 +556,249 @@ const Process = () => {
 };
 
 const Reviews = () => {
+  const scrollContainerRef = useRef(null);
+  
   const reviews = [
     {
-      name: "Sarah Jenkins",
-      date: "2 months ago",
-      text: "Absolutely thrilled with our new walk-in wardrobe. The team was incredibly professional, polite, and the craftsmanship is outstanding. Highly recommend Gallery Design.",
+      name: "George Eadie",
+      date: "",
+      text: "From John in the showroom to Margaret and Tracy in the office you will find friendly, efficient and knowledgeable service and assistance. Nothing was too much trouble. The whole process from start to finish delivered on every level exactly as was promised. Liam and his colleagues Brandon and Darren were simply superb in their craftsmanship and installation skills. From carpet protection to hoovering on completion every care was taken. Excellent all round family firm.",
       rating: 5
     },
     {
-      name: "David Mitchell",
-      date: "3 months ago",
-      text: "From the initial showroom visit to the final installation, everything was seamless. The designer really understood what we needed, and the fitters were very tidy.",
+      name: "Lynsaye Adams",
+      date: "",
+      text: "The whole experience from John coming out and helping design and Liams craftsmanship. I now have my dressing room of dreams!",
       rating: 5
     },
     {
-      name: "Emma Robertson",
-      date: "5 months ago",
-      text: "Beautiful fitted living room units! They transformed an awkward alcove into a stunning feature wall with loads of storage. Great communication throughout the process.",
+      name: "Alistair Mack",
+      date: "",
+      text: "Contacted John at gallery design Hamilton to have my full bedroom turned into a walk in wardrobe. There was a few awkward spaces and this was not a problem he came up with good suggestions. He even managed to fit a dressing table — me and my wife are totally delighted with the finished result. They kept us up to speed every step of the way. I totally recommend this company. There a great bunch of guys who work together and keep your area spotless.",
+      rating: 5
+    },
+    {
+      name: "Peter Miller",
+      date: "",
+      text: "Fantastic service from start to finish. Visited Gallery design looking for a complete refit and remodel of our master bedroom. From the initial visit at the showroom all the way through to completion the quality of service we received was exemplary. Liam and the team completed the install and we are absolutely delighted. There is nothing that is too much trouble for these guys. Impeccable workmanship, cleaned up after and left us with our perfect bedroom. Can't recommend this company highly enough.",
+      rating: 5
+    },
+    {
+      name: "James Doolan",
+      date: "",
+      text: "I had looked at various companies and eventually stumbled across Gallery Design. I visited their showroom and was immediately impressed with the quality finish on all their bespoke displays. John visited my home, was very helpful and honest — no sales gimmicks and no pressure sales tactics. Now that the bedroom is finished it is beyond my wildest dream. The attention to detail shown by Liam and Darren is exceptional. I would highly recommend this company in a heartbeat.",
+      rating: 5
+    },
+    {
+      name: "Anonymous (Ff)",
+      date: "",
+      text: "We first used Gallery Design about 2 years ago for a bespoke fitted bedroom. The excellent job, fair price and quality product still looking good as-new immediately took us back when we decided to have a media unit built. Liam really took on board the look we were after and delivered on our requirements for both storage and technology. The quality and finish is just excellent. Highly recommended!",
+      rating: 5
+    },
+    {
+      name: "Marie Miller",
+      date: "",
+      text: "We can't recommend Gallery Design highly enough. All the showroom staff were helpful, friendly and assisted us in making the right decision. Margaret's knowledge and experience was invaluable. John, Liam and the installation team were amazing. Fantastic, personal service from a family business.",
+      rating: 5
+    },
+    {
+      name: "William Alexander Walker",
+      date: "",
+      text: "Liz and I would not hesitate to recommend Gallery Designs. We are delighted with the good quality of our bespoke fitted wardrobe.",
+      rating: 5
+    },
+    {
+      name: "Natasha Alonzi",
+      date: "",
+      text: "I absolutely recommend The Gallery Design Bedrooms. John designed clever, attractive furniture solutions for a smaller space. Liam and his team built fitted wardrobes, dressing table, bedside tables and desk with shelves and drawers. The workmanship and professionalism is exceptional. Nothing was too much trouble. We are delighted and will certainly use them again.",
+      rating: 5
+    },
+    {
+      name: "B MCF",
+      date: "",
+      text: "Our experience with Gallery Design was fantastic. From design by John to fitting by Liam, the team were very professional, friendly and hard-working. The standard of the fitted wardrobe is very high, finish complete with integrated lighting. Totally transformed our room, highly recommend to anyone. Can’t thank you enough.",
+      rating: 5
+    },
+    {
+      name: "Marcus Lavety",
+      date: "",
+      text: "What a wonderful service from start to finish. John and his team designed and installed the most wonderful bespoke dressing system in my daughter's bedroom. I would recommend them to anyone.",
+      rating: 5
+    },
+    {
+      name: "Andrea Fletcher",
+      date: "",
+      text: "Would totally recommend Gallery Design. We have a small bedroom which is now a perfect dressing room. 5 star service from the first phone call to the installation. John, Liam and Brandon are all fantastic and left the room spotless.",
+      rating: 5
+    },
+    {
+      name: "Robert McCaffrey",
+      date: "",
+      text: "Our entire experience with Gallery Design was excellent. Margaret, John, Liam and the team were so professional and helpful throughout the process. My wife's bespoke dressing room is fantastic quality and exactly what she wanted.",
+      rating: 5
+    },
+    {
+      name: "Paul Reynolds",
+      date: "",
+      text: "After recently moving house, we turned to Gallery Design for the second time. From our initial contact to the final sign-off, John, Liam and the entire team demonstrated outstanding professionalism and expertise at every stage. The installation process was seamless and efficient. We couldn't be happier with the results.",
+      rating: 5
+    },
+    {
+      name: "David Miller",
+      date: "",
+      text: "Top class, staff are most helpful.",
+      rating: 5
+    },
+    {
+      name: "Janet Hamilton",
+      date: "",
+      text: "Great experience from Margaret at the showroom to John coming to our home to plan our new bedroom furniture. Liam and the boys who installed were excellent, completed on time and were neat and very tidy. We are very pleased with our new bedroom.",
+      rating: 5
+    },
+    {
+      name: "Sadia Khan",
+      date: "",
+      text: "It was an absolute great experience working with John and Liam. Words can't describe how beautiful my fitted cupboards are looking. Highly recommend — not only are they a great team and very friendly, but they also give you the right advice on selecting what will look good in your home.",
+      rating: 5
+    },
+    {
+      name: "David Howat",
+      date: "",
+      text: "Gallery Design were FAB! They designed us a new wardrobe suite for our granddaughter's room and it hits the mark on all levels. Staff are amazing and very knowledgeable, fitters worked very hard, were very tidy and great to have in the house.",
+      rating: 5
+    },
+    {
+      name: "Pamela Dodds",
+      date: "",
+      text: "Absolutely delighted with my wardrobes. The boys were amazing — all fitted in one day, no mess, no hassle, lovely guys. Excellent quality, so glad I decided to go with them.",
+      rating: 5
+    },
+    {
+      name: "Property Rentals",
+      date: "",
+      text: "Without doubt a 5-star service from start to finish. Had 3 bedrooms and a media wall fitted and we are so pleased with every room. Everything was fitted to perfection, excellent quality and amazing workmanship. Not a bit of mess was left.",
+      rating: 5
+    },
+    {
+      name: "Liz McMorris",
+      date: "",
+      text: "Excellent sales, design and installation team all in a friendly family manner. Highly recommended for that personal feel.",
+      rating: 5
+    },
+    {
+      name: "Iain Black",
+      date: "",
+      text: "My wife and I are delighted with our new look bedroom. From seeing the great choice in their showroom to Liam and the team building the quality wardrobes in our home, the experience has been 1st class. Would not hesitate to recommend to family and friends.",
+      rating: 5
+    },
+    {
+      name: "Audrey Richard",
+      date: "",
+      text: "Absolutely delighted with all aspects of work done, bedroom furniture and care taken. Friendly, respectful workers who never stopped. Would highly recommend this local company.",
+      rating: 5
+    },
+    {
+      name: "Kathy Harding",
+      date: "",
+      text: "This family run bespoke furniture business made every stage of the process easy, from design and product selection to installation. The end product was perfect, exactly what we were looking for. No mess. No fuss. We can't praise this company highly enough.",
+      rating: 5
+    },
+    {
+      name: "Carol Gilhooley",
+      date: "",
+      text: "A huge thank you to John, Liam, Darren and Brandon. We have been a repeat customer over the past 15 years and can honestly say we wouldn't go anywhere else. The quality and attention to detail is exceptional and we couldn't be happier with the finished result. Nothing was too much trouble.",
+      rating: 5
+    },
+    {
+      name: "James Rough",
+      date: "",
+      text: "Absolutely delighted with our fitted bedrooms. Friendly and helpful advice in the showroom, then John came out and helped with ideas. Liam and his team were fantastic. The finished product was amazing — first class workmanship.",
+      rating: 5
+    },
+    {
+      name: "Sharon Macdonald",
+      date: "",
+      text: "Gallery Design have now completed every bedroom in my home. The materials used are of a very high standard and the workmanship was outstanding. Absolutely love my new bedroom — it's definitely the best room in the house.",
       rating: 5
     }
   ];
 
-  return (
-    <section className="py-10 px-6 lg:px-12 bg-bone border-t border-concrete/20">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div className="max-w-xl">
-            <h2 className="font-heading text-4xl mb-4 text-black">Loved by our Customers</h2>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="flex text-amber-400">
-                {[...Array(5)].map((_, i) => <Star key={i} size={20} fill="currentColor" />)}
-              </div>
-              <span className="font-bold text-lg">5.0</span>
-            </div>
-            <p className="font-body text-black/80 font-medium mb-2">We focus on crafting beautiful storage with care and respect for your home.</p>
-            <p className="font-body text-black/60 text-sm">Based on over 300+ reviews from happy homeowners.</p>
-          </div>
-          <MagneticButton className="px-6 py-3 border border-concrete rounded-full font-medium inline-flex items-center gap-2 hover:bg-black hover:text-white transition-colors">
-            Read all Google Reviews <ArrowRight size={16} />
-          </MagneticButton>
-        </div>
+  const handleScroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 400; // Adjust for card width + gap
+      const currentScroll = scrollContainerRef.current.scrollLeft;
+      scrollContainerRef.current.scrollTo({
+        left: direction === 'left' ? currentScroll - scrollAmount : currentScroll + scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {reviews.map((review, i) => (
-            <div key={i} className="bg-white p-8 rounded-[2rem] border border-concrete shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="flex text-amber-400 mb-6">
-                  {[...Array(review.rating)].map((_, idx) => <Star key={idx} size={16} fill="currentColor" />)}
-                </div>
-                <p className="font-body text-black/80 mb-8 italic">"{review.text}"</p>
+  return (
+    <section className="py-20 md:py-32 bg-white overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div className="max-w-xl">
+            <h2 className="font-heading text-4xl mb-4 text-black">Loved by our customers</h2>
+            <p className="font-body text-black/60 text-lg">We take deep pride in every piece of storage we build. Our lovely customers continually praise our friendly showroom service and the spotless work of our fitting team.</p>
+          </div>
+          <div className="flex gap-4">
+            <button 
+              onClick={() => handleScroll('left')}
+              className="p-4 rounded-full border border-concrete hover:bg-concrete/20 transition-colors hidden md:block"
+              aria-label="Previous reviews"
+            >
+              <ArrowRight size={24} className="rotate-180 text-black" />
+            </button>
+            <button 
+              onClick={() => handleScroll('right')}
+              className="p-4 rounded-full bg-black text-white hover:bg-black/80 transition-colors hidden md:block"
+              aria-label="Next reviews"
+            >
+              <ArrowRight size={24} />
+            </button>
+          </div>
+        </div>
+      </div>
+        
+      <div 
+        ref={scrollContainerRef}
+        className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 cursor-grab active:cursor-grabbing w-full px-6 lg:px-12"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        {reviews.map((review, i) => (
+          <div 
+            key={i} 
+            className="min-w-[300px] md:min-w-[400px] max-w-[400px] snap-start bg-bone p-8 rounded-[2rem] border border-concrete/50 flex flex-col h-auto"
+          >
+            <div className="flex text-yellow-500 mb-6">
+              {[...Array(review.rating)].map((_, i) => (
+                <Star key={i} size={16} fill="currentColor" />
+              ))}
+            </div>
+            <div className="relative mb-6 flex-grow">
+              <Quote className="absolute -top-2 -left-2 text-concrete opacity-50 w-8 h-8" />
+              <p className="font-body text-black/80 text-sm md:text-base italic relative z-10 pt-2 lg:line-clamp-6">"{review.text}"</p>
+            </div>
+            <div className="flex items-center gap-4 mt-auto">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-heading font-bold">
+                {review.name.charAt(0)}
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-concrete/50 flex items-center justify-center font-heading font-bold text-primary">
-                  {review.name.charAt(0)}
-                </div>
-                <div>
-                  <h4 className="font-bold font-heading text-sm">{review.name}</h4>
-                  <p className="text-xs text-black/50 font-data">{review.date}</p>
-                </div>
-                <div className="ml-auto">
-                  <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                  </svg>
-                </div>
+              <div>
+                <h4 className="font-heading font-medium text-black">{review.name}</h4>
+                <p className="font-data text-xs text-black/50">Verified Customer</p>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-8">
+        <a href="https://www.google.com/search?q=gallery+design+bedrooms&rlz=1C5GCEM_enGB1159GB1159&oq=gallery+desig&gs_lcrp=EgZjaHJvbWUqCQgAEEUYOxiABDIJCAAQRRg7GIAEMgcIARAAGIAEMhAIAhAuGK8BGMcBGIAEGI4FMgYIAxBFGDkyBwgEEAAYgAQyBggFEEUYPTIGCAYQRRg8MgYIBxBFGDzSAQgyOTE2ajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8#lrd=0x488848b388c0101b:0xfb3a777b6e9bf194,1,,,," target="_blank" rel="noopener noreferrer">
+          <MagneticButton className="px-6 py-3 border border-concrete rounded-full text-black hover:bg-concrete/10 transition-colors w-full md:w-auto font-medium">
+            Read all Google reviews
+          </MagneticButton>
+        </a>
       </div>
     </section>
   );
@@ -703,7 +959,7 @@ const Booking = () => {
             
             <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6">
               {/* Replace with your Access Key from Web3Forms */}
-              <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+              <input type="hidden" name="access_key" value="3b2f54d2-0f00-4cfa-b3cd-98b1924b93e0" />
               <input type="hidden" name="subject" value="New Showroom Visit Request from Website" />
               <input type="checkbox" name="botcheck" className="hidden" />
 
@@ -810,7 +1066,7 @@ const Booking = () => {
               <h3 className="font-heading text-2xl font-bold">Opening Hours</h3>
             </div>
             
-            <div className="space-y-1 font-body text-black/80 font-medium">
+            <div className="space-y-1 font-body text-black/80 font-medium w-full">
               {[
                 { day: 'Monday', hours: '9:00 AM - 5:00 PM' },
                 { day: 'Tuesday', hours: '9:00 AM - 5:00 PM' },
@@ -822,7 +1078,7 @@ const Booking = () => {
               ].map(({ day, hours, closed }) => (
                 <div key={day} className={`flex justify-between items-center py-3 border-b border-concrete/40 last:border-0 ${closed ? 'text-black/40' : ''}`}>
                   <span>{day}</span>
-                  <span className={closed ? 'font-normal' : 'text-black'}>{hours}</span>
+                  <span className={closed ? 'font-normal text-black/40' : 'text-black'}>{hours}</span>
                 </div>
               ))}
             </div>
@@ -847,26 +1103,26 @@ const Footer = () => {
         
         <div className="flex flex-col gap-3">
           <h4 className="font-data text-xs text-concrete/40 mb-2 uppercase">Services</h4>
-          <a href="#" className="hover:text-primary transition-colors">Sliding Doors</a>
-          <a href="#" className="hover:text-primary transition-colors">Walk-in Wardrobes</a>
-          <a href="#" className="hover:text-primary transition-colors">Awkward Spaces</a>
-          <a href="#" className="hover:text-primary transition-colors">TV Media Units</a>
+          <span>Sliding Doors</span>
+          <span>Walk-in Wardrobes</span>
+          <span>Awkward Spaces</span>
+          <span>TV Media Units</span>
         </div>
         
         <div className="flex flex-col gap-3">
           <h4 className="font-data text-xs text-concrete/40 mb-2 uppercase">Company</h4>
-          <a href="#" className="hover:text-primary transition-colors">Book Showroom</a>
-          <a href="#" className="hover:text-primary transition-colors">Our Process</a>
-          <a href="#" className="hover:text-primary transition-colors">Portfolio</a>
-          <a href="#" className="hover:text-primary transition-colors">Contact</a>
+          <span>Book Showroom</span>
+          <span>Our Process</span>
+          <span>Portfolio</span>
+          <span>Contact</span>
         </div>
       </div>
       
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-data text-concrete/40">
         <p>&copy; {new Date().getFullYear()} Gallery Design. All rights reserved.</p>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-bone">Privacy Policy</a>
-          <a href="#" className="hover:text-bone">Terms of Service</a>
+          <span>Privacy Policy</span>
+          <span>Terms of Service</span>
         </div>
       </div>
     </footer>
