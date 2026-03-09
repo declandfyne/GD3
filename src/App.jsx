@@ -177,7 +177,7 @@ const Hero = () => {
     <section ref={scope} className="relative h-[100dvh] w-full flex items-end pb-20 pt-32 px-6 lg:px-12 bg-black overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
-          src="/hero image2.jpg" 
+          src="/hero-image2.jpg" 
           alt="Custom built walk in wardrobe" 
           className="w-full h-full object-cover opacity-60"
           fetchpriority="high"
