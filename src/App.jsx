@@ -102,9 +102,18 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Desktop top bar */}
+      <div className="hidden md:flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-8 py-2 justify-center gap-8 items-center">
+        <span>Burnbank Rd, Hamilton ML3 9AZ</span>
+        <span className="text-white/30">·</span>
+        <a href="tel:01698286866" className="hover:text-white transition-colors">01698 286866</a>
+        <span className="text-white/30">·</span>
+        <span>Mon–Fri 9am–5pm &nbsp;·&nbsp; Sat–Sun Closed</span>
+      </div>
+
       <nav
         ref={navRef}
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[2rem] transition-all duration-300 w-[90%] max-w-5xl ${
+        className={`fixed top-6 md:top-12 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[2rem] transition-all duration-300 w-[90%] max-w-5xl ${
           scrolled || menuOpen
             ? 'bg-bone/80 backdrop-blur-xl border border-concrete text-black shadow-premium'
             : 'bg-black/20 backdrop-blur-md text-bone shadow-lg'
@@ -151,6 +160,11 @@ const Navbar = () => {
             Contact Us
           </MagneticButton>
         </a>
+        <div className="mt-8 text-center text-black/50 font-data text-xs space-y-1">
+          <p>Burnbank Rd, Hamilton ML3 9AZ</p>
+          <a href="tel:01698286866" className="block hover:text-primary transition-colors">01698 286866</a>
+          <p>Mon–Fri 9am–5pm &nbsp;·&nbsp; Sat–Sun Closed</p>
+        </div>
       </div>
     </>
   );
