@@ -1131,6 +1131,275 @@ const Booking = () => {
   );
 };
 
+const PrivacyPolicy = () => {
+  return (
+    <div className="min-h-screen bg-bone pt-32 pb-20 px-6 lg:px-12">
+      <div className="max-w-3xl mx-auto">
+        <h1 className="font-drama font-bold text-5xl md:text-6xl text-black mb-8 border-b border-concrete pb-8">
+          Privacy Policy
+        </h1>
+        <div className="prose prose-lg text-black/80 font-body space-y-8">
+          <div>
+            <p className="text-sm text-black/60 font-data mb-6">The Gallery Design Bedrooms Ltd<br/>Last updated: March 2026</p>
+          </div>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">1. WHO WE ARE</h2>
+            <p>The Gallery Design Bedrooms Ltd ("we", "us", or "our") is a company registered in Scotland. Our principal place of business is at Burnbank Road, Hamilton, ML3 9AZ. We are the data controller responsible for your personal information.</p>
+            <p className="mt-4">If you have any questions about this Privacy Policy or how we handle your personal data, please contact us at gallerydesignbedrooms@gmail.com or call 01698 286866.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">2. WHAT INFORMATION WE COLLECT</h2>
+            <p className="mb-4">We may collect the following types of personal information:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Contact details:</strong> name, email address, phone number, and postal address</li>
+              <li><strong>Enquiry information:</strong> details about your project, room dimensions, and design preferences you share with us</li>
+              <li><strong>Communications:</strong> records of correspondence between you and us, including emails and call notes</li>
+              <li><strong>Website usage data:</strong> IP address, browser type, pages visited, and time spent on our website (collected via cookies)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">3. HOW WE COLLECT YOUR INFORMATION</h2>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>When you fill in a contact or booking form on our website</li>
+              <li>When you call or email us directly</li>
+              <li>When you visit our showroom</li>
+              <li>When you interact with our website (via cookies and analytics tools)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">4. HOW WE USE YOUR INFORMATION</h2>
+            <p className="mb-4">We use your personal data to:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Respond to your enquiries and provide quotations</li>
+              <li>Schedule and manage showroom appointments and home visits</li>
+              <li>Carry out the services you have requested, including design, manufacture, and installation</li>
+              <li>Process payments and maintain financial records</li>
+              <li>Send you service-related communications (e.g. appointment confirmations, installation updates)</li>
+              <li>Improve our website and services</li>
+              <li>Comply with our legal obligations</li>
+            </ul>
+            <p className="mt-4">We will only send you marketing communications if you have given us permission to do so, and you can opt out at any time.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">5. LEGAL BASIS FOR PROCESSING</h2>
+            <p className="mb-4">We process your personal data on the following legal bases:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Contract:</strong> where processing is necessary to fulfil a contract with you (e.g. to deliver your order)</li>
+              <li><strong>Legitimate interests:</strong> where we have a legitimate business interest, such as responding to enquiries or improving our services</li>
+              <li><strong>Legal obligation:</strong> where we are required to process data to comply with the law</li>
+              <li><strong>Consent:</strong> where you have given us clear consent, such as for marketing communications</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">6. WHO WE SHARE YOUR DATA WITH</h2>
+            <p>We do not sell your personal data to third parties. We may share your information with:</p>
+            <ul className="list-disc pl-6 space-y-2 mt-4">
+              <li>Our installation and delivery teams (where necessary to complete your order)</li>
+              <li>IT and website service providers who process data on our behalf</li>
+              <li>Our accountant or legal advisers where required</li>
+              <li>HMRC or other regulatory authorities where we are legally required to do so</li>
+            </ul>
+            <p className="mt-4">Any third parties we share data with are required to keep it secure and use it only for the purpose it was shared.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">7. HOW LONG WE KEEP YOUR DATA</h2>
+            <p>We retain personal data only for as long as necessary. Typically:</p>
+            <ul className="list-disc pl-6 space-y-2 mt-4">
+              <li>Enquiries that do not result in a sale are kept for up to 12 months</li>
+              <li>Customer and order records are kept for 7 years to comply with financial and legal obligations</li>
+              <li>Website analytics data is retained as per our analytics provider's standard retention periods</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">8. YOUR RIGHTS</h2>
+            <p className="mb-4">Under UK data protection law, you have the right to:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Access the personal data we hold about you</li>
+              <li>Request correction of inaccurate data</li>
+              <li>Request erasure of your data (in certain circumstances)</li>
+              <li>Object to or restrict how we process your data</li>
+              <li>Request portability of your data</li>
+              <li>Withdraw consent at any time where processing is based on consent</li>
+            </ul>
+            <p className="mt-4">To exercise any of these rights, please contact us at gallerydesignbedrooms@gmail.com. We will respond within one month. You also have the right to lodge a complaint with the Information Commissioner's Office (ICO) at ico.org.uk.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">9. COOKIES</h2>
+            <p>Our website uses cookies to improve your browsing experience and to help us understand how visitors use our site. Cookies are small text files stored on your device. You can control or disable cookies through your browser settings, though this may affect how certain parts of our website function.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">10. SECURITY</h2>
+            <p>We take appropriate technical and organisational measures to protect your personal data against unauthorised access, loss, or misuse. However, no internet transmission is completely secure, and we cannot guarantee the absolute security of data sent to us electronically.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">11. CHANGES TO THIS POLICY</h2>
+            <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with a revised "Last updated" date. We encourage you to review this policy periodically.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">12. CONTACT US</h2>
+            <p className="mb-4">If you have any questions or concerns about this Privacy Policy or how we handle your data, please contact us:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>By email: gallerydesignbedrooms@gmail.com</li>
+              <li>By phone: 01698 286866</li>
+              <li>By post: The Gallery Design Bedrooms Ltd, Burnbank Road, Hamilton, ML3 9AZ</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const TermsOfService = () => {
+  return (
+    <div className="min-h-screen bg-bone pt-32 pb-20 px-6 lg:px-12">
+      <div className="max-w-3xl mx-auto">
+        <h1 className="font-drama font-bold text-5xl md:text-6xl text-black mb-8 border-b border-concrete pb-8">
+          Terms of Service
+        </h1>
+        <div className="prose prose-lg text-black/80 font-body space-y-8">
+          <div>
+            <p className="text-sm text-black/60 font-data mb-6">The Gallery Design Bedrooms Ltd<br/>Last updated: March 2026</p>
+          </div>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">1. INTRODUCTION</h2>
+            <p>These Terms of Service ("Terms") govern your use of the website at gallerydesigns.vercel.app and any services provided by The Gallery Design Bedrooms Ltd ("we", "us", or "our"), a company registered in Scotland with its principal place of business at Burnbank Road, Hamilton, ML3 9AZ.</p>
+            <p className="mt-4">By visiting our website, booking an appointment, requesting a quotation, or engaging our services in any way, you agree to be bound by these Terms. If you do not agree, please do not use our website or services.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">2. OUR SERVICES</h2>
+            <p className="mb-4">The Gallery Design Bedrooms Ltd provides bespoke fitted storage and bedroom furniture solutions, including but not limited to:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Walk-in wardrobes</li>
+              <li>Fitted wardrobes</li>
+              <li>Sliding wardrobes</li>
+              <li>Elegant closets and dressing rooms</li>
+              <li>Home office fitted storage</li>
+              <li>Living room and TV units</li>
+              <li>Bedroom furniture and storage solutions</li>
+              <li>Bespoke solutions for awkward or unusual spaces</li>
+            </ul>
+            <p className="mt-4">All work is carried out on a bespoke, made-to-measure basis. The exact scope of each project will be agreed in writing prior to commencement.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">3. QUOTATIONS AND ORDERS</h2>
+            <div className="space-y-4">
+              <p><strong>3.1</strong> All quotations provided by us are free of charge and carry no obligation.</p>
+              <p><strong>3.2</strong> A quotation is valid for 30 days from the date of issue unless otherwise stated.</p>
+              <p><strong>3.3</strong> An order is only confirmed once you have accepted the quotation in writing and paid any required deposit. At this point a binding contract is formed between you and The Gallery Design Bedrooms Ltd.</p>
+              <p><strong>3.4</strong> Any changes to the agreed specification after an order is confirmed may result in revised pricing and/or revised installation dates. All changes must be agreed in writing.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">4. PRICING AND PAYMENT</h2>
+            <div className="space-y-4">
+              <p><strong>4.1</strong> All prices quoted include VAT unless otherwise stated.</p>
+              <p><strong>4.2</strong> A deposit is required upon confirmation of order. The deposit amount will be specified in your quotation.</p>
+              <p><strong>4.3</strong> The remaining balance is due upon satisfactory completion of the installation, unless otherwise agreed in writing.</p>
+              <p><strong>4.4</strong> We reserve the right to charge interest on overdue balances at a rate of 8% per annum above the Bank of England base rate in accordance with the Late Payment of Commercial Debts (Interest) Act 1998.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">5. INSTALLATION</h2>
+            <div className="space-y-4">
+              <p><strong>5.1</strong> Installation dates will be agreed with you in advance. We will make every reasonable effort to meet agreed dates, however dates may be subject to change due to circumstances outside our control.</p>
+              <p><strong>5.2</strong> You are responsible for ensuring the installation area is clear and accessible prior to our team's arrival. Any additional costs arising from failure to do so may be charged to you.</p>
+              <p><strong>5.3</strong> Our team will take reasonable care to protect your property during installation. Floor and surface protection will be used where appropriate.</p>
+              <p><strong>5.4</strong> Upon completion, you will be asked to inspect the work. Any defects or concerns must be raised at this point or within 7 days of completion in writing.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">6. CANCELLATIONS AND CHANGES</h2>
+            <div className="space-y-4">
+              <p><strong>6.1</strong> You may cancel your order within 14 days of confirmation provided manufacture of your bespoke furniture has not yet commenced. In this case your deposit will be refunded in full.</p>
+              <p><strong>6.2</strong> If manufacture has commenced, we reserve the right to retain some or all of the deposit to cover reasonable costs already incurred.</p>
+              <p><strong>6.3</strong> We reserve the right to cancel or postpone an order in exceptional circumstances. In such cases we will notify you promptly and arrange a full refund of any monies paid.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">7. WARRANTY AND DEFECTS</h2>
+            <div className="space-y-4">
+              <p><strong>7.1</strong> All products and installation work carried out by The Gallery Design Bedrooms Ltd are covered by a workmanship guarantee. The duration of this guarantee will be specified in your quotation.</p>
+              <p><strong>7.2</strong> This guarantee covers defects in materials and workmanship under normal use and does not extend to damage caused by misuse, accidental damage, neglect, unauthorised modification, or fair wear and tear.</p>
+              <p><strong>7.3</strong> To make a warranty claim, please contact us at gallerydesignbedrooms@gmail.com or call 01698 286866. We will arrange an inspection and, where a valid defect is found, carry out repair or replacement at no cost to you.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">8. LIMITATION OF LIABILITY</h2>
+            <div className="space-y-4">
+              <p><strong>8.1</strong> Nothing in these Terms limits or excludes our liability for death or personal injury caused by our negligence, fraud or fraudulent misrepresentation, or any other liability that cannot be excluded by law.</p>
+              <p><strong>8.2</strong> Subject to clause 8.1, our total liability to you in connection with any contract shall not exceed the total value of the contract price paid by you.</p>
+              <p><strong>8.3</strong> We are not liable for any indirect, consequential, or economic losses arising from delays, defects, or cancellations except where required by law.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">9. USE OF OUR WEBSITE</h2>
+            <div className="space-y-4">
+              <p><strong>9.1</strong> You may use our website for lawful purposes only. You must not use the website in any way that is unlawful, harmful, or that infringes the rights of others.</p>
+              <p><strong>9.2</strong> All content on this website, including text, images, logos, and design, is the property of The Gallery Design Bedrooms Ltd or its licensors and is protected by copyright. You may not reproduce or distribute any content without our prior written permission.</p>
+              <p><strong>9.3</strong> We make every effort to ensure the information on our website is accurate and up to date, but we give no warranty as to its completeness or accuracy. We reserve the right to change or remove content at any time without notice.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">10. SHOWROOM APPOINTMENTS</h2>
+            <div className="space-y-4">
+              <p><strong>10.1</strong> Showroom appointments are offered free of charge and with no obligation to purchase.</p>
+              <p><strong>10.2</strong> If you are unable to attend a booked appointment, please notify us as soon as possible by calling 01698 286866 or emailing gallerydesignbedrooms@gmail.com so we can offer the slot to another customer.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">11. PRIVACY</h2>
+            <p>Your use of our website and services is also governed by our Privacy Policy, which is incorporated into these Terms by reference. By using our website or services, you confirm that you have read and understood our Privacy Policy. A copy is available on our website at /privacy-policy.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">12. GOVERNING LAW</h2>
+            <p>These Terms are governed by the laws of Scotland. Any disputes arising from these Terms or your use of our services shall be subject to the exclusive jurisdiction of the Scottish courts.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">13. CHANGES TO THESE TERMS</h2>
+            <p>We reserve the right to update these Terms at any time. Changes will be posted on this page with a revised "Last updated" date. Continued use of our website or services after changes are posted constitutes your acceptance of the updated Terms.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl text-black mb-4">14. CONTACT US</h2>
+            <p className="mb-4">If you have any questions about these Terms, please contact us:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>By email: gallerydesignbedrooms@gmail.com</li>
+              <li>By phone: 01698 286866</li>
+              <li>By post: The Gallery Design Bedrooms Ltd, Burnbank Road, Hamilton, ML3 9AZ</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Footer = () => {
   return (
     <footer className="bg-black text-bone rounded-t-[4rem] pt-20 pb-10 px-6 lg:px-12 mt-12">
@@ -1153,18 +1422,18 @@ const Footer = () => {
         
         <div className="flex flex-col gap-3">
           <h4 className="font-data text-xs text-concrete/40 mb-2 uppercase">Company</h4>
-          <span>Book Showroom</span>
-          <span>Our Process</span>
-          <span>Portfolio</span>
-          <span>Contact</span>
+          <a href="/#contact" className="text-bone/60 hover:text-bone hover:translate-x-2 transition-all w-fit">Book Showroom</a>
+          <a href="/#process" className="text-bone/60 hover:text-bone hover:translate-x-2 transition-all w-fit">Our Process</a>
+          <a href="/#work" className="text-bone/60 hover:text-bone hover:translate-x-2 transition-all w-fit">Portfolio</a>
+          <a href="/#contact" className="text-bone/60 hover:text-bone hover:translate-x-2 transition-all w-fit">Contact</a>
         </div>
       </div>
       
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-data text-concrete/40">
         <p>&copy; {new Date().getFullYear()} Gallery Design. All rights reserved.</p>
         <div className="flex gap-6">
-          <span>Privacy Policy</span>
-          <span>Terms of Service</span>
+          <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+          <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
         </div>
       </div>
     </footer>
@@ -1214,6 +1483,8 @@ export default function App() {
             </main>
           } />
           <Route path="/faq" element={<FAQPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>
         <Footer />
       </div>
