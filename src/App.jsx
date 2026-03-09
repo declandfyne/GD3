@@ -221,28 +221,50 @@ const Hero = () => {
 };
 
 const Services = () => {
-  const [feedLogs, setFeedLogs] = useState(["Taking careful measurements...", "Looking at the space...", "Ready to begin."]);
   const sectionRef = useRef(null);
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const logs = ["Measuring your room", "Choosing the perfect finish", "Planning the new layout", "Drawing up the design", "Preparing for installation"];
-      setFeedLogs(prev => {
-        const next = [...prev, logs[Math.floor(Math.random() * logs.length)]];
-        if (next.length > 4) next.shift();
-        return next;
-      });
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
+
+  const services = [
+    {
+      image: "/walkinwardrobe3.png",
+      label: "Most Popular",
+      title: "Walk-in Wardrobes",
+      hook: "Your own dressing room — in your own home.",
+      description: "Imagine starting every morning in a beautifully organised space where everything has its place. We design and build stunning walk-in wardrobes that turn an ordinary room into something you'll genuinely love.",
+      benefits: ["Floor-to-ceiling storage", "Custom lighting & mirrors", "Built around your lifestyle"],
+    },
+    {
+      image: "/warm room.png",
+      label: "Bedroom Storage",
+      title: "Fitted Wardrobes",
+      hook: "No more clutter. No more wasted space.",
+      description: "A fitted wardrobe goes from wall to wall and floor to ceiling — making the absolute most of your room. We'll design it around exactly what you need to store, so everything has a home.",
+      benefits: ["Maximises every inch of space", "Sliding or hinged door options", "Matches your room perfectly"],
+    },
+    {
+      image: "/TVUnit2.png",
+      label: "Living Room",
+      title: "TV & Media Units",
+      hook: "Transform the heart of your home.",
+      description: "A beautifully fitted media wall or TV unit can completely change how your living room looks and feels. We hide away all the cables and clutter so you're left with a clean, stylish space your family will enjoy every day.",
+      benefits: ["Hides cables & equipment", "Custom shelving & storage", "Designed to fit your wall exactly"],
+    },
+    {
+      image: "/Walkinwardrobe.png",
+      label: "Any Space",
+      title: "Awkward Spaces",
+      hook: "No room is too tricky for us.",
+      description: "Sloped ceilings, alcoves, oddly shaped rooms — these are our speciality. We've fitted hundreds of beautiful wardrobes into spaces other companies would turn down. If it's a challenge, we love it.",
+      benefits: ["Loft conversions & sloped ceilings", "Alcoves & recesses", "Made-to-measure, always"],
+    },
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.service-card', {
-        y: 50,
+        y: 40,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
+        duration: 0.7,
+        stagger: 0.15,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -254,71 +276,57 @@ const Services = () => {
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="pt-10 pb-20 md:pb-24 px-6 lg:px-12 bg-bone">
+    <section id="services" ref={sectionRef} className="py-20 md:py-28 px-6 lg:px-12 bg-bone">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-4 max-w-3xl">
-          <h2 className="font-heading text-4xl mb-4 text-black">Beautiful Solutions</h2>
-          <p className="font-body text-black/60 text-lg mb-6">Every home is different. We design and build lovely storage that perfectly fits your space and makes everyday living feel effortless. From grand walk-in wardrobes to the smallest alcove shelving, we can solve any storage challenge.</p>
-          <div className="flex flex-wrap gap-2">
-            {["Walk-in Wardrobes", "Fitted Wardrobes", "TV Units", "Sliding Doors", "Shelving", "Home Office Storage", "Bedroom Storage", "Living Room Storage"].map((service) => (
-              <span key={service} className="px-4 py-2 bg-concrete/20 rounded-full text-sm font-heading font-medium text-black border border-concrete/50">
-                {service}
-              </span>
-            ))}
-          </div>
+
+        <div className="mb-12 md:mb-16">
+          <h2 className="font-heading text-4xl md:text-5xl mb-4 text-black">What We Can Do For You</h2>
+          <p className="font-body text-black/60 text-lg md:text-xl max-w-2xl">Every home is different — and so is every customer. Whether you're dreaming of a walk-in wardrobe or just need more space in your bedroom, we'll design something beautiful that fits your home and your life perfectly.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Card 1: Static layout of offerings */}
-          <div className="service-card bg-concrete/30 p-8 rounded-[2rem] border border-concrete flex flex-col justify-between min-h-[400px] hover:-translate-y-1 transition-transform">
-            <div>
-              <div className="font-data text-xs text-primary mb-4">[01] BEDROOM STORAGE</div>
-              <h3 className="font-heading text-2xl mb-2 text-black">Fitted & Walk-In</h3>
-              <p className="text-black/60 font-body">Crafted to fit your room perfectly, giving you the elegant and organized space you've always wanted.</p>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-6">
-              <span className="px-3 py-1 bg-white rounded-full text-xs font-data border border-concrete">Sliding Doors</span>
-              <span className="px-3 py-1 bg-white rounded-full text-xs font-data border border-concrete">Walk-in</span>
-              <span className="px-3 py-1 bg-white rounded-full text-xs font-data border border-concrete">Fitted</span>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {services.map((service, i) => (
+            <div key={i} className="service-card group bg-white rounded-[2rem] overflow-hidden border border-concrete/60 flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-300">
+              {/* Photo */}
+              <div className="relative h-56 md:h-64 overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-black text-xs font-data uppercase tracking-wider px-3 py-1.5 rounded-full border border-concrete/40">
+                  {service.label}
+                </span>
+              </div>
 
-          {/* Card 2: Live Feed */}
-          <div className="service-card bg-black text-bone p-8 rounded-[2rem] min-h-[400px] flex flex-col justify-between hover:-translate-y-1 transition-transform relative overflow-hidden">
-            <div className="relative z-10">
-              <div className="font-data text-xs text-primary mb-4">[02] LIVING & OFFICE</div>
-              <h3 className="font-heading text-2xl mb-2">Custom TV Units & Desks</h3>
-              <p className="text-bone/60 font-body">TV units, shelving, and comfortable home office spaces designed to blend seamlessly with your home's unique style.</p>
-            </div>
+              {/* Content */}
+              <div className="p-6 md:p-8 flex flex-col flex-1">
+                <h3 className="font-heading text-2xl md:text-3xl text-black mb-2">{service.title}</h3>
+                <p className="font-heading text-primary text-base mb-3">{service.hook}</p>
+                <p className="font-body text-black/60 text-base leading-relaxed mb-6">{service.description}</p>
 
-            <div className="font-data text-sm flex flex-col gap-2 relative z-10">
-              {feedLogs.map((log, i) => (
-                <div key={i} className={`flex items-center gap-2 ${i === feedLogs.length - 1 ? 'text-concrete' : 'text-concrete/40'}`}>
-                  <span>&gt;</span> {log}
-                  {i === feedLogs.length - 1 && <span className="w-2 h-4 bg-primary inline-block animate-pulse" />}
-                </div>
-              ))}
+                <ul className="mt-auto space-y-2">
+                  {service.benefits.map((b, j) => (
+                    <li key={j} className="flex items-center gap-3 text-black/70 font-body text-sm">
+                      <CheckCircle2 size={16} className="text-primary flex-shrink-0" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-
-          {/* Card 3: Booking Route */}
-          <div className="service-card bg-concrete/30 p-8 rounded-[2rem] border border-concrete flex flex-col justify-between min-h-[400px] hover:-translate-y-1 transition-transform">
-            <div>
-              <div className="font-data text-xs text-primary mb-4">[03] THE OUTCOME</div>
-              <h3 className="font-heading text-2xl mb-2 text-black">A Simple Process</h3>
-              <p className="text-black/60 font-body">We take care of everything, starting with a friendly chat at our showroom through to the beautiful final installation.</p>
-            </div>
-            <div className="bg-white rounded-2xl p-4 flex flex-col font-data text-xs text-black border border-concrete">
-              <div className="flex items-center gap-3"><div className="w-2 h-2 rounded-full bg-primary"/><span className="opacity-60">Showroom Visit</span></div>
-              <div className="ml-1 w-0.5 h-3 bg-concrete" />
-              <div className="flex items-center gap-3"><div className="w-2 h-2 rounded-full bg-primary"/><span className="opacity-60">Home Measure & Design</span></div>
-              <div className="ml-1 w-0.5 h-3 bg-concrete" />
-              <div className="flex items-center gap-3"><div className="w-2 h-2 rounded-full bg-primary"/><span className="opacity-60">Design Sign Off</span></div>
-              <div className="ml-1 w-0.5 h-3 bg-concrete" />
-              <div className="flex items-center gap-3"><div className="w-2 h-2 rounded-full bg-primary"/><span className="opacity-60">Installation</span></div>
-            </div>
-          </div>
+          ))}
         </div>
+
+        <div className="mt-10 text-center">
+          <a href="#contact">
+            <MagneticButton className="px-8 py-4 bg-black text-bone rounded-full font-medium inline-flex items-center gap-2 text-base">
+              Book a Free Consultation <ArrowRight size={18} />
+            </MagneticButton>
+          </a>
+          <p className="text-black/40 font-body text-sm mt-3">No obligation — just a friendly chat about your home</p>
+        </div>
+
       </div>
     </section>
   );
@@ -328,20 +336,38 @@ const Work = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const images = [
-    { src: "/walkinwardrobe3.png", alt: "Walk in wardrobe", subtitle: "Beautiful Transformation", title: "Elegant Walk-in Wardrobe, Edinburgh" },
+    { src: "/Bedroom2.png", alt: "Fitted bedroom", subtitle: "Bedroom Storage", title: "Beautiful Fitted Bedroom" },
     { src: "/tvunit3.png", alt: "Living room storage", subtitle: "Living Space", title: "Beautiful TV Media Wall" },
-    { src: "/warm room.png", alt: "Home office", subtitle: "Bedroom Storage", title: "Cozy Fitted Wardrobes" },
+    { src: "/TVUnit4.png", alt: "TV media unit", subtitle: "Media Wall", title: "Custom Media Unit" },
     { src: "/backboard.png", alt: "Bedroom features", subtitle: "Beautiful Finishes", title: "Custom Headboards" },
     { src: "/walkinwardrobe2.png", alt: "Walk in wardrobe detail", subtitle: "Smart Storage", title: "Shoe Display Solutions" },
-    { src: "/Walkinwardrobe.png", alt: "Walk in wardrobe", subtitle: "Complete Room Fit-Out", title: "Bespoke Dressing Room" }
+    { src: "/TVUnit5.png", alt: "TV unit and shelving", subtitle: "Living Room", title: "Bespoke TV & Shelving Unit" }
   ];
 
   return (
     <section id="work" className="py-10 px-6 lg:px-12 bg-black text-bone">
       <div className="max-w-7xl mx-auto">
         <h2 className="font-drama font-bold text-5xl md:text-7xl mb-12">Our Recent Work</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+        {/* Mobile carousel */}
+        <div className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6" style={{ scrollbarWidth: 'none' }}>
+          {images.map((image, i) => (
+            <div
+              key={i}
+              className="min-w-[80vw] snap-start flex-shrink-0 relative rounded-[2rem] h-72 overflow-hidden border border-white/10 cursor-pointer"
+              onClick={() => setSelectedImage(image)}
+            >
+              <img src={image.src} className="w-full h-full object-cover" alt={image.alt} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                <span className="font-data text-white text-xs mb-1 uppercase">{image.subtitle}</span>
+                <h3 className="font-heading text-xl">{image.title}</h3>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop grid */}
+        <div className="hidden md:grid grid-cols-12 gap-6">
           <div 
             className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10 cursor-pointer"
             onClick={() => setSelectedImage(images[0])}
@@ -399,7 +425,7 @@ const Work = () => {
             </div>
           </div>
           
-          <div 
+          <div
             className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10 cursor-pointer"
             onClick={() => setSelectedImage(images[5])}
           >
@@ -409,7 +435,7 @@ const Work = () => {
               <h3 className="font-heading text-2xl md:text-3xl">{images[5].title}</h3>
             </div>
           </div>
-        </div>
+        </div> {/* end desktop grid */}
       </div>
 
       {/* Lightbox */}
