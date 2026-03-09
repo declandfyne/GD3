@@ -336,12 +336,12 @@ const Work = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const images = [
-    { src: "/Bedroom2.png", alt: "Fitted bedroom", subtitle: "Bedroom Storage", title: "Beautiful Fitted Bedroom" },
+    { src: "/Bedroom2.jpg", alt: "Fitted bedroom", subtitle: "Bedroom Storage", title: "Beautiful Fitted Bedroom" },
     { src: "/tvunit3.png", alt: "Living room storage", subtitle: "Living Space", title: "Beautiful TV Media Wall" },
-    { src: "/TVUnit4.png", alt: "TV media unit", subtitle: "Media Wall", title: "Custom Media Unit" },
+    { src: "/TVUnit4.jpg", alt: "TV media unit", subtitle: "Media Wall", title: "Custom Media Unit" },
     { src: "/backboard.png", alt: "Bedroom features", subtitle: "Beautiful Finishes", title: "Custom Headboards" },
     { src: "/walkinwardrobe2.png", alt: "Walk in wardrobe detail", subtitle: "Smart Storage", title: "Shoe Display Solutions" },
-    { src: "/TVUnit5.png", alt: "TV unit and shelving", subtitle: "Living Room", title: "Bespoke TV & Shelving Unit" }
+    { src: "/TVUnit5.jpg", alt: "TV unit and shelving", subtitle: "Living Room", title: "Bespoke TV & Shelving Unit" }
   ];
 
   return (
