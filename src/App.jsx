@@ -292,6 +292,7 @@ const Services = () => {
                 <img
                   src={service.image}
                   alt={service.title}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-black text-xs font-data uppercase tracking-wider px-3 py-1.5 rounded-full border border-concrete/40">
@@ -357,7 +358,7 @@ const Work = () => {
               className="min-w-[80vw] snap-start flex-shrink-0 relative rounded-[2rem] h-72 overflow-hidden border border-white/10 cursor-pointer"
               onClick={() => setSelectedImage(image)}
             >
-              <img src={image.src} className="w-full h-full object-cover" alt={image.alt} />
+              <img src={image.src} className="w-full h-full object-cover" alt={image.alt} loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                 <span className="font-data text-white text-xs mb-1 uppercase">{image.subtitle}</span>
                 <h3 className="font-heading text-xl">{image.title}</h3>
@@ -372,7 +373,7 @@ const Work = () => {
             className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10 cursor-pointer"
             onClick={() => setSelectedImage(images[0])}
           >
-            <img src={images[0].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[0].alt} />
+            <img src={images[0].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[0].alt} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
               <span className="font-data text-white text-xs mb-2 uppercase">{images[0].subtitle}</span>
               <h3 className="font-heading text-2xl md:text-3xl">{images[0].title}</h3>
@@ -384,7 +385,7 @@ const Work = () => {
               className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
               onClick={() => setSelectedImage(images[1])}
             >
-              <img src={images[1].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[1].alt} />
+              <img src={images[1].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[1].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                 <span className="font-data text-white text-xs mb-1 uppercase">{images[1].subtitle}</span>
                 <h3 className="font-heading text-xl">{images[1].title}</h3>
@@ -394,7 +395,7 @@ const Work = () => {
               className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
               onClick={() => setSelectedImage(images[2])}
             >
-              <img src={images[2].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[2].alt} />
+              <img src={images[2].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[2].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                 <span className="font-data text-white text-xs mb-1 uppercase">{images[2].subtitle}</span>
                 <h3 className="font-heading text-xl">{images[2].title}</h3>
@@ -407,7 +408,7 @@ const Work = () => {
               className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
               onClick={() => setSelectedImage(images[3])}
             >
-              <img src={images[3].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[3].alt} />
+              <img src={images[3].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[3].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                 <span className="font-data text-white text-xs mb-1 uppercase">{images[3].subtitle}</span>
                 <h3 className="font-heading text-xl">{images[3].title}</h3>
@@ -417,7 +418,7 @@ const Work = () => {
               className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
               onClick={() => setSelectedImage(images[4])}
             >
-              <img src={images[4].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[4].alt} />
+              <img src={images[4].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[4].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                 <span className="font-data text-white text-xs mb-1 uppercase">{images[4].subtitle}</span>
                 <h3 className="font-heading text-xl">{images[4].title}</h3>
@@ -429,7 +430,7 @@ const Work = () => {
             className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10 cursor-pointer"
             onClick={() => setSelectedImage(images[5])}
           >
-            <img src={images[5].src} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[5].alt} />
+            <img src={images[5].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[5].alt} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
               <span className="font-data text-white text-xs mb-2 uppercase">{images[5].subtitle}</span>
               <h3 className="font-heading text-2xl md:text-3xl">{images[5].title}</h3>
@@ -519,7 +520,7 @@ const Process = () => {
               <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-primary rounded-full z-20 border-4 border-bone -translate-x-1/2 mt-8 md:mt-0" />
               <div className="md:w-1/2 w-full pl-16 md:pl-8">
                 <div className="w-full h-48 md:h-64 bg-concrete/30 rounded-[2rem] border border-concrete/50 overflow-hidden flex items-center justify-center group cursor-pointer hover:shadow-lg transition-all duration-300">
-                  <img src="/Step1.webp" alt="Showroom detail" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+                  <img src="/Step1.webp" alt="Showroom detail" loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
                 </div>
               </div>
             </div>
@@ -536,7 +537,7 @@ const Process = () => {
               <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-primary rounded-full z-20 border-4 border-bone -translate-x-1/2 mt-8 md:mt-0" />
               <div className="md:w-1/2 w-full pl-16 md:pr-8">
                 <div className="w-full h-48 md:h-64 bg-concrete/30 rounded-[2rem] border border-concrete/50 overflow-hidden flex items-center justify-center group cursor-pointer hover:shadow-lg transition-all duration-300">
-                   <img src="/Step2.webp" alt="Design planning" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+                   <img src="/Step2.webp" alt="Design planning" loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
                 </div>
               </div>
             </div>
@@ -553,7 +554,7 @@ const Process = () => {
               <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-primary rounded-full z-20 border-4 border-bone -translate-x-1/2 mt-8 md:mt-0" />
               <div className="md:w-1/2 w-full pl-16 md:pl-8">
                 <div className="w-full h-48 md:h-64 bg-concrete/30 rounded-[2rem] border border-concrete/50 overflow-hidden flex items-center justify-center group cursor-pointer hover:shadow-lg transition-all duration-300">
-                  <img src="/Step3.webp" alt="Installation process" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+                  <img src="/Step3.webp" alt="Installation process" loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
                 </div>
               </div>
             </div>
@@ -570,7 +571,7 @@ const Process = () => {
               <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-primary rounded-full z-20 border-4 border-bone -translate-x-1/2 mt-8 md:mt-0" />
               <div className="md:w-1/2 w-full pl-16 md:pr-8">
                 <div className="w-full h-48 md:h-64 bg-concrete/30 rounded-[2rem] border border-concrete/50 overflow-hidden flex items-center justify-center group cursor-pointer hover:shadow-lg transition-all duration-300">
-                   <img src="/Step4.webp" alt="Finished beautiful room" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+                   <img src="/Step4.webp" alt="Finished beautiful room" loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
                 </div>
               </div>
             </div>
@@ -959,7 +960,7 @@ const FAQPage = () => {
   return (
     <div className="pt-24 bg-bone min-h-screen">
       <div className="relative w-full h-[50vh] min-h-[400px] overflow-hidden mb-16">
-        <img src="/FAQ HERO.webp" alt="Frequently Asked Questions" className="w-full h-full object-cover" />
+        <img src="/FAQ HERO.webp" alt="Frequently Asked Questions" loading="lazy" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/40 flex flex-col justify-end pb-10 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto w-full">
             <h1 className="text-bone font-drama text-5xl md:text-7xl font-bold">Frequently Asked Questions</h1>
