@@ -452,7 +452,7 @@ const Process = () => {
     const ctx = gsap.context(() => {
       const steps = gsap.utils.toArray('.process-step');
       
-      steps.forEach((step, i) => {
+      steps.forEach((step) => {
         gsap.from(step, {
           opacity: 0,
           y: 50,
@@ -766,9 +766,9 @@ const Reviews = () => {
         className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 cursor-grab active:cursor-grabbing w-full px-6 lg:px-12"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {reviews.map((review, i) => (
+        {reviews.map((review, index) => (
           <div 
-            key={i} 
+            key={index} 
             className="min-w-[300px] md:min-w-[400px] max-w-[400px] snap-start bg-bone p-8 rounded-[2rem] border border-concrete/50 flex flex-col h-auto"
           >
             <div className="flex text-yellow-500 mb-6">
@@ -793,7 +793,7 @@ const Reviews = () => {
         ))}
       </div>
 
-      <div className="mt-8">
+      <div className="mt-8 px-6 lg:px-12 max-w-[1400px] mx-auto">
         <a href="https://www.google.com/search?q=gallery+design+bedrooms&rlz=1C5GCEM_enGB1159GB1159&oq=gallery+desig&gs_lcrp=EgZjaHJvbWUqCQgAEEUYOxiABDIJCAAQRRg7GIAEMgcIARAAGIAEMhAIAhAuGK8BGMcBGIAEGI4FMgYIAxBFGDkyBwgEEAAYgAQyBggFEEUYPTIGCAYQRRg8MgYIBxBFGDzSAQgyOTE2ajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8#lrd=0x488848b388c0101b:0xfb3a777b6e9bf194,1,,,," target="_blank" rel="noopener noreferrer">
           <MagneticButton className="px-6 py-3 border border-concrete rounded-full text-black hover:bg-concrete/10 transition-colors w-full md:w-auto font-medium">
             Read all Google reviews
@@ -910,8 +910,8 @@ const FAQ = () => {
         </div>
         
         <div className="space-y-4">
-          {faqs.map((faq, i) => (
-            <details key={i} className="group bg-white rounded-2xl border border-concrete [&_summary::-webkit-details-marker]:hidden">
+          {faqs.map((faq, index) => (
+            <details key={index} className="group bg-white rounded-2xl border border-concrete [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex items-center justify-between p-6 md:p-8 cursor-pointer list-none font-heading text-lg font-medium text-black">
                 {faq.question}
                 <span className="transition group-open:rotate-180">
@@ -947,16 +947,111 @@ const FAQPage = () => {
 
 const Booking = () => {
   const [showHours, setShowHours] = useState(false);
+  const [status, setStatus] = useState({ isOpen: false, text: '' });
+
+  useEffect(() => {
+    const checkStatus = () => {
+      const now = new Date();
+      const day = now.getDay();
+      const hour = now.getHours();
+      
+      const isWeekday = day >= 1 && day <= 5;
+      const isOpen = isWeekday && hour >= 9 && hour < 17;
+      
+      let text = '';
+      if (isOpen) {
+        text = 'Closes at 17:00';
+      } else {
+        if (isWeekday && hour < 9) {
+          text = 'Opens today at 09:00';
+        } else if (day >= 1 && day <= 4 && hour >= 17) {
+          text = 'Opens tomorrow at 09:00';
+        } else if ((day === 5 && hour >= 17) || day === 6) {
+          text = 'Opens Monday at 09:00';
+        } else if (day === 0) {
+          text = 'Opens tomorrow at 09:00';
+        }
+      }
+      
+      setStatus({ isOpen, text });
+    };
+    
+    checkStatus();
+    const interval = setInterval(checkStatus, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section id="contact" className="py-10 px-6 lg:px-12 bg-bone relative">
+    <section id="contact" className="py-20 lg:py-32 px-6 lg:px-12 bg-bone border-t border-black/10">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           
-          <div className="bg-white p-8 md:p-12 rounded-[2rem] border border-concrete shadow-premium">
-            <h2 className="font-heading text-3xl mb-2">Book a Showroom Visit</h2>
-            <p className="text-black/60 font-body mb-8">We'd love to hear your ideas. Book a friendly, no-obligation showroom visit today to start the journey.</p>
-            
+          {/* Left Column - Contact Info */}
+          <div>
+            <h2 className="font-heading font-medium text-4xl lg:text-5xl tracking-tight mb-6">
+              Start your journey
+            </h2>
+            <p className="font-body text-black/60 text-lg max-w-md mb-12">
+              Ready to transform your bedroom? Get in touch with our team to discuss your project or schedule a consultation.
+            </p>
+
+            <button 
+              onClick={() => setShowHours(true)}
+              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-body text-xs border mb-12 cursor-pointer transition-colors ${
+                status.isOpen 
+                  ? 'bg-green-100/50 text-green-700 border-green-200 hover:bg-green-100' 
+                  : 'bg-red-100/50 text-red-700 border-red-200 hover:bg-red-100'
+              }`}
+              title="View full opening hours"
+            >
+              <div className={`w-2 h-2 rounded-full animate-pulse ${status.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+              <span className="font-medium uppercase tracking-wider">{status.isOpen ? 'Open' : 'Closed'}</span> 
+              <span className="opacity-40 mx-1">•</span> 
+              <span>{status.text}</span>
+            </button>
+
+            <div className="space-y-8">
+              <div className="flex items-start gap-4">
+                <div className="mt-1 p-3 bg-concrete/50 rounded-full"><MapPin size={20} className="text-primary" /></div>
+                <div>
+                  <h4 className="font-heading font-medium text-lg mb-1">Our Showroom</h4>
+                  <p className="font-body text-black/60">Burnbank Rd, Hamilton ML3 9AZ</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-1 p-3 bg-concrete/50 rounded-full"><Phone size={20} className="text-primary" /></div>
+                <div>
+                  <h4 className="font-heading font-medium text-lg mb-1">Call Us</h4>
+                  <p className="font-body text-black/60">01698 286866</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-1 p-3 bg-concrete/50 rounded-full"><Mail size={20} className="text-primary" /></div>
+                <div>
+                  <h4 className="font-heading font-medium text-lg mb-1">Email Us</h4>
+                  <p className="font-body text-black/60">gallerydesignbedrooms@gmail.com</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-1 p-3 bg-concrete/50 rounded-full"><Clock size={20} className="text-primary" /></div>
+                <div>
+                  <h4 className="font-heading font-medium text-lg mb-1">Opening Hours</h4>
+                  <p className="font-body text-black/60">Monday - Friday: 9:00 AM - 5:00 PM</p>
+                  <p className="font-body text-black/60">Saturday - Sunday: Closed</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Contact Form */}
+          <div>
+            <h2 className="font-heading font-medium text-4xl lg:text-5xl tracking-tight mb-6">
+              Book a consultation
+            </h2>
+            <p className="font-body text-black/60 text-lg max-w-md mb-12">
+              Fill out the form below to schedule a consultation with our team. We'll get back to you as soon as possible.
+            </p>
+
             <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6">
               {/* Replace with your Access Key from Web3Forms */}
               <input type="hidden" name="access_key" value="3b2f54d2-0f00-4cfa-b3cd-98b1924b93e0" />
@@ -989,59 +1084,6 @@ const Booking = () => {
               </button>
             </form>
           </div>
-
-          <div className="flex flex-col justify-center gap-8 lg:pl-12">
-            <div>
-              <h2 className="font-drama font-bold text-5xl mb-4">Come Say Hello</h2>
-              <p className="text-black/70 max-w-md mb-8">If you are still unsure, we can give you more information before you schedule an appointment, speak with our team today.</p>
-              
-              <div 
-                onClick={() => setShowHours(true)}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-100 text-red-700 font-data text-xs border border-red-200 mb-6 w-fit cursor-pointer hover:bg-red-200 transition-colors"
-                title="View full opening hours"
-              >
-                <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                <span className="font-bold">Closed</span> 
-                <span className="opacity-70 mx-1">•</span> 
-                <span>Opens tomorrow at 09:00</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-6 font-body">
-              <div className="flex items-start gap-4">
-                <div className="mt-1 p-3 bg-concrete/50 rounded-full"><MapPin size={20} className="text-primary" /></div>
-                <div>
-                  <h4 className="font-bold mb-1">Our Showroom</h4>
-                  <p className="text-black/70">Burnbank Rd, Hamilton ML3 9AZ</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="mt-1 p-3 bg-concrete/50 rounded-full"><Phone size={20} className="text-primary" /></div>
-                <div>
-                  <h4 className="font-bold mb-1">Call Us</h4>
-                  <p className="text-black/70">01698 286866</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="mt-1 p-3 bg-concrete/50 rounded-full"><Mail size={20} className="text-primary" /></div>
-                <div>
-                  <h4 className="font-bold mb-1">Email Us</h4>
-                  <p className="text-black/70">gallerydesignbedrooms@gmail.com</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="mt-1 p-3 bg-concrete/50 rounded-full"><Clock size={20} className="text-primary" /></div>
-                <div>
-                  <h4 className="font-bold mb-1">Opening Hours</h4>
-                  <p className="text-black/70">Monday - Friday: 9:00 AM - 5:00 PM</p>
-                  <p className="text-black/70">Saturday - Sunday: Closed</p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
         </div>
       </div>
 
@@ -1068,11 +1110,11 @@ const Booking = () => {
             
             <div className="space-y-1 font-body text-black/80 font-medium w-full">
               {[
-                { day: 'Monday', hours: '9:00 AM - 5:00 PM' },
-                { day: 'Tuesday', hours: '9:00 AM - 5:00 PM' },
-                { day: 'Wednesday', hours: '9:00 AM - 5:00 PM' },
-                { day: 'Thursday', hours: '9:00 AM - 5:00 PM' },
-                { day: 'Friday', hours: '9:00 AM - 5:00 PM' },
+                { day: 'Monday', hours: '9:00 AM - 5:00 PM', closed: false },
+                { day: 'Tuesday', hours: '9:00 AM - 5:00 PM', closed: false },
+                { day: 'Wednesday', hours: '9:00 AM - 5:00 PM', closed: false },
+                { day: 'Thursday', hours: '9:00 AM - 5:00 PM', closed: false },
+                { day: 'Friday', hours: '9:00 AM - 5:00 PM', closed: false },
                 { day: 'Saturday', hours: 'Closed', closed: true },
                 { day: 'Sunday', hours: 'Closed', closed: true }
               ].map(({ day, hours, closed }) => (
@@ -1159,6 +1201,14 @@ export default function App() {
               <Work />
               <Process />
               <Reviews />
+              <section className="py-20 bg-bone">
+                <div className="max-w-7xl mx-auto px-6 lg:px-12">
+                  <h2 className="font-heading font-medium text-4xl lg:text-5xl tracking-tight mb-12 text-center">
+                    Latest on TikTok
+                  </h2>
+                  <div className="elfsight-app-bbf01bb6-80de-47f4-91e2-3c4738b28400" data-elfsight-app-lazy></div>
+                </div>
+              </section>
               <Trust />
               <Booking />
             </main>
