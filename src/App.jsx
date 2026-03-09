@@ -125,7 +125,7 @@ const Navbar = () => {
     <>
       {/* Desktop top bar */}
       <div className="hidden md:flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-8 py-2 justify-center gap-8 items-center">
-        <span>Burnbank Rd, Hamilton ML3 9AZ</span>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Burnbank Rd, Hamilton ML3 9AZ</a>
         <span className="text-white/30">·</span>
         <a href="tel:01698286866" className="hover:text-white transition-colors">01698 286866</a>
         <span className="text-white/30">·</span>
@@ -188,7 +188,7 @@ const Navbar = () => {
           <span>{status.text}</span>
         </a>
         <div className="text-center text-black/50 font-data text-xs space-y-1">
-          <p>Burnbank Rd, Hamilton ML3 9AZ</p>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Burnbank Rd, Hamilton ML3 9AZ</a>
           <a href="tel:01698286866" className="block hover:text-primary transition-colors">01698 286866</a>
           <p>Mon–Fri 9am–5pm &nbsp;·&nbsp; Sat–Sun Closed</p>
         </div>
@@ -1083,14 +1083,14 @@ const Booking = () => {
                 <div className="mt-1 p-3 bg-concrete/50 rounded-full"><MapPin size={20} className="text-primary" /></div>
                 <div>
                   <h4 className="font-heading font-medium text-lg mb-1">Our Showroom</h4>
-                  <p className="font-body text-black/60">Burnbank Rd, Hamilton ML3 9AZ</p>
+                  <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="font-body text-black/60 hover:text-primary transition-colors">Burnbank Rd, Hamilton ML3 9AZ</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <div className="mt-1 p-3 bg-concrete/50 rounded-full"><Phone size={20} className="text-primary" /></div>
                 <div>
                   <h4 className="font-heading font-medium text-lg mb-1">Call Us</h4>
-                  <p className="font-body text-black/60">01698 286866</p>
+                  <a href="tel:01698286866" className="font-body text-black/60 hover:text-primary transition-colors">01698 286866</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
