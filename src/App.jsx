@@ -80,6 +80,27 @@ const Navbar = () => {
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [status, setStatus] = useState({ isOpen: false, text: '' });
+
+  useEffect(() => {
+    const checkStatus = () => {
+      const now = new Date();
+      const day = now.getDay();
+      const hour = now.getHours();
+      const isWeekday = day >= 1 && day <= 5;
+      const isOpen = isWeekday && hour >= 9 && hour < 17;
+      let text = '';
+      if (isOpen) { text = 'Closes at 17:00'; }
+      else if (isWeekday && hour < 9) { text = 'Opens today at 09:00'; }
+      else if (day >= 1 && day <= 4 && hour >= 17) { text = 'Opens tomorrow at 09:00'; }
+      else if ((day === 5 && hour >= 17) || day === 6) { text = 'Opens Monday at 09:00'; }
+      else if (day === 0) { text = 'Opens tomorrow at 09:00'; }
+      setStatus({ isOpen, text });
+    };
+    checkStatus();
+    const interval = setInterval(checkStatus, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -160,7 +181,13 @@ const Navbar = () => {
             Contact Us
           </MagneticButton>
         </a>
-        <div className="mt-8 text-center text-black/50 font-data text-xs space-y-1">
+        <a href="/#contact" onClick={() => setMenuOpen(false)} className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-body text-xs border ${status.isOpen ? 'bg-green-100/50 text-green-700 border-green-200' : 'bg-red-100/50 text-red-700 border-red-200'}`}>
+          <div className={`w-2 h-2 rounded-full animate-pulse ${status.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+          <span className="font-medium uppercase tracking-wider">{status.isOpen ? 'Open' : 'Closed'}</span>
+          <span className="opacity-40 mx-1">•</span>
+          <span>{status.text}</span>
+        </a>
+        <div className="text-center text-black/50 font-data text-xs space-y-1">
           <p>Burnbank Rd, Hamilton ML3 9AZ</p>
           <a href="tel:01698286866" className="block hover:text-primary transition-colors">01698 286866</a>
           <p>Mon–Fri 9am–5pm &nbsp;·&nbsp; Sat–Sun Closed</p>
