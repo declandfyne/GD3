@@ -181,14 +181,14 @@ const Navbar = () => {
             Contact Us
           </MagneticButton>
         </a>
-        <a href="/#contact" onClick={() => setMenuOpen(false)} className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-body text-xs border ${status.isOpen ? 'bg-green-100/50 text-green-700 border-green-200' : 'bg-red-100/50 text-red-700 border-red-200'}`}>
-          <div className={`w-2 h-2 rounded-full animate-pulse ${status.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
-          <span className="font-medium uppercase tracking-wider">{status.isOpen ? 'Open' : 'Closed'}</span>
-          <span className="opacity-40 mx-1">•</span>
-          <span>{status.text}</span>
-        </a>
-        <div className="text-center text-black/50 font-data text-xs space-y-1">
+        <div className="text-center text-black/50 font-data text-xs space-y-2">
           <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Burnbank Rd, Hamilton ML3 9AZ</a>
+          <a href="/#contact" onClick={() => setMenuOpen(false)} className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-body text-xs border ${status.isOpen ? 'bg-green-100/50 text-green-700 border-green-200' : 'bg-red-100/50 text-red-700 border-red-200'}`}>
+            <div className={`w-2 h-2 rounded-full animate-pulse ${status.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+            <span className="font-medium uppercase tracking-wider">{status.isOpen ? 'Open' : 'Closed'}</span>
+            <span className="opacity-40 mx-1">•</span>
+            <span>{status.text}</span>
+          </a>
           <a href="tel:01698286866" className="block hover:text-primary transition-colors">01698 286866</a>
           <p>Mon–Fri 9am–5pm &nbsp;·&nbsp; Sat–Sun Closed</p>
         </div>
