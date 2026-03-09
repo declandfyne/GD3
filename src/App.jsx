@@ -1061,22 +1061,22 @@ const Booking = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="font-data text-xs uppercase" htmlFor="name">Name</label>
-                  <input type="text" name="name" id="name" required className="w-full bg-bone border border-concrete rounded-xl px-4 py-3 outline-none focus:border-primary transition-colors" />
+                  <input type="text" name="name" id="name" required className="w-full bg-white border border-concrete rounded-xl px-4 py-3 outline-none focus:border-primary transition-colors" />
                 </div>
                 <div className="space-y-2">
                   <label className="font-data text-xs uppercase" htmlFor="phone">Phone</label>
-                  <input type="tel" name="phone" id="phone" required className="w-full bg-bone border border-concrete rounded-xl px-4 py-3 outline-none focus:border-primary transition-colors" />
+                  <input type="tel" name="phone" id="phone" required className="w-full bg-white border border-concrete rounded-xl px-4 py-3 outline-none focus:border-primary transition-colors" />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="font-data text-xs uppercase" htmlFor="email">Email Address</label>
-                <input type="email" name="email" id="email" required className="w-full bg-bone border border-concrete rounded-xl px-4 py-3 outline-none focus:border-primary transition-colors" />
+                <input type="email" name="email" id="email" required className="w-full bg-white border border-concrete rounded-xl px-4 py-3 outline-none focus:border-primary transition-colors" />
               </div>
 
               <div className="space-y-2">
                 <label className="font-data text-xs uppercase" htmlFor="notes">Tell us a little about what you're looking for</label>
-                <textarea name="message" id="notes" rows="3" required className="w-full bg-bone border border-concrete rounded-xl px-4 py-3 outline-none focus:border-primary transition-colors resize-none"></textarea>
+                <textarea name="message" id="notes" rows="3" required className="w-full bg-white border border-concrete rounded-xl px-4 py-3 outline-none focus:border-primary transition-colors resize-none"></textarea>
               </div>
 
               <button type="submit" className="w-full bg-black text-white rounded-xl py-4 font-medium flex justify-center items-center gap-2 hover:bg-black/80 transition-colors">
