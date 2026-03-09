@@ -959,7 +959,7 @@ const FAQPage = () => {
   return (
     <div className="pt-24 bg-bone min-h-screen">
       <div className="relative w-full h-[50vh] min-h-[400px] overflow-hidden mb-16">
-        <img src="/FAQ HERO.png" alt="Frequently Asked Questions" className="w-full h-full object-cover" />
+        <img src="/FAQ HERO.webp" alt="Frequently Asked Questions" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/40 flex flex-col justify-end pb-10 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto w-full">
             <h1 className="text-bone font-drama text-5xl md:text-7xl font-bold">Frequently Asked Questions</h1>
