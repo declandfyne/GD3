@@ -407,8 +407,6 @@ const Services = () => {
 };
 
 const Work = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
-
   const images = [
     { src: "/Bedroom2.jpg", alt: "Fitted bedroom", subtitle: "Bedroom Storage", title: "Beautiful Fitted Bedroom" },
     { src: "/tvunit3.png", alt: "Living room storage", subtitle: "Living Space", title: "Beautiful TV Media Wall" },
@@ -428,8 +426,7 @@ const Work = () => {
           {images.map((image, i) => (
             <div
               key={i}
-              className="min-w-[80vw] snap-start flex-shrink-0 relative rounded-[2rem] h-72 overflow-hidden border border-white/10 cursor-pointer"
-              onClick={() => setSelectedImage(image)}
+              className="min-w-[80vw] snap-start flex-shrink-0 relative rounded-[2rem] h-72 overflow-hidden border border-white/10"
             >
               <img src={image.src} className="w-full h-full object-cover" alt={image.alt} loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
@@ -442,9 +439,8 @@ const Work = () => {
 
         {/* Desktop grid */}
         <div className="hidden md:grid grid-cols-12 gap-6">
-          <div 
-            className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10 cursor-pointer"
-            onClick={() => setSelectedImage(images[0])}
+          <div
+            className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10"
           >
             <img src={images[0].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[0].alt} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
@@ -454,9 +450,8 @@ const Work = () => {
           </div>
           
           <div className="md:col-span-4 flex flex-col gap-6">
-            <div 
-              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
-              onClick={() => setSelectedImage(images[1])}
+            <div
+              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10"
             >
               <img src={images[1].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[1].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
@@ -464,9 +459,8 @@ const Work = () => {
                 <h3 className="font-heading text-xl">{images[1].title}</h3>
               </div>
             </div>
-            <div 
-              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
-              onClick={() => setSelectedImage(images[2])}
+            <div
+              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10"
             >
               <img src={images[2].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[2].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
@@ -477,9 +471,8 @@ const Work = () => {
           </div>
           
           <div className="md:col-span-4 flex flex-col gap-6">
-            <div 
-              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
-              onClick={() => setSelectedImage(images[3])}
+            <div
+              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10"
             >
               <img src={images[3].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[3].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
@@ -487,9 +480,8 @@ const Work = () => {
                 <h3 className="font-heading text-xl">{images[3].title}</h3>
               </div>
             </div>
-            <div 
-              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10 cursor-pointer"
-              onClick={() => setSelectedImage(images[4])}
+            <div
+              className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10"
             >
               <img src={images[4].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[4].alt} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
@@ -500,8 +492,7 @@ const Work = () => {
           </div>
           
           <div
-            className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10 cursor-pointer"
-            onClick={() => setSelectedImage(images[5])}
+            className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10"
           >
             <img src={images[5].src} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={images[5].alt} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
@@ -512,35 +503,6 @@ const Work = () => {
         </div> {/* end desktop grid */}
       </div>
 
-      {/* Lightbox */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md px-6 animate-in fade-in duration-300 cursor-pointer"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button 
-            onClick={() => setSelectedImage(null)}
-            className="absolute top-6 right-6 lg:top-10 lg:right-10 text-white/50 hover:text-white transition-colors"
-          >
-            <X size={32} />
-          </button>
-          
-          <div 
-            className="relative max-w-5xl w-full max-h-[80vh] flex flex-col"
-            onClick={e => e.stopPropagation()}
-          >
-            <img 
-              src={selectedImage.src} 
-              alt={selectedImage.alt}
-              className="w-full h-auto max-h-[70vh] object-contain rounded-lg shadow-2xl"
-            />
-            <div className="mt-6 text-center">
-              <span className="font-data text-white/60 text-xs uppercase tracking-widest block mb-2">{selectedImage.subtitle}</span>
-              <h3 className="font-heading text-white text-2xl md:text-3xl">{selectedImage.title}</h3>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
