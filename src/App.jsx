@@ -1220,21 +1220,41 @@ const Booking = () => {
               <h3 className="font-heading text-2xl font-bold">Opening Hours</h3>
             </div>
             
-            <div className="space-y-1 font-body text-black/80 font-medium w-full">
-              {[
-                { day: 'Monday', hours: '9:00 AM - 5:00 PM', closed: false },
-                { day: 'Tuesday', hours: '9:00 AM - 5:00 PM', closed: false },
-                { day: 'Wednesday', hours: '9:00 AM - 5:00 PM', closed: false },
-                { day: 'Thursday', hours: '9:00 AM - 5:00 PM', closed: false },
-                { day: 'Friday', hours: '9:00 AM - 5:00 PM', closed: false },
-                { day: 'Saturday', hours: 'Closed', closed: true },
-                { day: 'Sunday', hours: 'Closed', closed: true }
-              ].map(({ day, hours, closed }) => (
-                <div key={day} className={`flex justify-between items-center py-3 border-b border-concrete/40 last:border-0 ${closed ? 'text-black/40' : ''}`}>
-                  <span>{day}</span>
-                  <span className={closed ? 'font-normal text-black/40' : 'text-black'}>{hours}</span>
-                </div>
-              ))}
+            <div className="space-y-6 font-body text-black/80 font-medium w-full">
+              <div>
+                <p className="font-data text-xs uppercase tracking-wider text-primary mb-2">Hamilton</p>
+                {[
+                  { day: 'Monday', hours: '9:00 AM - 5:00 PM', closed: false },
+                  { day: 'Tuesday', hours: '9:00 AM - 5:00 PM', closed: false },
+                  { day: 'Wednesday', hours: '9:00 AM - 5:00 PM', closed: false },
+                  { day: 'Thursday', hours: '9:00 AM - 5:00 PM', closed: false },
+                  { day: 'Friday', hours: '9:00 AM - 5:00 PM', closed: false },
+                  { day: 'Saturday', hours: 'Closed', closed: true },
+                  { day: 'Sunday', hours: 'Closed', closed: true }
+                ].map(({ day, hours, closed }) => (
+                  <div key={day} className={`flex justify-between items-center py-2.5 border-b border-concrete/40 last:border-0 ${closed ? 'text-black/40' : ''}`}>
+                    <span>{day}</span>
+                    <span className={closed ? 'font-normal text-black/40' : 'text-black'}>{hours}</span>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <p className="font-data text-xs uppercase tracking-wider text-primary mb-2">Hillington</p>
+                {[
+                  { day: 'Monday', hours: '10:00 AM - 5:00 PM', closed: false },
+                  { day: 'Tuesday', hours: '10:00 AM - 5:00 PM', closed: false },
+                  { day: 'Wednesday', hours: '10:00 AM - 5:00 PM', closed: false },
+                  { day: 'Thursday', hours: '10:00 AM - 5:00 PM', closed: false },
+                  { day: 'Friday', hours: '10:00 AM - 5:00 PM', closed: false },
+                  { day: 'Saturday', hours: '10:00 AM - 4:00 PM', closed: false },
+                  { day: 'Sunday', hours: '12:00 PM - 4:00 PM', closed: false }
+                ].map(({ day, hours, closed }) => (
+                  <div key={day} className={`flex justify-between items-center py-2.5 border-b border-concrete/40 last:border-0 ${closed ? 'text-black/40' : ''}`}>
+                    <span>{day}</span>
+                    <span className={closed ? 'font-normal text-black/40' : 'text-black'}>{hours}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
