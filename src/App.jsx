@@ -1147,7 +1147,7 @@ const Booking = () => {
                   <h4 className="font-heading font-medium text-lg mb-1">Opening Hours</h4>
                   <p className="font-body text-black/60 font-medium">Hamilton</p>
                   <p className="font-body text-black/60">Mon–Fri: 9:00 AM – 5:00 PM &nbsp;·&nbsp; Sat–Sun: Closed</p>
-                  <p className="font-body text-black/60 font-medium mt-2">Glasgow</p>
+                  <p className="font-body text-black/60 font-medium mt-2">Hillington</p>
                   <p className="font-body text-black/60">Mon–Fri: 10:00 AM – 5:00 PM</p>
                   <p className="font-body text-black/60">Sat: 10:00 AM – 4:00 PM &nbsp;·&nbsp; Sun: 12:00 – 4:00 PM</p>
                 </div>
