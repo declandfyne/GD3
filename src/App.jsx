@@ -147,7 +147,7 @@ const Navbar = () => {
         <a href="tel:01698286866" className="hover:text-white transition-colors">01698 286866</a>
         <div className={`w-1.5 h-1.5 rounded-full ${hamiltonStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
         <span className="text-white/30 mx-2">|</span>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Glasgow · Carnegie Rd</a>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Hillington · Carnegie Rd</a>
         <a href="tel:01418828008" className="hover:text-white transition-colors">0141 882 8008</a>
         <div className={`w-1.5 h-1.5 rounded-full ${glasgowStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
       </div>
@@ -214,7 +214,7 @@ const Navbar = () => {
           </div>
           <div className="w-px bg-black/10" />
           <div className="space-y-2">
-            <p className="font-medium text-black/70 uppercase tracking-wider">Glasgow</p>
+            <p className="font-medium text-black/70 uppercase tracking-wider">Hillington</p>
             <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Carnegie Rd, G52 4JZ</a>
             <a href="tel:01418828008" className="block hover:text-primary transition-colors">0141 882 8008</a>
             <p>Mon–Fri 10am–5pm</p>
@@ -980,7 +980,7 @@ const FAQ = () => {
       answer: "Not at all — that's what we're here for. Our designer will walk you through ideas and options during your free home visit, so you can figure out what works best for your space."
     },
     {
-      question: "Can you work with awkward spaces like slopped ceilings?",
+      question: "Can you work with awkward spaces like sloped ceilings?",
       answer: "Absolutely — tricky spaces are our specialty. Sloped ceilings, alcoves, odd corners — we design furniture that fits your exact space perfectly, wall-to-wall and floor-to-ceiling."
     },
     {
@@ -1111,7 +1111,7 @@ const Booking = () => {
               </button>
               <button onClick={() => setShowHours(true)} className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-body text-xs border cursor-pointer transition-colors ${glasgowStatus.isOpen ? 'bg-green-100/50 text-green-700 border-green-200 hover:bg-green-100' : 'bg-red-100/50 text-red-700 border-red-200 hover:bg-red-100'}`} title="View Glasgow opening hours">
                 <div className={`w-2 h-2 rounded-full animate-pulse ${glasgowStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
-                <span className="font-medium uppercase tracking-wider">Glasgow</span>
+                <span className="font-medium uppercase tracking-wider">Hillington</span>
                 <span className="opacity-40">•</span>
                 <span>{glasgowStatus.isOpen ? 'Open' : 'Closed'}</span>
               </button>
@@ -1123,7 +1123,7 @@ const Booking = () => {
                 <div>
                   <h4 className="font-heading font-medium text-lg mb-1">Our Showrooms</h4>
                   <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="font-body text-black/60 hover:text-primary transition-colors block">Hamilton — Burnbank Rd, ML3 9AZ</a>
-                  <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="font-body text-black/60 hover:text-primary transition-colors block">Glasgow — 120 Carnegie Rd, G52 4JZ</a>
+                  <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="font-body text-black/60 hover:text-primary transition-colors block">Hillington — 120 Carnegie Rd, G52 4JZ</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -1131,7 +1131,7 @@ const Booking = () => {
                 <div>
                   <h4 className="font-heading font-medium text-lg mb-1">Call Us</h4>
                   <a href="tel:01698286866" className="font-body text-black/60 hover:text-primary transition-colors block">Hamilton — 01698 286866</a>
-                  <a href="tel:01418828008" className="font-body text-black/60 hover:text-primary transition-colors block">Glasgow — 0141 882 8008</a>
+                  <a href="tel:01418828008" className="font-body text-black/60 hover:text-primary transition-colors block">Hillington — 0141 882 8008</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
