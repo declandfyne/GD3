@@ -276,7 +276,7 @@ const Services = () => {
       benefits: ["Floor-to-ceiling storage", "Custom lighting & mirrors", "Built around your lifestyle"],
     },
     {
-      image: "/image1.webp",
+      image: "/walkinwardrobe2.png",
       label: "Bedroom Storage",
       title: "Fitted Wardrobes",
       hook: "No more clutter. No more wasted space.",
