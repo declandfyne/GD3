@@ -80,22 +80,40 @@ const Navbar = () => {
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [status, setStatus] = useState({ isOpen: false, text: '' });
+  const [hamiltonStatus, setHamiltonStatus] = useState({ isOpen: false, text: '' });
+  const [glasgowStatus, setGlasgowStatus] = useState({ isOpen: false, text: '' });
 
   useEffect(() => {
     const checkStatus = () => {
       const now = new Date();
       const day = now.getDay();
       const hour = now.getHours();
-      const isWeekday = day >= 1 && day <= 5;
-      const isOpen = isWeekday && hour >= 9 && hour < 17;
-      let text = '';
-      if (isOpen) { text = 'Closes at 17:00'; }
-      else if (isWeekday && hour < 9) { text = 'Opens today at 09:00'; }
-      else if (day >= 1 && day <= 4 && hour >= 17) { text = 'Opens tomorrow at 09:00'; }
-      else if ((day === 5 && hour >= 17) || day === 6) { text = 'Opens Monday at 09:00'; }
-      else if (day === 0) { text = 'Opens tomorrow at 09:00'; }
-      setStatus({ isOpen, text });
+
+      // Hamilton: Mon-Fri 9-17, Sat-Sun closed
+      const hOpen = day >= 1 && day <= 5 && hour >= 9 && hour < 17;
+      let hText = '';
+      if (hOpen) { hText = 'Closes at 17:00'; }
+      else if (day >= 1 && day <= 5 && hour < 9) { hText = 'Opens today at 09:00'; }
+      else if (day >= 1 && day <= 4 && hour >= 17) { hText = 'Opens tomorrow at 09:00'; }
+      else if ((day === 5 && hour >= 17) || day === 6) { hText = 'Opens Monday at 09:00'; }
+      else if (day === 0) { hText = 'Opens tomorrow at 09:00'; }
+      setHamiltonStatus({ isOpen: hOpen, text: hText });
+
+      // Glasgow: Mon-Fri 10-17, Sat 10-16, Sun 12-16
+      let gOpen = false;
+      if (day >= 1 && day <= 5) gOpen = hour >= 10 && hour < 17;
+      else if (day === 6) gOpen = hour >= 10 && hour < 16;
+      else if (day === 0) gOpen = hour >= 12 && hour < 16;
+      let gText = '';
+      if (gOpen) { gText = (day === 6 || day === 0) ? 'Closes at 16:00' : 'Closes at 17:00'; }
+      else if (day >= 1 && day <= 5 && hour < 10) { gText = 'Opens today at 10:00'; }
+      else if (day >= 1 && day <= 4 && hour >= 17) { gText = 'Opens tomorrow at 10:00'; }
+      else if (day === 5 && hour >= 17) { gText = 'Opens Saturday at 10:00'; }
+      else if (day === 6 && hour < 10) { gText = 'Opens today at 10:00'; }
+      else if (day === 6 && hour >= 16) { gText = 'Opens Sunday at 12:00'; }
+      else if (day === 0 && hour < 12) { gText = 'Opens today at 12:00'; }
+      else if (day === 0 && hour >= 16) { gText = 'Opens Monday at 10:00'; }
+      setGlasgowStatus({ isOpen: gOpen, text: gText });
     };
     checkStatus();
     const interval = setInterval(checkStatus, 60000);
@@ -124,12 +142,14 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop top bar */}
-      <div className="hidden md:flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-8 py-2 justify-center gap-8 items-center">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Burnbank Rd, Hamilton ML3 9AZ</a>
-        <span className="text-white/30">·</span>
+      <div className="hidden md:flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-8 py-2 justify-center gap-6 items-center">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Hamilton · Burnbank Rd</a>
         <a href="tel:01698286866" className="hover:text-white transition-colors">01698 286866</a>
-        <span className="text-white/30">·</span>
-        <span>Mon–Fri 9am–5pm &nbsp;·&nbsp; Sat–Sun Closed</span>
+        <div className={`w-1.5 h-1.5 rounded-full ${hamiltonStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+        <span className="text-white/30 mx-2">|</span>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Glasgow · Carnegie Rd</a>
+        <a href="tel:01418828008" className="hover:text-white transition-colors">0141 882 8008</a>
+        <div className={`w-1.5 h-1.5 rounded-full ${glasgowStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
       </div>
 
       <nav
@@ -181,16 +201,26 @@ const Navbar = () => {
             Contact Us
           </MagneticButton>
         </a>
-        <div className="text-center text-black/50 font-data text-xs space-y-2">
-          <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Burnbank Rd, Hamilton ML3 9AZ</a>
-          <a href="tel:01698286866" className="block hover:text-primary transition-colors">01698 286866</a>
-          <p>Mon–Fri 9am–5pm &nbsp;·&nbsp; Sat–Sun Closed</p>
-          <div className="pt-1">
-            <a href="/#contact" onClick={() => setMenuOpen(false)} className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-body text-xs border ${status.isOpen ? 'bg-green-100/50 text-green-700 border-green-200' : 'bg-red-100/50 text-red-700 border-red-200'}`}>
-              <div className={`w-2 h-2 rounded-full animate-pulse ${status.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
-              <span className="font-medium uppercase tracking-wider">{status.isOpen ? 'Open' : 'Closed'}</span>
-              <span className="opacity-40 mx-1">•</span>
-              <span>{status.text}</span>
+        <div className="flex gap-8 text-center text-black/50 font-data text-xs">
+          <div className="space-y-2">
+            <p className="font-medium text-black/70 uppercase tracking-wider">Hamilton</p>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Burnbank Rd, ML3 9AZ</a>
+            <a href="tel:01698286866" className="block hover:text-primary transition-colors">01698 286866</a>
+            <p>Mon–Fri 9am–5pm</p>
+            <a href="/#contact" onClick={() => setMenuOpen(false)} className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-body text-xs border ${hamiltonStatus.isOpen ? 'bg-green-100/50 text-green-700 border-green-200' : 'bg-red-100/50 text-red-700 border-red-200'}`}>
+              <div className={`w-2 h-2 rounded-full animate-pulse ${hamiltonStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+              <span className="font-medium uppercase tracking-wider">{hamiltonStatus.isOpen ? 'Open' : 'Closed'}</span>
+            </a>
+          </div>
+          <div className="w-px bg-black/10" />
+          <div className="space-y-2">
+            <p className="font-medium text-black/70 uppercase tracking-wider">Glasgow</p>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Carnegie Rd, G52 4JZ</a>
+            <a href="tel:01418828008" className="block hover:text-primary transition-colors">0141 882 8008</a>
+            <p>Mon–Fri 10am–5pm</p>
+            <a href="/#contact" onClick={() => setMenuOpen(false)} className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-body text-xs border ${glasgowStatus.isOpen ? 'bg-green-100/50 text-green-700 border-green-200' : 'bg-red-100/50 text-red-700 border-red-200'}`}>
+              <div className={`w-2 h-2 rounded-full animate-pulse ${glasgowStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+              <span className="font-medium uppercase tracking-wider">{glasgowStatus.isOpen ? 'Open' : 'Closed'}</span>
             </a>
           </div>
         </div>
@@ -1017,35 +1047,42 @@ const FAQPage = () => {
 
 const Booking = () => {
   const [showHours, setShowHours] = useState(false);
-  const [status, setStatus] = useState({ isOpen: false, text: '' });
+  const [hamiltonStatus, setHamiltonStatus] = useState({ isOpen: false, text: '' });
+  const [glasgowStatus, setGlasgowStatus] = useState({ isOpen: false, text: '' });
 
   useEffect(() => {
     const checkStatus = () => {
       const now = new Date();
       const day = now.getDay();
       const hour = now.getHours();
-      
-      const isWeekday = day >= 1 && day <= 5;
-      const isOpen = isWeekday && hour >= 9 && hour < 17;
-      
-      let text = '';
-      if (isOpen) {
-        text = 'Closes at 17:00';
-      } else {
-        if (isWeekday && hour < 9) {
-          text = 'Opens today at 09:00';
-        } else if (day >= 1 && day <= 4 && hour >= 17) {
-          text = 'Opens tomorrow at 09:00';
-        } else if ((day === 5 && hour >= 17) || day === 6) {
-          text = 'Opens Monday at 09:00';
-        } else if (day === 0) {
-          text = 'Opens tomorrow at 09:00';
-        }
-      }
-      
-      setStatus({ isOpen, text });
+
+      // Hamilton: Mon-Fri 9-17
+      const hOpen = day >= 1 && day <= 5 && hour >= 9 && hour < 17;
+      let hText = '';
+      if (hOpen) { hText = 'Closes at 17:00'; }
+      else if (day >= 1 && day <= 5 && hour < 9) { hText = 'Opens today at 09:00'; }
+      else if (day >= 1 && day <= 4 && hour >= 17) { hText = 'Opens tomorrow at 09:00'; }
+      else if ((day === 5 && hour >= 17) || day === 6) { hText = 'Opens Monday at 09:00'; }
+      else if (day === 0) { hText = 'Opens tomorrow at 09:00'; }
+      setHamiltonStatus({ isOpen: hOpen, text: hText });
+
+      // Glasgow: Mon-Fri 10-17, Sat 10-16, Sun 12-16
+      let gOpen = false;
+      if (day >= 1 && day <= 5) gOpen = hour >= 10 && hour < 17;
+      else if (day === 6) gOpen = hour >= 10 && hour < 16;
+      else if (day === 0) gOpen = hour >= 12 && hour < 16;
+      let gText = '';
+      if (gOpen) { gText = (day === 6 || day === 0) ? 'Closes at 16:00' : 'Closes at 17:00'; }
+      else if (day >= 1 && day <= 5 && hour < 10) { gText = 'Opens today at 10:00'; }
+      else if (day >= 1 && day <= 4 && hour >= 17) { gText = 'Opens tomorrow at 10:00'; }
+      else if (day === 5 && hour >= 17) { gText = 'Opens Saturday at 10:00'; }
+      else if (day === 6 && hour < 10) { gText = 'Opens today at 10:00'; }
+      else if (day === 6 && hour >= 16) { gText = 'Opens Sunday at 12:00'; }
+      else if (day === 0 && hour < 12) { gText = 'Opens today at 12:00'; }
+      else if (day === 0 && hour >= 16) { gText = 'Opens Monday at 10:00'; }
+      setGlasgowStatus({ isOpen: gOpen, text: gText });
     };
-    
+
     checkStatus();
     const interval = setInterval(checkStatus, 60000);
     return () => clearInterval(interval);
@@ -1065,34 +1102,36 @@ const Booking = () => {
               Ready to transform your bedroom? Get in touch with our team to discuss your project or schedule a consultation.
             </p>
 
-            <button 
-              onClick={() => setShowHours(true)}
-              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-body text-xs border mb-12 cursor-pointer transition-colors ${
-                status.isOpen 
-                  ? 'bg-green-100/50 text-green-700 border-green-200 hover:bg-green-100' 
-                  : 'bg-red-100/50 text-red-700 border-red-200 hover:bg-red-100'
-              }`}
-              title="View full opening hours"
-            >
-              <div className={`w-2 h-2 rounded-full animate-pulse ${status.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
-              <span className="font-medium uppercase tracking-wider">{status.isOpen ? 'Open' : 'Closed'}</span> 
-              <span className="opacity-40 mx-1">•</span> 
-              <span>{status.text}</span>
-            </button>
+            <div className="flex gap-3 mb-12">
+              <button onClick={() => setShowHours(true)} className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-body text-xs border cursor-pointer transition-colors ${hamiltonStatus.isOpen ? 'bg-green-100/50 text-green-700 border-green-200 hover:bg-green-100' : 'bg-red-100/50 text-red-700 border-red-200 hover:bg-red-100'}`} title="View Hamilton opening hours">
+                <div className={`w-2 h-2 rounded-full animate-pulse ${hamiltonStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+                <span className="font-medium uppercase tracking-wider">Hamilton</span>
+                <span className="opacity-40">•</span>
+                <span>{hamiltonStatus.isOpen ? 'Open' : 'Closed'}</span>
+              </button>
+              <button onClick={() => setShowHours(true)} className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-body text-xs border cursor-pointer transition-colors ${glasgowStatus.isOpen ? 'bg-green-100/50 text-green-700 border-green-200 hover:bg-green-100' : 'bg-red-100/50 text-red-700 border-red-200 hover:bg-red-100'}`} title="View Glasgow opening hours">
+                <div className={`w-2 h-2 rounded-full animate-pulse ${glasgowStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+                <span className="font-medium uppercase tracking-wider">Glasgow</span>
+                <span className="opacity-40">•</span>
+                <span>{glasgowStatus.isOpen ? 'Open' : 'Closed'}</span>
+              </button>
+            </div>
 
             <div className="space-y-8">
               <div className="flex items-start gap-4">
                 <div className="mt-1 p-3 bg-concrete/50 rounded-full"><MapPin size={20} className="text-primary" /></div>
                 <div>
-                  <h4 className="font-heading font-medium text-lg mb-1">Our Showroom</h4>
-                  <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="font-body text-black/60 hover:text-primary transition-colors">Burnbank Rd, Hamilton ML3 9AZ</a>
+                  <h4 className="font-heading font-medium text-lg mb-1">Our Showrooms</h4>
+                  <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="font-body text-black/60 hover:text-primary transition-colors block">Hamilton — Burnbank Rd, ML3 9AZ</a>
+                  <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="font-body text-black/60 hover:text-primary transition-colors block">Glasgow — 120 Carnegie Rd, G52 4JZ</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <div className="mt-1 p-3 bg-concrete/50 rounded-full"><Phone size={20} className="text-primary" /></div>
                 <div>
                   <h4 className="font-heading font-medium text-lg mb-1">Call Us</h4>
-                  <a href="tel:01698286866" className="font-body text-black/60 hover:text-primary transition-colors">01698 286866</a>
+                  <a href="tel:01698286866" className="font-body text-black/60 hover:text-primary transition-colors block">Hamilton — 01698 286866</a>
+                  <a href="tel:01418828008" className="font-body text-black/60 hover:text-primary transition-colors block">Glasgow — 0141 882 8008</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -1106,8 +1145,11 @@ const Booking = () => {
                 <div className="mt-1 p-3 bg-concrete/50 rounded-full"><Clock size={20} className="text-primary" /></div>
                 <div>
                   <h4 className="font-heading font-medium text-lg mb-1">Opening Hours</h4>
-                  <p className="font-body text-black/60">Monday - Friday: 9:00 AM - 5:00 PM</p>
-                  <p className="font-body text-black/60">Saturday - Sunday: Closed</p>
+                  <p className="font-body text-black/60 font-medium">Hamilton</p>
+                  <p className="font-body text-black/60">Mon–Fri: 9:00 AM – 5:00 PM &nbsp;·&nbsp; Sat–Sun: Closed</p>
+                  <p className="font-body text-black/60 font-medium mt-2">Glasgow</p>
+                  <p className="font-body text-black/60">Mon–Fri: 10:00 AM – 5:00 PM</p>
+                  <p className="font-body text-black/60">Sat: 10:00 AM – 4:00 PM &nbsp;·&nbsp; Sun: 12:00 – 4:00 PM</p>
                 </div>
               </div>
             </div>
