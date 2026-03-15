@@ -254,7 +254,7 @@ const Hero = () => {
 
   const heroImage = heroData?.image ? urlFor(heroData.image).width(1920).url() : '/hero-image2.webp';
   const heroHeading = heroData?.heading || 'Your Home.';
-  const heroSubheading = heroData?.subheading || 'Creating gracefully organized spaces with custom wardrobes, elegant living room units, and clever storage that makes daily life a joy.';
+  const heroSubheading = heroData?.subheading || 'Creating organized spaces with custom wardrobes, elegant living room units, and clever storage that makes daily life a joy.';
 
   return (
     <section ref={scope} className="relative h-[100dvh] w-full flex items-end pb-20 pt-32 px-6 lg:px-12 bg-black overflow-hidden">
