@@ -461,6 +461,7 @@ const FALLBACK_WORK = [
 
 const Work = () => {
   const [workData, setWorkData] = useState(null);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
     client.fetch(`*[_type == "workImage"] | order(order asc)`).then(data => {
@@ -480,16 +481,26 @@ const Work = () => {
   });
 
   return (
-    <section id="work" className="py-10 px-6 lg:px-12 bg-black text-bone">
-      <div className="max-w-7xl mx-auto">
+    <section id="work" className="py-10 bg-black text-bone">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <h2 className="font-drama font-bold text-5xl md:text-7xl mb-12">Our Recent Work</h2>
+      </div>
 
         {/* Mobile carousel */}
-        <div className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6" style={{ scrollbarWidth: 'none' }}>
+        <div
+          className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4"
+          style={{ scrollbarWidth: 'none' }}
+          onScroll={e => {
+            const el = e.currentTarget;
+            const index = Math.round(el.scrollLeft / (el.scrollWidth / images.length));
+            setActiveSlide(index);
+          }}
+        >
           {images.map((image, i) => (
             <div
               key={i}
-              className="min-w-[80vw] snap-start flex-shrink-0 relative rounded-[2rem] h-72 overflow-hidden border border-white/10"
+              className="snap-start flex-shrink-0 relative rounded-[2rem] h-72 overflow-hidden border border-white/10"
+              style={{ minWidth: 'calc(100vw - 3rem)', marginLeft: i === 0 ? '1.5rem' : 0 }}
             >
               <img src={image.src} className="w-full h-full object-cover" alt={image.alt} loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
@@ -499,9 +510,14 @@ const Work = () => {
             </div>
           ))}
         </div>
+        <div className="md:hidden flex justify-center gap-2 mt-4">
+          {images.map((_, i) => (
+            <div key={i} className={`rounded-full transition-all duration-300 ${i === activeSlide ? 'w-4 h-1.5 bg-white' : 'w-1.5 h-1.5 bg-white/30'}`} />
+          ))}
+        </div>
 
-        {/* Desktop grid */}
-        <div className="hidden md:grid grid-cols-12 gap-6">
+      {/* Desktop grid */}
+      <div className="hidden md:grid grid-cols-12 gap-6 max-w-7xl mx-auto px-6 lg:px-12">
           <div
             className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10"
           >
@@ -511,7 +527,7 @@ const Work = () => {
               <h3 className="font-heading text-2xl md:text-3xl">{images[0].title}</h3>
             </div>
           </div>
-          
+
           <div className="md:col-span-4 flex flex-col gap-6">
             <div
               className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10"
@@ -532,7 +548,7 @@ const Work = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="md:col-span-4 flex flex-col gap-6">
             <div
               className="group relative overflow-hidden rounded-[2rem] h-[288px] border border-white/10"
@@ -553,7 +569,7 @@ const Work = () => {
               </div>
             </div>
           </div>
-          
+
           <div
             className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10"
           >
@@ -563,8 +579,7 @@ const Work = () => {
               <h3 className="font-heading text-2xl md:text-3xl">{images[5].title}</h3>
             </div>
           </div>
-        </div> {/* end desktop grid */}
-      </div>
+        </div>
 
     </section>
   );
