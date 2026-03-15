@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { client, urlFor } from './sanityClient';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Calendar, MapPin, Phone, CheckCircle2, ChevronRight, Menu, X, Clock, Navigation, Mail, Star, Quote } from 'lucide-react';
+import { ArrowRight, Calendar, MapPin, Phone, CheckCircle2, ChevronRight, Menu, X, Clock, Navigation, Mail } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -231,6 +232,11 @@ const Navbar = () => {
 
 const Hero = () => {
   const scope = useRef(null);
+  const [heroData, setHeroData] = useState(null);
+
+  useEffect(() => {
+    client.fetch(`*[_type == "hero"][0]`).then(setHeroData);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -246,12 +252,16 @@ const Hero = () => {
     return () => ctx.revert();
   }, []);
 
+  const heroImage = heroData?.image ? urlFor(heroData.image).width(1920).url() : '/hero-image2.webp';
+  const heroHeading = heroData?.heading || 'Your Home.';
+  const heroSubheading = heroData?.subheading || 'Creating gracefully organized spaces with custom wardrobes, elegant living room units, and clever storage that makes daily life a joy.';
+
   return (
     <section ref={scope} className="relative h-[100dvh] w-full flex items-end pb-20 pt-32 px-6 lg:px-12 bg-black overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img 
-          src="/hero-image2.webp" 
-          alt="Custom built walk in wardrobe" 
+        <img
+          src={heroImage}
+          alt="Custom built walk in wardrobe"
           className="w-full h-full object-cover opacity-60"
           fetchpriority="high"
           loading="eager"
@@ -263,10 +273,10 @@ const Hero = () => {
         <div className="max-w-3xl">
           <h1 className="text-bone mb-6">
             <span className="block font-heading font-medium text-2xl md:text-4xl mb-2 hero-element">Beautiful storage for</span>
-            <span className="block font-drama font-bold text-6xl md:text-8xl lg:text-9xl text-concrete leading-none uppercase tracking-tight hero-element">Your Home.</span>
+            <span className="block font-drama font-bold text-6xl md:text-8xl lg:text-9xl text-concrete leading-none uppercase tracking-tight hero-element">{heroHeading}</span>
           </h1>
           <p className="text-concrete/80 text-lg md:text-xl max-w-xl font-body hero-element mb-10">
-            Creating gracefully organized spaces with custom wardrobes, elegant living room units, and clever storage that makes daily life a joy.
+            {heroSubheading}
           </p>
           
           <div className="flex flex-wrap items-center gap-4 hero-element">
@@ -293,43 +303,52 @@ const Hero = () => {
   );
 };
 
+const FALLBACK_SERVICES = [
+  {
+    image: "/walkinwardrobe3.png",
+    label: "Most Popular",
+    title: "Walk-in Wardrobes",
+    hook: "Your own dressing room — in your own home.",
+    description: "Imagine starting every morning in a beautifully organised space where everything has its place. We design and build stunning walk-in wardrobes that turn an ordinary room into something you'll genuinely love.",
+    benefits: ["Floor-to-ceiling storage", "Custom lighting & mirrors", "Built around your lifestyle"],
+  },
+  {
+    image: "/walkinwardrobe2.png",
+    label: "Bedroom Storage",
+    title: "Fitted Wardrobes",
+    hook: "No more clutter. No more wasted space.",
+    description: "A fitted wardrobe goes from wall to wall and floor to ceiling — making the absolute most of your room. We'll design it around exactly what you need to store, so everything has a home.",
+    benefits: ["Maximises every inch of space", "Sliding or hinged door options", "Matches your room perfectly"],
+  },
+  {
+    image: "/image2.webp",
+    label: "Living Room",
+    title: "TV & Media Units",
+    hook: "Transform the heart of your home.",
+    description: "A beautifully fitted media wall or TV unit can completely change how your living room looks and feels. We hide away all the cables and clutter so you're left with a clean, stylish space your family will enjoy every day.",
+    benefits: ["Hides cables & equipment", "Custom shelving & storage", "Designed to fit your wall exactly"],
+  },
+  {
+    image: "/Walkinwardrobe.png",
+    label: "Any Space",
+    title: "Awkward Spaces",
+    hook: "No room is too tricky for us.",
+    description: "Sloped ceilings, alcoves, oddly shaped rooms — these are our speciality. We've fitted hundreds of beautiful wardrobes into spaces other companies would turn down. If it's a challenge, we love it.",
+    benefits: ["Loft conversions & sloped ceilings", "Alcoves & recesses", "Made-to-measure, always"],
+  },
+];
+
 const Services = () => {
   const sectionRef = useRef(null);
+  const [services, setServices] = useState(null);
 
-  const services = [
-    {
-      image: "/walkinwardrobe3.png",
-      label: "Most Popular",
-      title: "Walk-in Wardrobes",
-      hook: "Your own dressing room — in your own home.",
-      description: "Imagine starting every morning in a beautifully organised space where everything has its place. We design and build stunning walk-in wardrobes that turn an ordinary room into something you'll genuinely love.",
-      benefits: ["Floor-to-ceiling storage", "Custom lighting & mirrors", "Built around your lifestyle"],
-    },
-    {
-      image: "/walkinwardrobe2.png",
-      label: "Bedroom Storage",
-      title: "Fitted Wardrobes",
-      hook: "No more clutter. No more wasted space.",
-      description: "A fitted wardrobe goes from wall to wall and floor to ceiling — making the absolute most of your room. We'll design it around exactly what you need to store, so everything has a home.",
-      benefits: ["Maximises every inch of space", "Sliding or hinged door options", "Matches your room perfectly"],
-    },
-    {
-      image: "/image2.webp",
-      label: "Living Room",
-      title: "TV & Media Units",
-      hook: "Transform the heart of your home.",
-      description: "A beautifully fitted media wall or TV unit can completely change how your living room looks and feels. We hide away all the cables and clutter so you're left with a clean, stylish space your family will enjoy every day.",
-      benefits: ["Hides cables & equipment", "Custom shelving & storage", "Designed to fit your wall exactly"],
-    },
-    {
-      image: "/Walkinwardrobe.png",
-      label: "Any Space",
-      title: "Awkward Spaces",
-      hook: "No room is too tricky for us.",
-      description: "Sloped ceilings, alcoves, oddly shaped rooms — these are our speciality. We've fitted hundreds of beautiful wardrobes into spaces other companies would turn down. If it's a challenge, we love it.",
-      benefits: ["Loft conversions & sloped ceilings", "Alcoves & recesses", "Made-to-measure, always"],
-    },
-  ];
+  useEffect(() => {
+    client.fetch(`*[_type == "service"] | order(order asc)`).then(data => {
+      if (data && data.length > 0) setServices(data);
+    });
+  }, []);
+
+  const displayServices = services || FALLBACK_SERVICES;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -358,12 +377,12 @@ const Services = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {services.map((service, i) => (
+          {displayServices.map((service, i) => (
             <div key={i} className="service-card group bg-white rounded-[2rem] overflow-hidden border border-concrete/60 flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-300">
               {/* Photo */}
               <div className="relative h-56 md:h-64 overflow-hidden">
                 <img
-                  src={service.image}
+                  src={service.image?._type === 'image' ? urlFor(service.image).width(800).url() : service.image}
                   alt={service.title}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -395,7 +414,7 @@ const Services = () => {
         <div className="mt-10 text-center">
           <a href="#contact">
             <MagneticButton className="px-8 py-4 bg-black text-bone rounded-full font-medium inline-flex items-center gap-2 text-base">
-              Book a Free Consultation <ArrowRight size={18} />
+              Arrange a showroom appointment<ArrowRight size={18} />
             </MagneticButton>
           </a>
           <p className="text-black/40 font-body text-sm mt-3">No obligation — just a friendly chat about your home</p>
@@ -406,15 +425,31 @@ const Services = () => {
   );
 };
 
+const FALLBACK_WORK = [
+  { src: "/Bedroom2.jpg", alt: "Fitted bedroom", subtitle: "Bedroom Storage", title: "Beautiful Fitted Bedroom" },
+  { src: "/tvunit3.png", alt: "Living room storage", subtitle: "Living Space", title: "Beautiful TV Media Wall" },
+  { src: "/TVUnit4.webp", alt: "TV media unit", subtitle: "Media Wall", title: "Custom Media Unit" },
+  { src: "/image4.webp", alt: "Fitted wardrobes with mirror panels", subtitle: "Fitted Wardrobes", title: "Mirror Panel Wardrobes" },
+  { src: "/walkinwardrobe2.png", alt: "Walk in wardrobe detail", subtitle: "Smart Storage", title: "Shoe Display Solutions" },
+  { src: "/TVUnit5.webp", alt: "TV unit and shelving", subtitle: "Living Room", title: "Bespoke TV & Shelving Unit" }
+];
+
 const Work = () => {
-  const images = [
-    { src: "/Bedroom2.jpg", alt: "Fitted bedroom", subtitle: "Bedroom Storage", title: "Beautiful Fitted Bedroom" },
-    { src: "/tvunit3.png", alt: "Living room storage", subtitle: "Living Space", title: "Beautiful TV Media Wall" },
-    { src: "/TVUnit4.webp", alt: "TV media unit", subtitle: "Media Wall", title: "Custom Media Unit" },
-    { src: "/image4.webp", alt: "Fitted wardrobes with mirror panels", subtitle: "Fitted Wardrobes", title: "Mirror Panel Wardrobes" },
-    { src: "/walkinwardrobe2.png", alt: "Walk in wardrobe detail", subtitle: "Smart Storage", title: "Shoe Display Solutions" },
-    { src: "/TVUnit5.webp", alt: "TV unit and shelving", subtitle: "Living Room", title: "Bespoke TV & Shelving Unit" }
-  ];
+  const [workData, setWorkData] = useState(null);
+
+  useEffect(() => {
+    client.fetch(`*[_type == "workImage"] | order(order asc)`).then(data => {
+      if (data && data.length > 0) setWorkData(data);
+    });
+  }, []);
+
+  const rawImages = workData || FALLBACK_WORK;
+  const images = rawImages.map(item => ({
+    src: item.image?._type === 'image' ? urlFor(item.image).width(1200).url() : item.src,
+    alt: item.alt,
+    subtitle: item.subtitle,
+    title: item.title,
+  }));
 
   return (
     <section id="work" className="py-10 px-6 lg:px-12 bg-black text-bone">
@@ -618,249 +653,14 @@ const Process = () => {
 };
 
 const Reviews = () => {
-  const scrollContainerRef = useRef(null);
-  
-  const reviews = [
-    {
-      name: "George Eadie",
-      date: "",
-      text: "From John in the showroom to Margaret and Tracy in the office you will find friendly, efficient and knowledgeable service and assistance. Nothing was too much trouble. The whole process from start to finish delivered on every level exactly as was promised. Liam and his colleagues Brandon and Darren were simply superb in their craftsmanship and installation skills. From carpet protection to hoovering on completion every care was taken. Excellent all round family firm.",
-      rating: 5
-    },
-    {
-      name: "Lynsaye Adams",
-      date: "",
-      text: "The whole experience from John coming out and helping design and Liams craftsmanship. I now have my dressing room of dreams!",
-      rating: 5
-    },
-    {
-      name: "Alistair Mack",
-      date: "",
-      text: "Contacted John at gallery design Hamilton to have my full bedroom turned into a walk in wardrobe. There was a few awkward spaces and this was not a problem he came up with good suggestions. He even managed to fit a dressing table — me and my wife are totally delighted with the finished result. They kept us up to speed every step of the way. I totally recommend this company. There a great bunch of guys who work together and keep your area spotless.",
-      rating: 5
-    },
-    {
-      name: "Peter Miller",
-      date: "",
-      text: "Fantastic service from start to finish. Visited Gallery design looking for a complete refit and remodel of our master bedroom. From the initial visit at the showroom all the way through to completion the quality of service we received was exemplary. Liam and the team completed the install and we are absolutely delighted. There is nothing that is too much trouble for these guys. Impeccable workmanship, cleaned up after and left us with our perfect bedroom. Can't recommend this company highly enough.",
-      rating: 5
-    },
-    {
-      name: "James Doolan",
-      date: "",
-      text: "I had looked at various companies and eventually stumbled across Gallery Design. I visited their showroom and was immediately impressed with the quality finish on all their bespoke displays. John visited my home, was very helpful and honest — no sales gimmicks and no pressure sales tactics. Now that the bedroom is finished it is beyond my wildest dream. The attention to detail shown by Liam and Darren is exceptional. I would highly recommend this company in a heartbeat.",
-      rating: 5
-    },
-    {
-      name: "Anonymous (Ff)",
-      date: "",
-      text: "We first used Gallery Design about 2 years ago for a bespoke fitted bedroom. The excellent job, fair price and quality product still looking good as-new immediately took us back when we decided to have a media unit built. Liam really took on board the look we were after and delivered on our requirements for both storage and technology. The quality and finish is just excellent. Highly recommended!",
-      rating: 5
-    },
-    {
-      name: "Marie Miller",
-      date: "",
-      text: "We can't recommend Gallery Design highly enough. All the showroom staff were helpful, friendly and assisted us in making the right decision. Margaret's knowledge and experience was invaluable. John, Liam and the installation team were amazing. Fantastic, personal service from a family business.",
-      rating: 5
-    },
-    {
-      name: "William Alexander Walker",
-      date: "",
-      text: "Liz and I would not hesitate to recommend Gallery Designs. We are delighted with the good quality of our bespoke fitted wardrobe.",
-      rating: 5
-    },
-    {
-      name: "Natasha Alonzi",
-      date: "",
-      text: "I absolutely recommend The Gallery Design Bedrooms. John designed clever, attractive furniture solutions for a smaller space. Liam and his team built fitted wardrobes, dressing table, bedside tables and desk with shelves and drawers. The workmanship and professionalism is exceptional. Nothing was too much trouble. We are delighted and will certainly use them again.",
-      rating: 5
-    },
-    {
-      name: "B MCF",
-      date: "",
-      text: "Our experience with Gallery Design was fantastic. From design by John to fitting by Liam, the team were very professional, friendly and hard-working. The standard of the fitted wardrobe is very high, finish complete with integrated lighting. Totally transformed our room, highly recommend to anyone. Can’t thank you enough.",
-      rating: 5
-    },
-    {
-      name: "Marcus Lavety",
-      date: "",
-      text: "What a wonderful service from start to finish. John and his team designed and installed the most wonderful bespoke dressing system in my daughter's bedroom. I would recommend them to anyone.",
-      rating: 5
-    },
-    {
-      name: "Andrea Fletcher",
-      date: "",
-      text: "Would totally recommend Gallery Design. We have a small bedroom which is now a perfect dressing room. 5 star service from the first phone call to the installation. John, Liam and Brandon are all fantastic and left the room spotless.",
-      rating: 5
-    },
-    {
-      name: "Robert McCaffrey",
-      date: "",
-      text: "Our entire experience with Gallery Design was excellent. Margaret, John, Liam and the team were so professional and helpful throughout the process. My wife's bespoke dressing room is fantastic quality and exactly what she wanted.",
-      rating: 5
-    },
-    {
-      name: "Paul Reynolds",
-      date: "",
-      text: "After recently moving house, we turned to Gallery Design for the second time. From our initial contact to the final sign-off, John, Liam and the entire team demonstrated outstanding professionalism and expertise at every stage. The installation process was seamless and efficient. We couldn't be happier with the results.",
-      rating: 5
-    },
-    {
-      name: "David Miller",
-      date: "",
-      text: "Top class, staff are most helpful.",
-      rating: 5
-    },
-    {
-      name: "Janet Hamilton",
-      date: "",
-      text: "Great experience from Margaret at the showroom to John coming to our home to plan our new bedroom furniture. Liam and the boys who installed were excellent, completed on time and were neat and very tidy. We are very pleased with our new bedroom.",
-      rating: 5
-    },
-    {
-      name: "Sadia Khan",
-      date: "",
-      text: "It was an absolute great experience working with John and Liam. Words can't describe how beautiful my fitted cupboards are looking. Highly recommend — not only are they a great team and very friendly, but they also give you the right advice on selecting what will look good in your home.",
-      rating: 5
-    },
-    {
-      name: "David Howat",
-      date: "",
-      text: "Gallery Design were FAB! They designed us a new wardrobe suite for our granddaughter's room and it hits the mark on all levels. Staff are amazing and very knowledgeable, fitters worked very hard, were very tidy and great to have in the house.",
-      rating: 5
-    },
-    {
-      name: "Pamela Dodds",
-      date: "",
-      text: "Absolutely delighted with my wardrobes. The boys were amazing — all fitted in one day, no mess, no hassle, lovely guys. Excellent quality, so glad I decided to go with them.",
-      rating: 5
-    },
-    {
-      name: "Property Rentals",
-      date: "",
-      text: "Without doubt a 5-star service from start to finish. Had 3 bedrooms and a media wall fitted and we are so pleased with every room. Everything was fitted to perfection, excellent quality and amazing workmanship. Not a bit of mess was left.",
-      rating: 5
-    },
-    {
-      name: "Liz McMorris",
-      date: "",
-      text: "Excellent sales, design and installation team all in a friendly family manner. Highly recommended for that personal feel.",
-      rating: 5
-    },
-    {
-      name: "Iain Black",
-      date: "",
-      text: "My wife and I are delighted with our new look bedroom. From seeing the great choice in their showroom to Liam and the team building the quality wardrobes in our home, the experience has been 1st class. Would not hesitate to recommend to family and friends.",
-      rating: 5
-    },
-    {
-      name: "Audrey Richard",
-      date: "",
-      text: "Absolutely delighted with all aspects of work done, bedroom furniture and care taken. Friendly, respectful workers who never stopped. Would highly recommend this local company.",
-      rating: 5
-    },
-    {
-      name: "Kathy Harding",
-      date: "",
-      text: "This family run bespoke furniture business made every stage of the process easy, from design and product selection to installation. The end product was perfect, exactly what we were looking for. No mess. No fuss. We can't praise this company highly enough.",
-      rating: 5
-    },
-    {
-      name: "Carol Gilhooley",
-      date: "",
-      text: "A huge thank you to John, Liam, Darren and Brandon. We have been a repeat customer over the past 15 years and can honestly say we wouldn't go anywhere else. The quality and attention to detail is exceptional and we couldn't be happier with the finished result. Nothing was too much trouble.",
-      rating: 5
-    },
-    {
-      name: "James Rough",
-      date: "",
-      text: "Absolutely delighted with our fitted bedrooms. Friendly and helpful advice in the showroom, then John came out and helped with ideas. Liam and his team were fantastic. The finished product was amazing — first class workmanship.",
-      rating: 5
-    },
-    {
-      name: "Sharon Macdonald",
-      date: "",
-      text: "Gallery Design have now completed every bedroom in my home. The materials used are of a very high standard and the workmanship was outstanding. Absolutely love my new bedroom — it's definitely the best room in the house.",
-      rating: 5
-    }
-  ];
-
-  const handleScroll = (direction) => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 400; // Adjust for card width + gap
-      const currentScroll = scrollContainerRef.current.scrollLeft;
-      scrollContainerRef.current.scrollTo({
-        left: direction === 'left' ? currentScroll - scrollAmount : currentScroll + scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
-    <section className="py-20 md:py-32 bg-white overflow-hidden">
+    <section className="py-20 md:py-32 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-          <div className="max-w-xl">
-            <h2 className="font-heading text-4xl mb-4 text-black">Loved by our customers</h2>
-            <p className="font-body text-black/60 text-lg">We take deep pride in every piece of storage we build. Our lovely customers continually praise our friendly showroom service and the spotless work of our fitting team.</p>
-          </div>
-          <div className="flex gap-4">
-            <button 
-              onClick={() => handleScroll('left')}
-              className="p-4 rounded-full border border-concrete hover:bg-concrete/20 transition-colors hidden md:block"
-              aria-label="Previous reviews"
-            >
-              <ArrowRight size={24} className="rotate-180 text-black" />
-            </button>
-            <button 
-              onClick={() => handleScroll('right')}
-              className="p-4 rounded-full bg-black text-white hover:bg-black/80 transition-colors hidden md:block"
-              aria-label="Next reviews"
-            >
-              <ArrowRight size={24} />
-            </button>
-          </div>
+        <div className="mb-12">
+          <h2 className="font-heading text-4xl mb-4 text-black">Loved by our customers</h2>
+          <p className="font-body text-black/60 text-lg">We take deep pride in every piece of storage we build. Our lovely customers continually praise our friendly showroom service and the spotless work of our fitting team.</p>
         </div>
-      </div>
-        
-      <div 
-        ref={scrollContainerRef}
-        className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 cursor-grab active:cursor-grabbing w-full px-6 lg:px-12"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        {reviews.map((review, index) => (
-          <div 
-            key={index} 
-            className="min-w-[300px] md:min-w-[400px] max-w-[400px] snap-start bg-bone p-8 rounded-[2rem] border border-concrete/50 flex flex-col h-auto"
-          >
-            <div className="flex text-yellow-500 mb-6">
-              {[...Array(review.rating)].map((_, i) => (
-                <Star key={i} size={16} fill="currentColor" />
-              ))}
-            </div>
-            <div className="relative mb-6 flex-grow">
-              <Quote className="absolute -top-2 -left-2 text-concrete opacity-50 w-8 h-8" />
-              <p className="font-body text-black/80 text-sm md:text-base italic relative z-10 pt-2 lg:line-clamp-6">"{review.text}"</p>
-            </div>
-            <div className="flex items-center gap-4 mt-auto">
-              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-heading font-bold">
-                {review.name.charAt(0)}
-              </div>
-              <div>
-                <h4 className="font-heading font-medium text-black">{review.name}</h4>
-                <p className="font-data text-xs text-black/50">Verified Customer</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-8 px-6 lg:px-12 max-w-[1400px] mx-auto">
-        <a href="https://www.google.com/search?q=gallery+design+bedrooms&rlz=1C5GCEM_enGB1159GB1159&oq=gallery+desig&gs_lcrp=EgZjaHJvbWUqCQgAEEUYOxiABDIJCAAQRRg7GIAEMgcIARAAGIAEMhAIAhAuGK8BGMcBGIAEGI4FMgYIAxBFGDkyBwgEEAAYgAQyBggFEEUYPTIGCAYQRRg8MgYIBxBFGDzSAQgyOTE2ajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8#lrd=0x488848b388c0101b:0xfb3a777b6e9bf194,1,,,," target="_blank" rel="noopener noreferrer">
-          <MagneticButton className="px-6 py-3 border border-concrete rounded-full text-black hover:bg-concrete/10 transition-colors w-full md:w-auto font-medium">
-            Read all Google reviews
-          </MagneticButton>
-        </a>
+        <div className="elfsight-app-fae0c6a0-e493-45da-89e4-096c846db02a" data-elfsight-app-lazy></div>
       </div>
     </section>
   );
@@ -914,7 +714,7 @@ const Credentials = () => {
             <p className="font-data text-xs uppercase text-black/60">Years Experience</p>
           </div>
           <div className="text-center px-4">
-            <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="850">0</span>+</div>
+            <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="2400">0</span>+</div>
             <p className="font-data text-xs uppercase text-black/60">Projects Completed</p>
           </div>
           <div className="text-center px-4">
@@ -923,7 +723,7 @@ const Credentials = () => {
           </div>
           <div className="text-center px-4">
             <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="300">0</span>+</div>
-            <p className="font-data text-xs uppercase text-black/60">5-Star Reviews</p>
+            <p className="font-data text-xs uppercase text-black/60">5-Star Recent Reviews</p>
           </div>
         </div>
       </div>
@@ -1120,7 +920,7 @@ const Booking = () => {
           {/* Right Column - Contact Form */}
           <div>
             <h2 className="font-heading font-medium text-4xl lg:text-5xl tracking-tight mb-6">
-              Book a consultation
+              Contact us
             </h2>
             <p className="font-body text-black/60 text-lg max-w-md mb-12">
               Fill out the form below to schedule a consultation with our team. We'll get back to you as soon as possible.
