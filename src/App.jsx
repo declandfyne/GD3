@@ -142,20 +142,26 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Desktop top bar */}
-      <div className="hidden md:flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-8 py-2 justify-center gap-6 items-center">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Hamilton · Burnbank Rd</a>
+      {/* Top bar - all screens */}
+      <div className="flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-4 md:px-8 py-2 justify-center gap-4 md:gap-6 items-center">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+          <span className="hidden md:inline">Hamilton · Burnbank Rd</span>
+          <span className="md:hidden">Hamilton</span>
+        </a>
         <a href="tel:01698286866" className="hover:text-white transition-colors">01698 286866</a>
         <div className={`w-1.5 h-1.5 rounded-full ${hamiltonStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
-        <span className="text-white/30 mx-2">|</span>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Hillington · Carnegie Rd</a>
+        <span className="text-white/30 mx-1 md:mx-2">|</span>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+          <span className="hidden md:inline">Hillington · Carnegie Rd</span>
+          <span className="md:hidden">Hillington</span>
+        </a>
         <a href="tel:01418828008" className="hover:text-white transition-colors">0141 882 8008</a>
         <div className={`w-1.5 h-1.5 rounded-full ${glasgowStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
       </div>
 
       <nav
         ref={navRef}
-        className={`fixed top-6 md:top-12 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[2rem] transition-all duration-300 w-[90%] max-w-5xl ${
+        className={`fixed top-12 md:top-12 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[2rem] transition-all duration-300 w-[90%] max-w-5xl ${
           scrolled || menuOpen
             ? 'bg-bone/80 backdrop-blur-xl border border-concrete text-black shadow-premium'
             : 'bg-black/20 backdrop-blur-md text-bone shadow-lg'
