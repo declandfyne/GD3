@@ -171,12 +171,12 @@ const Navbar = () => {
           <img
             src="/GalleryDesignLogo.svg"
             alt="Gallery Design Logo"
-            className={`h-8 w-auto transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
+            className={`h-8 w-auto flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
           />
           <img
             src="/GalleryDesignMonogram.svg"
-            alt="Gallery Design Monogram"
-            className={`h-5 md:h-4 w-auto self-center transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
+            alt="Gallery Design"
+            className={`h-4 w-auto self-center flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
           />
         </Link>
         
@@ -262,6 +262,7 @@ const Hero = () => {
     return () => ctx.revert();
   }, []);
 
+  const heroVideo = heroData?.video?.asset?.url || null;
   const heroImage = heroData?.image ? urlFor(heroData.image).width(1920).url() : '/hero-image2.webp';
   const heroHeading = heroData?.heading || 'Your Home.';
   const heroSubheading = heroData?.subheading || 'Creating organized spaces with custom wardrobes, elegant living room units, and clever storage that makes daily life a joy.';
@@ -269,13 +270,24 @@ const Hero = () => {
   return (
     <section ref={scope} className="relative h-[100dvh] w-full flex items-end pb-20 pt-32 px-6 lg:px-12 bg-black overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt="Custom built walk in wardrobe"
-          className="w-full h-full object-cover opacity-60"
-          fetchpriority="high"
-          loading="eager"
-        />
+        {heroVideo ? (
+          <video
+            src={heroVideo}
+            className="w-full h-full object-cover opacity-60"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <img
+            src={heroImage}
+            alt="Custom built walk in wardrobe"
+            className="w-full h-full object-cover opacity-60"
+            fetchPriority="high"
+            loading="eager"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent mix-blend-multiply" />
       </div>
 

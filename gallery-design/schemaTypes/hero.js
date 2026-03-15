@@ -20,7 +20,12 @@ export const hero = {
       title: 'Background Image',
       type: 'image',
       options: { hotspot: true },
-      validation: Rule => Rule.required()
+    },
+    {
+      name: 'video',
+      title: 'Background Video (overrides image if set)',
+      type: 'file',
+      options: { accept: 'video/*' },
     }
   ],
   preview: {
