@@ -176,7 +176,7 @@ const Navbar = () => {
           <img
             src="/GalleryDesignMonogram.svg"
             alt="Gallery Design"
-            className={`h-4 w-auto self-center flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
+            className={`h-[17.6px] md:h-4 w-auto self-center flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
           />
         </Link>
         
