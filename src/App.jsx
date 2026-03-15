@@ -1361,6 +1361,7 @@ export default function App() {
         <ScrollToTop />
         <div className="noise-overlay" />
         <Navbar />
+        <div className="elfsight-app-ce7da6d4-0b5a-4eed-9e88-07a33c89fc75" data-elfsight-app-lazy></div>
         <Routes>
           <Route path="/" element={
             <main>
