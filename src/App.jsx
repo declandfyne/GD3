@@ -446,13 +446,16 @@ const Work = () => {
     });
   }, []);
 
-  const rawImages = workData || FALLBACK_WORK;
-  const images = rawImages.map(item => ({
-    src: item.image?._type === 'image' ? urlFor(item.image).width(1200).url() : item.src,
-    alt: item.alt,
-    subtitle: item.subtitle,
-    title: item.title,
-  }));
+  const images = FALLBACK_WORK.map((fallback, i) => {
+    const sanityItem = workData?.find(s => s.order === i + 1);
+    if (!sanityItem) return fallback;
+    return {
+      src: sanityItem.image?._type === 'image' ? urlFor(sanityItem.image).width(1200).url() : fallback.src,
+      alt: sanityItem.alt || fallback.alt,
+      subtitle: sanityItem.subtitle || fallback.subtitle,
+      title: sanityItem.title || fallback.title,
+    };
+  });
 
   return (
     <section id="work" className="py-10 px-6 lg:px-12 bg-black text-bone">
