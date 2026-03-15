@@ -348,7 +348,10 @@ const Services = () => {
     });
   }, []);
 
-  const displayServices = services || FALLBACK_SERVICES;
+  const displayServices = FALLBACK_SERVICES.map((fallback, i) => {
+    const sanityItem = services?.find(s => s.order === i + 1);
+    return sanityItem || fallback;
+  });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -399,7 +402,7 @@ const Services = () => {
                 <p className="font-body text-black/60 text-base leading-relaxed mb-6">{service.description}</p>
 
                 <ul className="mt-auto space-y-2">
-                  {service.benefits.map((b, j) => (
+                  {(service.benefits || []).map((b, j) => (
                     <li key={j} className="flex items-center gap-3 text-black/70 font-body text-sm">
                       <CheckCircle2 size={16} className="text-primary flex-shrink-0" />
                       {b}

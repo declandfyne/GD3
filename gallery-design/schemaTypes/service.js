@@ -30,6 +30,18 @@ export const service = {
       validation: Rule => Rule.required()
     },
     {
+      name: 'hook',
+      title: 'Hook (short tagline)',
+      type: 'string',
+    },
+    {
+      name: 'benefits',
+      title: 'Benefits',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Add up to 3 bullet points'
+    },
+    {
       name: 'order',
       title: 'Display Order',
       type: 'number',
