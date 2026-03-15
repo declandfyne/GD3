@@ -162,12 +162,16 @@ const Navbar = () => {
         }`}
       >
         <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 font-heading font-bold text-xl tracking-tight">
-          <img 
-            src="/GalleryDesignLogo.svg" 
-            alt="Gallery Design Logo" 
-            className={`h-8 w-auto transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`} 
+          <img
+            src="/GalleryDesignLogo.svg"
+            alt="Gallery Design Logo"
+            className={`h-8 w-auto transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
           />
-          <span className="inline">Gallery Design</span>
+          <img
+            src="/GalleryDesignMonogram.svg"
+            alt="Gallery Design Monogram"
+            className={`h-5 md:h-4 w-auto self-center transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
+          />
         </Link>
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
