@@ -481,14 +481,13 @@ const Work = () => {
   });
 
   return (
-    <section id="work" className="py-10 bg-black text-bone">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section id="work" className="py-10 px-6 lg:px-12 bg-black text-bone">
+      <div className="max-w-7xl mx-auto">
         <h2 className="font-drama font-bold text-5xl md:text-7xl mb-12">Our Recent Work</h2>
-      </div>
 
         {/* Mobile carousel */}
         <div
-          className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4"
+          className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6"
           style={{ scrollbarWidth: 'none' }}
           onScroll={e => {
             const el = e.currentTarget;
@@ -516,8 +515,8 @@ const Work = () => {
           ))}
         </div>
 
-      {/* Desktop grid */}
-      <div className="hidden md:grid grid-cols-12 gap-6 max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Desktop grid */}
+        <div className="hidden md:grid grid-cols-12 gap-6">
           <div
             className="md:col-span-8 group relative overflow-hidden rounded-[2rem] h-[600px] border border-white/10"
           >
@@ -580,7 +579,7 @@ const Work = () => {
             </div>
           </div>
         </div>
-
+      </div>
     </section>
   );
 };
