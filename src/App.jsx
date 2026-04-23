@@ -18,54 +18,6 @@ const fetchFromSanity = async (query, label) => {
   }
 };
 
-const getMobilePortraitMetrics = () => {
-  if (typeof window === 'undefined') {
-    return {
-      isMobilePortrait: false,
-      isShort: false,
-      tier: 'lg',
-      viewportWidth: 0,
-      viewportHeight: 0,
-    };
-  }
-
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
-  const isMobilePortrait = viewportWidth < 768 && viewportHeight >= viewportWidth;
-
-  let tier = 'lg';
-  if (viewportWidth <= 359) tier = 'xs';
-  else if (viewportWidth <= 389) tier = 'sm';
-  else if (viewportWidth <= 429) tier = 'md';
-
-  return {
-    isMobilePortrait,
-    isShort: viewportHeight <= 700,
-    tier,
-    viewportWidth,
-    viewportHeight,
-  };
-};
-
-const useMobilePortraitMetrics = () => {
-  const [metrics, setMetrics] = useState(getMobilePortraitMetrics);
-
-  useEffect(() => {
-    const updateMetrics = () => setMetrics(getMobilePortraitMetrics());
-
-    updateMetrics();
-    window.addEventListener('resize', updateMetrics);
-    window.addEventListener('orientationchange', updateMetrics);
-
-    return () => {
-      window.removeEventListener('resize', updateMetrics);
-      window.removeEventListener('orientationchange', updateMetrics);
-    };
-  }, []);
-
-  return metrics;
-};
-
 const AppSkeleton = () => (
   <div className="min-h-screen bg-bone pt-32 px-6 lg:px-12 animate-pulse">
     {/* Navbar Skeleton */}
@@ -136,9 +88,8 @@ const MagneticButton = ({ children, className = '', onClick }) => {
   );
 };
 
-const Navbar = ({ mobileMetrics }) => {
+const Navbar = () => {
   const navRef = useRef(null);
-  const mobileTopbarRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [hamiltonStatus, setHamiltonStatus] = useState({ isOpen: false, text: '' });
@@ -200,48 +151,6 @@ const Navbar = ({ mobileMetrics }) => {
     };
   }, [menuOpen]);
 
-  useEffect(() => {
-    const resetOffsets = () => {
-      document.documentElement.style.removeProperty('--mobile-header-offset');
-      document.documentElement.style.removeProperty('--mobile-hero-offset');
-    };
-
-    if (!mobileMetrics.isMobilePortrait) {
-      resetOffsets();
-      return;
-    }
-
-    const navGap = mobileMetrics.tier === 'xs' ? 8 : mobileMetrics.tier === 'sm' ? 10 : 12;
-    const heroGap = mobileMetrics.isShort ? 14 : mobileMetrics.tier === 'lg' ? 24 : 18;
-
-    const updateOffsets = () => {
-      const topbarHeight = mobileTopbarRef.current?.offsetHeight ?? 0;
-      const navHeight = navRef.current?.offsetHeight ?? 0;
-
-      document.documentElement.style.setProperty('--mobile-header-offset', `${topbarHeight + navGap}px`);
-      document.documentElement.style.setProperty('--mobile-hero-offset', `${topbarHeight + navHeight + navGap + heroGap}px`);
-    };
-
-    updateOffsets();
-
-    const resizeObserver = typeof window.ResizeObserver === 'function' ? new ResizeObserver(updateOffsets) : null;
-    if (resizeObserver && mobileTopbarRef.current) resizeObserver.observe(mobileTopbarRef.current);
-    if (resizeObserver && navRef.current) resizeObserver.observe(navRef.current);
-    window.addEventListener('resize', updateOffsets);
-
-    return () => {
-      resizeObserver?.disconnect();
-      window.removeEventListener('resize', updateOffsets);
-      resetOffsets();
-    };
-  }, [mobileMetrics.isMobilePortrait, mobileMetrics.isShort, mobileMetrics.tier, menuOpen, scrolled]);
-
-  const isCompactMobile = mobileMetrics.isMobilePortrait && (mobileMetrics.tier === 'xs' || mobileMetrics.tier === 'sm');
-  const mobileTopbarColumnsClass = mobileMetrics.isMobilePortrait && mobileMetrics.tier === 'xs' ? 'grid-cols-1' : 'grid-cols-2';
-  const navChromeClass = isCompactMobile ? 'px-4 py-2.5 w-[92%]' : mobileMetrics.isMobilePortrait ? 'px-5 py-3 w-[92%]' : 'px-6 py-3 w-[90%]';
-  const logoHeightClass = isCompactMobile ? 'h-7' : 'h-8';
-  const monogramHeightClass = isCompactMobile ? 'h-[15px] md:h-4' : 'h-[17.6px] md:h-4';
-
   return (
     <>
       {/* Top bar - desktop */}
@@ -262,8 +171,8 @@ const Navbar = ({ mobileMetrics }) => {
       </div>
 
       {/* Top bar - mobile */}
-      <div ref={mobileTopbarRef} className="mobile-topbar md:hidden fixed top-0 left-0 right-0 z-50 bg-black/85 backdrop-blur-md border-b border-white/10 px-3 pb-2">
-        <div className={`grid ${mobileTopbarColumnsClass} gap-2 text-[10px] font-data text-white/70`}>
+      <div className="mobile-topbar md:hidden fixed top-0 left-0 right-0 z-50 bg-black/85 backdrop-blur-md border-b border-white/10 px-3 pb-2">
+        <div className="grid grid-cols-2 gap-2 text-[10px] font-data text-white/70">
           <div className="rounded-2xl border border-white/10 bg-white/5 px-3 py-2">
             <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white transition-colors">
               <div className={`w-2 h-2 rounded-full ${hamiltonStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
@@ -283,8 +192,7 @@ const Navbar = ({ mobileMetrics }) => {
 
       <nav
         ref={navRef}
-        style={mobileMetrics.isMobilePortrait ? { top: 'var(--mobile-header-offset, 4.75rem)' } : undefined}
-        className={`fixed md:top-12 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between rounded-[2rem] transition-all duration-300 max-w-5xl ${navChromeClass} ${
+        className={`mobile-nav-offset fixed md:top-12 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[2rem] transition-all duration-300 w-[90%] max-w-5xl ${
           scrolled || menuOpen
             ? 'bg-bone/80 backdrop-blur-xl border border-concrete text-black shadow-premium'
             : 'bg-black/20 backdrop-blur-md text-bone shadow-lg'
@@ -294,12 +202,12 @@ const Navbar = ({ mobileMetrics }) => {
           <img
             src="/GalleryDesignLogo.svg"
             alt="Gallery Design Logo"
-            className={`${logoHeightClass} w-auto flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
+            className={`h-8 w-auto flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
           />
           <img
             src="/GalleryDesignMonogram.svg"
             alt="Gallery Design"
-            className={`${monogramHeightClass} w-auto self-center flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
+            className={`h-[17.6px] md:h-4 w-auto self-center flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
           />
         </Link>
         
@@ -363,7 +271,7 @@ const Navbar = ({ mobileMetrics }) => {
   );
 };
 
-const Hero = ({ mobileMetrics }) => {
+const Hero = () => {
   const scope = useRef(null);
   const [heroData, setHeroData] = useState(null);
 
@@ -390,43 +298,9 @@ const Hero = ({ mobileMetrics }) => {
   const heroHeadingIntro = heroData?.headingIntro || 'Beautiful storage for';
   const heroHeading = heroData?.heading || 'Your Home.';
   const heroSubheading = heroData?.subheading || 'Creating organized spaces with custom wardrobes, elegant living room units, and clever storage that makes daily life a joy.';
-  const isCompactMobile = mobileMetrics.isMobilePortrait && (mobileMetrics.tier === 'xs' || mobileMetrics.tier === 'sm');
-  const heroIntroClass = mobileMetrics.isMobilePortrait
-    ? mobileMetrics.tier === 'xs'
-      ? 'text-lg'
-      : mobileMetrics.tier === 'sm'
-        ? 'text-xl'
-        : 'text-2xl'
-    : 'text-2xl md:text-4xl';
-  const heroSubheadingClass = mobileMetrics.isMobilePortrait
-    ? mobileMetrics.tier === 'xs'
-      ? 'text-base'
-      : 'text-lg'
-    : 'text-lg md:text-xl';
-  const heroButtonClass = isCompactMobile ? 'px-6 py-3 text-sm' : mobileMetrics.isMobilePortrait ? 'px-7 py-3.5 text-sm' : 'px-8 py-4';
-  const heroChipClass = isCompactMobile ? 'px-3 py-2.5 text-[10px]' : mobileMetrics.isMobilePortrait ? 'px-4 py-3 text-[11px]' : 'px-4 py-3';
-  const heroHeadingStyle = mobileMetrics.isMobilePortrait
-    ? {
-        fontSize:
-          mobileMetrics.tier === 'xs'
-            ? 'clamp(3rem, 15vw, 3.6rem)'
-            : mobileMetrics.tier === 'sm'
-              ? 'clamp(3.4rem, 14vw, 4.2rem)'
-              : mobileMetrics.tier === 'md'
-                ? 'clamp(4rem, 13vw, 5rem)'
-                : 'clamp(4.5rem, 12vw, 5.75rem)',
-        lineHeight: 0.9,
-      }
-    : undefined;
-  const heroSectionStyle = mobileMetrics.isMobilePortrait
-    ? {
-        paddingTop: 'var(--mobile-hero-offset, 12rem)',
-        paddingBottom: mobileMetrics.isShort ? '3rem' : '4rem',
-      }
-    : undefined;
 
   return (
-    <section ref={scope} style={heroSectionStyle} className="relative min-h-[100svh] md:min-h-[100dvh] w-full flex items-end pb-20 pt-32 md:pt-32 px-6 lg:px-12 bg-black overflow-hidden">
+    <section ref={scope} className="relative min-h-[100svh] md:min-h-[100dvh] w-full flex items-end pb-16 md:pb-20 pt-44 md:pt-32 px-6 lg:px-12 bg-black overflow-hidden">
       <div className="absolute inset-0 z-0">
         {heroVideo ? (
           <video
@@ -449,34 +323,34 @@ const Hero = ({ mobileMetrics }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent mix-blend-multiply" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-12">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-10 md:gap-12">
         <div className="max-w-3xl">
           <h1 className="text-bone mb-6">
-            <span className={`block font-heading font-medium mb-2 hero-element ${heroIntroClass}`}>{heroHeadingIntro}</span>
-            <span style={heroHeadingStyle} className="block font-drama font-bold text-6xl md:text-8xl lg:text-9xl text-concrete leading-none uppercase tracking-tight hero-element">{heroHeading}</span>
+            <span className="block font-heading font-medium text-2xl md:text-4xl mb-2 hero-element">{heroHeadingIntro}</span>
+            <span className="block font-drama font-bold text-6xl md:text-8xl lg:text-9xl text-concrete leading-none uppercase tracking-tight hero-element">{heroHeading}</span>
           </h1>
-          <p className={`text-concrete/80 max-w-xl font-body hero-element mb-8 md:mb-10 ${heroSubheadingClass}`}>
+          <p className="text-concrete/80 text-lg md:text-xl max-w-xl font-body hero-element mb-10">
             {heroSubheading}
           </p>
           
-          <div className={`flex flex-wrap items-center hero-element ${isCompactMobile ? 'gap-3' : 'gap-4'}`}>
+          <div className="flex flex-wrap items-center gap-4 hero-element">
             <a href="#contact">
-              <MagneticButton className={`${heroButtonClass} bg-primary text-bone rounded-full font-medium inline-flex items-center gap-2`}>
+              <MagneticButton className="px-8 py-4 bg-primary text-bone rounded-full font-medium inline-flex items-center gap-2">
                 Contact Us <ArrowRight size={18} />
               </MagneticButton>
             </a>
             <a href="#services">
-              <MagneticButton className={`${heroButtonClass} bg-white/10 backdrop-blur-md text-bone rounded-full font-medium hover:bg-white/20 transition-colors`}>
+              <MagneticButton className="px-8 py-4 bg-white/10 backdrop-blur-md text-bone rounded-full font-medium hover:bg-white/20 transition-colors">
                 View Services
               </MagneticButton>
             </a>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 text-concrete/70 font-data uppercase tracking-wider hero-element w-full md:w-auto max-w-2xl md:max-w-none mx-auto md:mx-0 text-center md:text-left">
-          <div className={`flex items-center justify-center md:justify-start gap-2 rounded-full border border-white/10 bg-white/5 ${heroChipClass}`}><CheckCircle2 size={14} className="text-primary"/> 1. Visit Showroom</div>
-          <div className={`flex items-center justify-center md:justify-start gap-2 rounded-full border border-white/10 bg-white/5 ${heroChipClass}`}><CheckCircle2 size={14} className="text-primary"/> 2. Home Measure & Design</div>
-          <div className={`flex items-center justify-center md:justify-start gap-2 rounded-full border border-white/10 bg-white/5 ${heroChipClass}`}><CheckCircle2 size={14} className="text-primary"/> 3. Quote & Installation</div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 gap-3 text-concrete/70 font-data text-xs uppercase tracking-wider hero-element w-full md:w-auto max-w-2xl md:max-w-none mx-auto md:mx-0 text-center md:text-left">
+          <div className="flex items-center justify-center md:justify-start gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3"><CheckCircle2 size={14} className="text-primary"/> 1. Visit Showroom</div>
+          <div className="flex items-center justify-center md:justify-start gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3"><CheckCircle2 size={14} className="text-primary"/> 2. Home Measure & Design</div>
+          <div className="flex items-center justify-center md:justify-start gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3"><CheckCircle2 size={14} className="text-primary"/> 3. Quote & Installation</div>
         </div>
       </div>
     </section>
@@ -617,36 +491,16 @@ const FALLBACK_WORK = [
   { src: "/TVUnit5.webp", alt: "TV unit and shelving", subtitle: "Living Room", title: "Bespoke TV & Shelving Unit" }
 ];
 
-const Work = ({ mobileMetrics }) => {
-  const carouselViewportRef = useRef(null);
+const Work = () => {
+  const carouselRef = useRef(null);
   const [workData, setWorkData] = useState(null);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [carouselViewportWidth, setCarouselViewportWidth] = useState(0);
 
   useEffect(() => {
     fetchFromSanity(`*[_type == "workImage"] | order(order asc)`, 'work images').then(data => {
       if (data && data.length > 0) setWorkData(data);
     });
   }, []);
-
-  useEffect(() => {
-    if (!mobileMetrics.isMobilePortrait) return;
-
-    const updateWidth = () => {
-      setCarouselViewportWidth(carouselViewportRef.current?.clientWidth ?? 0);
-    };
-
-    updateWidth();
-
-    const resizeObserver = typeof window.ResizeObserver === 'function' ? new ResizeObserver(updateWidth) : null;
-    if (resizeObserver && carouselViewportRef.current) resizeObserver.observe(carouselViewportRef.current);
-    window.addEventListener('resize', updateWidth);
-
-    return () => {
-      resizeObserver?.disconnect();
-      window.removeEventListener('resize', updateWidth);
-    };
-  }, [mobileMetrics.isMobilePortrait]);
 
   const images = FALLBACK_WORK.map((fallback, i) => {
     const sanityItem = workData?.find(s => s.order === i + 1);
@@ -659,35 +513,13 @@ const Work = ({ mobileMetrics }) => {
     };
   });
 
-  const mobileCardWidth = (() => {
-    const availableWidth = carouselViewportWidth || Math.max(mobileMetrics.viewportWidth - 48, 240);
-    if (!mobileMetrics.isMobilePortrait) return 352;
-    if (mobileMetrics.tier === 'xs') return Math.max(232, Math.min(268, availableWidth - 36));
-    if (mobileMetrics.tier === 'sm') return Math.max(248, Math.min(292, availableWidth - 40));
-    if (mobileMetrics.tier === 'md') return Math.max(276, Math.min(324, availableWidth - 48));
-    return Math.max(304, Math.min(352, availableWidth - 56));
-  })();
-  const mobileCardHeight = mobileMetrics.tier === 'xs' ? 240 : mobileMetrics.tier === 'sm' ? 252 : mobileMetrics.tier === 'md' ? 264 : 288;
-  const workHeadingClass = mobileMetrics.isMobilePortrait
-    ? mobileMetrics.tier === 'xs'
-      ? 'text-[2.2rem]'
-      : mobileMetrics.tier === 'sm'
-        ? 'text-[2.45rem]'
-        : mobileMetrics.tier === 'md'
-          ? 'text-[2.8rem]'
-          : 'text-5xl'
-    : 'text-5xl md:text-7xl';
-  const mobileCarouselGapClass = mobileMetrics.isMobilePortrait && mobileMetrics.tier === 'xs' ? 'gap-3' : 'gap-4';
-
   const handleCarouselScroll = (event) => {
     const slides = Array.from(event.currentTarget.children);
     if (slides.length === 0) return;
 
     const nextIndex = slides.reduce(
       (closest, slide, index) => {
-        const containerCenter = event.currentTarget.scrollLeft + event.currentTarget.clientWidth / 2;
-        const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
-        const distance = Math.abs(slideCenter - containerCenter);
+        const distance = Math.abs(slide.offsetLeft - event.currentTarget.scrollLeft);
         return distance < closest.distance ? { index, distance } : closest;
       },
       { index: 0, distance: Infinity }
@@ -699,26 +531,26 @@ const Work = ({ mobileMetrics }) => {
   return (
     <section id="work" className="py-10 px-6 lg:px-12 bg-black text-bone">
       <div className="max-w-7xl mx-auto">
-        <h2 className={`font-drama font-bold mb-12 ${workHeadingClass}`}>Our Recent Work</h2>
+        <h2 className="font-drama font-bold text-5xl md:text-7xl mb-12">Our Recent Work</h2>
 
         {/* Mobile carousel */}
         <div
-          ref={carouselViewportRef}
-          className={`hide-scrollbar md:hidden flex overflow-x-auto snap-x snap-mandatory pb-4 ${mobileCarouselGapClass}`}
+          ref={carouselRef}
+          className="hide-scrollbar md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6"
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
             WebkitOverflowScrolling: 'touch',
-            scrollPaddingLeft: '0px',
-            scrollPaddingRight: '0px'
+            scrollPaddingLeft: '1.5rem',
+            scrollPaddingRight: '1.5rem'
           }}
           onScroll={handleCarouselScroll}
         >
           {images.map((image, i) => (
             <div
               key={i}
-              className="snap-start flex-shrink-0 relative rounded-[2rem] overflow-hidden border border-white/10"
-              style={{ width: `${mobileCardWidth}px`, height: `${mobileCardHeight}px` }}
+              className={`snap-start flex-shrink-0 relative rounded-[2rem] h-72 overflow-hidden border border-white/10 ${i === 0 ? 'ml-6' : ''} ${i === images.length - 1 ? 'mr-6' : ''}`}
+              style={{ width: 'min(22rem, calc(100vw - 4.5rem))' }}
             >
               <img src={image.src} className="w-full h-full object-cover" alt={image.alt} loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
@@ -941,7 +773,7 @@ const Trust = () => {
   );
 };
 
-const Credentials = ({ mobileMetrics }) => {
+const Credentials = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -966,41 +798,25 @@ const Credentials = ({ mobileMetrics }) => {
     return () => ctx.revert();
   }, []);
 
-  const statCardClass = mobileMetrics.isMobilePortrait
-    ? mobileMetrics.tier === 'xs'
-      ? 'px-3 py-5'
-      : mobileMetrics.tier === 'sm'
-        ? 'px-3 py-5.5'
-        : 'px-4 py-6'
-    : 'px-4 py-6';
-  const statValueClass = mobileMetrics.isMobilePortrait
-    ? mobileMetrics.tier === 'xs'
-      ? 'text-[2.3rem]'
-      : mobileMetrics.tier === 'sm'
-        ? 'text-[2.6rem]'
-        : 'text-5xl'
-    : 'text-5xl md:text-6xl';
-  const statLabelClass = mobileMetrics.isMobilePortrait && mobileMetrics.tier === 'xs' ? 'text-[10px]' : 'text-xs';
-
   return (
     <section ref={sectionRef} className="py-10 px-6 lg:px-12 bg-concrete/20 border-y border-concrete">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-          <div className={`text-center rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0 ${statCardClass}`}>
-            <div className={`font-drama font-bold text-black mb-2 ${statValueClass}`}><span className="counter-val" data-target="15">0</span>+</div>
-            <p className={`font-data uppercase text-black/60 ${statLabelClass}`}>Years Experience</p>
+          <div className="text-center px-4 py-6 rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0">
+            <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="15">0</span>+</div>
+            <p className="font-data text-xs uppercase text-black/60">Years Experience</p>
           </div>
-          <div className={`text-center rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0 ${statCardClass}`}>
-            <div className={`font-drama font-bold text-black mb-2 ${statValueClass}`}><span className="counter-val" data-target="2400">0</span>+</div>
-            <p className={`font-data uppercase text-black/60 ${statLabelClass}`}>Projects Completed</p>
+          <div className="text-center px-4 py-6 rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0">
+            <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="2400">0</span>+</div>
+            <p className="font-data text-xs uppercase text-black/60">Projects Completed</p>
           </div>
-          <div className={`text-center rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0 ${statCardClass}`}>
-            <div className={`font-drama font-bold text-black mb-2 ${statValueClass}`}><span className="counter-val" data-target="100">0</span>%</div>
-            <p className={`font-data uppercase text-black/60 ${statLabelClass}`}>Made to Measure</p>
+          <div className="text-center px-4 py-6 rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0">
+            <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="100">0</span>%</div>
+            <p className="font-data text-xs uppercase text-black/60">Made to Measure</p>
           </div>
-          <div className={`text-center rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0 ${statCardClass}`}>
-            <div className={`font-drama font-bold text-black mb-2 ${statValueClass}`}><span className="counter-val" data-target="300">0</span>+</div>
-            <p className={`font-data uppercase text-black/60 ${statLabelClass}`}>5-Star Recent Reviews</p>
+          <div className="text-center px-4 py-6 rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0">
+            <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="300">0</span>+</div>
+            <p className="font-data text-xs uppercase text-black/60">5-Star Recent Reviews</p>
           </div>
         </div>
       </div>
@@ -1613,7 +1429,6 @@ const Footer = () => {
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const mobileMetrics = useMobilePortraitMetrics();
 
   useEffect(() => {
     // Simulate initial loading sequence for all assets and components
@@ -1632,15 +1447,15 @@ export default function App() {
       <div className="relative min-h-screen bg-bone scroll-smooth">
         <ScrollToTop />
         <div className="noise-overlay" />
-        <Navbar mobileMetrics={mobileMetrics} />
+        <Navbar />
         <div className="elfsight-app-ce7da6d4-0b5a-4eed-9e88-07a33c89fc75" data-elfsight-app-lazy></div>
         <Routes>
           <Route path="/" element={
             <main>
-              <Hero mobileMetrics={mobileMetrics} />
-              <Credentials mobileMetrics={mobileMetrics} />
+              <Hero />
+              <Credentials />
               <Services />
-              <Work mobileMetrics={mobileMetrics} />
+              <Work />
               <Process />
               <Reviews />
               <section className="py-20 bg-bone">
