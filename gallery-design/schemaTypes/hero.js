@@ -4,6 +4,11 @@ export const hero = {
   type: 'document',
   fields: [
     {
+      name: 'headingIntro',
+      title: 'Heading Intro',
+      type: 'string',
+    },
+    {
       name: 'heading',
       title: 'Heading',
       type: 'string',

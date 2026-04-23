@@ -264,6 +264,7 @@ const Hero = () => {
 
   const heroVideo = heroData?.video?.asset?.url || null;
   const heroImage = heroData?.image ? urlFor(heroData.image).width(1920).url() : '/hero-image2.webp';
+  const heroHeadingIntro = heroData?.headingIntro || 'Beautiful storage for';
   const heroHeading = heroData?.heading || 'Your Home.';
   const heroSubheading = heroData?.subheading || 'Creating organized spaces with custom wardrobes, elegant living room units, and clever storage that makes daily life a joy.';
 
@@ -294,7 +295,7 @@ const Hero = () => {
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-12">
         <div className="max-w-3xl">
           <h1 className="text-bone mb-6">
-            <span className="block font-heading font-medium text-2xl md:text-4xl mb-2 hero-element">Beautiful storage for</span>
+            <span className="block font-heading font-medium text-2xl md:text-4xl mb-2 hero-element">{heroHeadingIntro}</span>
             <span className="block font-drama font-bold text-6xl md:text-8xl lg:text-9xl text-concrete leading-none uppercase tracking-tight hero-element">{heroHeading}</span>
           </h1>
           <p className="text-concrete/80 text-lg md:text-xl max-w-xl font-body hero-element mb-10">
