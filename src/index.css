@@ -8,12 +8,27 @@
   }
 }
 
+@media (max-width: 767px) {
+  html,
+  body,
+  #root {
+    overflow-x: clip;
+  }
+
+  .mobile-carousel {
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    padding-inline: 1.5rem;
+  }
+}
+
+.mobile-topbar {
+  padding-top: max(0.5rem, env(safe-area-inset-top));
+}
+
 .noise-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   pointer-events: none;
   z-index: 9999;
   opacity: 0.05;

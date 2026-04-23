@@ -153,8 +153,8 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Top bar - all screens */}
-      <div className="flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-4 md:px-8 py-2 justify-center gap-4 md:gap-6 items-center">
+      {/* Top bar - desktop */}
+      <div className="hidden md:flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-4 md:px-8 py-2 justify-center gap-4 md:gap-6 items-center">
         <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
           <span className="hidden md:inline">Hamilton · Burnbank Rd</span>
           <span className="md:hidden">Hamilton</span>
@@ -170,9 +170,29 @@ const Navbar = () => {
         <div className={`w-1.5 h-1.5 rounded-full ${glasgowStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
       </div>
 
+      {/* Top bar - mobile */}
+      <div className="mobile-topbar md:hidden fixed top-0 left-0 right-0 z-50 bg-black/85 backdrop-blur-md border-b border-white/10 px-2.5 pb-1.5">
+        <div className="grid grid-cols-2 gap-1.5 text-[9px] font-data text-white/70">
+          <div className="rounded-xl border border-white/10 bg-white/5 px-2.5 py-1.5">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white transition-colors">
+              <div className={`w-1.5 h-1.5 rounded-full ${hamiltonStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+              <span className="font-medium uppercase tracking-[0.14em]">Hamilton</span>
+            </a>
+            <a href="tel:01698286866" className="mt-0.5 block text-white/70 transition-colors hover:text-white">01698 286866</a>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/5 px-2.5 py-1.5">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white transition-colors">
+              <div className={`w-1.5 h-1.5 rounded-full ${glasgowStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+              <span className="font-medium uppercase tracking-[0.14em]">Hillington</span>
+            </a>
+            <a href="tel:01418828008" className="mt-0.5 block text-white/70 transition-colors hover:text-white">0141 882 8008</a>
+          </div>
+        </div>
+      </div>
+
       <nav
         ref={navRef}
-        className={`fixed top-12 md:top-12 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[2rem] transition-all duration-300 w-[90%] max-w-5xl ${
+        className={`fixed top-[4.15rem] md:top-12 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-4 py-2.5 md:px-6 md:py-3 rounded-[2rem] transition-all duration-300 w-[92%] md:w-[90%] max-w-5xl ${
           scrolled || menuOpen
             ? 'bg-bone/80 backdrop-blur-xl border border-concrete text-black shadow-premium'
             : 'bg-black/20 backdrop-blur-md text-bone shadow-lg'
@@ -182,12 +202,12 @@ const Navbar = () => {
           <img
             src="/GalleryDesignLogo.svg"
             alt="Gallery Design Logo"
-            className={`h-8 w-auto flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
+            className={`h-7 md:h-8 w-auto flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
           />
           <img
             src="/GalleryDesignMonogram.svg"
             alt="Gallery Design"
-            className={`h-[17.6px] md:h-4 w-auto self-center flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
+            className={`h-[15px] md:h-4 w-auto self-center flex-shrink-0 transition-all duration-300 ${scrolled || menuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
           />
         </Link>
         
@@ -280,7 +300,7 @@ const Hero = () => {
   const heroSubheading = heroData?.subheading || 'Creating organized spaces with custom wardrobes, elegant living room units, and clever storage that makes daily life a joy.';
 
   return (
-    <section ref={scope} className="relative h-[100dvh] w-full flex items-end pb-20 pt-32 px-6 lg:px-12 bg-black overflow-hidden">
+    <section ref={scope} style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 10rem)' }} className="relative min-h-[100svh] md:h-[100dvh] w-full flex items-end pb-16 md:pb-20 px-6 lg:px-12 bg-black overflow-hidden">
       <div className="absolute inset-0 z-0">
         {heroVideo ? (
           <video
@@ -303,34 +323,34 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent mix-blend-multiply" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-12">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-10 md:gap-12">
         <div className="max-w-3xl">
           <h1 className="text-bone mb-6">
-            <span className="block font-heading font-medium text-2xl md:text-4xl mb-2 hero-element">{heroHeadingIntro}</span>
-            <span className="block font-drama font-bold text-6xl md:text-8xl lg:text-9xl text-concrete leading-none uppercase tracking-tight hero-element">{heroHeading}</span>
+            <span className="block font-heading font-medium text-xl sm:text-2xl md:text-4xl mb-2 hero-element">{heroHeadingIntro}</span>
+            <span className="block font-drama font-bold text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-concrete leading-none uppercase tracking-tight hero-element">{heroHeading}</span>
           </h1>
-          <p className="text-concrete/80 text-lg md:text-xl max-w-xl font-body hero-element mb-10">
+          <p className="text-concrete/80 text-base sm:text-lg md:text-xl max-w-xl font-body hero-element mb-8 md:mb-10">
             {heroSubheading}
           </p>
           
           <div className="flex flex-wrap items-center gap-4 hero-element">
             <a href="#contact">
-              <MagneticButton className="px-8 py-4 bg-primary text-bone rounded-full font-medium inline-flex items-center gap-2">
+              <MagneticButton className="px-6 py-3 sm:px-8 sm:py-4 bg-primary text-bone rounded-full font-medium inline-flex items-center gap-2 text-sm sm:text-base">
                 Contact Us <ArrowRight size={18} />
               </MagneticButton>
             </a>
             <a href="#services">
-              <MagneticButton className="px-8 py-4 bg-white/10 backdrop-blur-md text-bone rounded-full font-medium hover:bg-white/20 transition-colors">
+              <MagneticButton className="px-6 py-3 sm:px-8 sm:py-4 bg-white/10 backdrop-blur-md text-bone rounded-full font-medium hover:bg-white/20 transition-colors text-sm sm:text-base">
                 View Services
               </MagneticButton>
             </a>
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 text-concrete/70 font-data text-xs uppercase tracking-wider hero-element">
-          <div className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary"/> 1. Visit Showroom</div>
-          <div className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary"/> 2. Home Measure & Design</div>
-          <div className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary"/> 3. Quote & Installation</div>
+        <div className="flex flex-col gap-3 text-concrete/70 font-data text-[11px] md:text-xs uppercase tracking-wider hero-element items-center md:items-start text-center md:text-left">
+          <div className="flex items-center justify-center md:justify-start gap-2"><CheckCircle2 size={14} className="text-primary"/> 1. Visit Showroom</div>
+          <div className="flex items-center justify-center md:justify-start gap-2"><CheckCircle2 size={14} className="text-primary"/> 2. Home Measure & Design</div>
+          <div className="flex items-center justify-center md:justify-start gap-2"><CheckCircle2 size={14} className="text-primary"/> 3. Quote & Installation</div>
         </div>
       </div>
     </section>
@@ -499,21 +519,28 @@ const Work = () => {
 
         {/* Mobile carousel */}
         <div
-          className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6"
-          style={{ scrollbarWidth: 'none' }}
+          className="mobile-carousel hide-scrollbar md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4"
+          style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
           onScroll={e => {
-            const el = e.currentTarget;
-            const index = Math.round(el.scrollLeft / (el.scrollWidth / images.length));
+            const slides = Array.from(e.currentTarget.children);
+            const containerCenter = e.currentTarget.scrollLeft + e.currentTarget.clientWidth / 2;
+            const index = slides.reduce((closestIndex, slide, currentIndex) => {
+              const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
+              const closestSlide = slides[closestIndex];
+              const closestCenter = closestSlide.offsetLeft + closestSlide.clientWidth / 2;
+              return Math.abs(slideCenter - containerCenter) < Math.abs(closestCenter - containerCenter)
+                ? currentIndex
+                : closestIndex;
+            }, 0);
             setActiveSlide(index);
           }}
         >
           {images.map((image, i) => (
             <div
               key={i}
-              className="snap-start flex-shrink-0 relative rounded-[2rem] h-72 overflow-hidden border border-white/10"
-              style={{ minWidth: 'calc(100vw - 3rem)', marginLeft: i === 0 ? '1.5rem' : 0 }}
+              className="snap-start flex-shrink-0 relative rounded-[2rem] aspect-[4/3] w-[84%] max-w-sm overflow-hidden border border-white/10"
             >
-              <img src={image.src} className="w-full h-full object-cover" alt={image.alt} loading="lazy" />
+              <img src={image.src} className="w-full h-full object-cover object-center" alt={image.alt} loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                 <span className="font-data text-white text-xs mb-1 uppercase">{image.subtitle}</span>
                 <h3 className="font-heading text-xl">{image.title}</h3>
@@ -762,20 +789,20 @@ const Credentials = () => {
   return (
     <section ref={sectionRef} className="py-10 px-6 lg:px-12 bg-concrete/20 border-y border-concrete">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-x divide-concrete/50">
-          <div className="text-center px-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 md:divide-x md:divide-concrete/50">
+          <div className="text-center px-2 md:px-4">
             <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="15">0</span>+</div>
             <p className="font-data text-xs uppercase text-black/60">Years Experience</p>
           </div>
-          <div className="text-center px-4">
+          <div className="text-center px-2 md:px-4">
             <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="2400">0</span>+</div>
             <p className="font-data text-xs uppercase text-black/60">Projects Completed</p>
           </div>
-          <div className="text-center px-4">
+          <div className="text-center px-2 md:px-4">
             <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="100">0</span>%</div>
             <p className="font-data text-xs uppercase text-black/60">Made to Measure</p>
           </div>
-          <div className="text-center px-4">
+          <div className="text-center px-2 md:px-4">
             <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="300">0</span>+</div>
             <p className="font-data text-xs uppercase text-black/60">5-Star Recent Reviews</p>
           </div>
