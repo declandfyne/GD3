@@ -153,8 +153,8 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Top bar - all screens */}
-      <div className="flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-4 md:px-8 py-2 justify-center gap-4 md:gap-6 items-center">
+      {/* Top bar - desktop */}
+      <div className="hidden md:flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-4 md:px-8 py-2 justify-center gap-4 md:gap-6 items-center">
         <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
           <span className="hidden md:inline">Hamilton · Burnbank Rd</span>
           <span className="md:hidden">Hamilton</span>
@@ -170,9 +170,29 @@ const Navbar = () => {
         <div className={`w-1.5 h-1.5 rounded-full ${glasgowStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
       </div>
 
+      {/* Top bar - mobile */}
+      <div className="mobile-topbar md:hidden fixed top-0 left-0 right-0 z-50 bg-black/85 backdrop-blur-md border-b border-white/10 px-3 pb-2">
+        <div className="grid grid-cols-2 gap-2 text-[10px] font-data text-white/70">
+          <div className="rounded-2xl border border-white/10 bg-white/5 px-3 py-2">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white transition-colors">
+              <div className={`w-2 h-2 rounded-full ${hamiltonStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+              <span className="font-medium uppercase tracking-[0.18em]">Hamilton</span>
+            </a>
+            <a href="tel:01698286866" className="mt-1 block text-white/70 transition-colors hover:text-white">01698 286866</a>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/5 px-3 py-2">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white transition-colors">
+              <div className={`w-2 h-2 rounded-full ${glasgowStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
+              <span className="font-medium uppercase tracking-[0.18em]">Hillington</span>
+            </a>
+            <a href="tel:01418828008" className="mt-1 block text-white/70 transition-colors hover:text-white">0141 882 8008</a>
+          </div>
+        </div>
+      </div>
+
       <nav
         ref={navRef}
-        className={`fixed top-12 md:top-12 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[2rem] transition-all duration-300 w-[90%] max-w-5xl ${
+        className={`mobile-nav-offset fixed md:top-12 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-[2rem] transition-all duration-300 w-[90%] max-w-5xl ${
           scrolled || menuOpen
             ? 'bg-bone/80 backdrop-blur-xl border border-concrete text-black shadow-premium'
             : 'bg-black/20 backdrop-blur-md text-bone shadow-lg'
@@ -280,7 +300,7 @@ const Hero = () => {
   const heroSubheading = heroData?.subheading || 'Creating organized spaces with custom wardrobes, elegant living room units, and clever storage that makes daily life a joy.';
 
   return (
-    <section ref={scope} className="relative h-[100dvh] w-full flex items-end pb-20 pt-32 px-6 lg:px-12 bg-black overflow-hidden">
+    <section ref={scope} className="relative min-h-[100svh] md:min-h-[100dvh] w-full flex items-end pb-16 md:pb-20 pt-44 md:pt-32 px-6 lg:px-12 bg-black overflow-hidden">
       <div className="absolute inset-0 z-0">
         {heroVideo ? (
           <video
@@ -303,7 +323,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent mix-blend-multiply" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-12">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-10 md:gap-12">
         <div className="max-w-3xl">
           <h1 className="text-bone mb-6">
             <span className="block font-heading font-medium text-2xl md:text-4xl mb-2 hero-element">{heroHeadingIntro}</span>
@@ -327,10 +347,10 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 text-concrete/70 font-data text-xs uppercase tracking-wider hero-element">
-          <div className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary"/> 1. Visit Showroom</div>
-          <div className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary"/> 2. Home Measure & Design</div>
-          <div className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary"/> 3. Quote & Installation</div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 gap-3 text-concrete/70 font-data text-xs uppercase tracking-wider hero-element w-full md:w-auto max-w-2xl md:max-w-none mx-auto md:mx-0 text-center md:text-left">
+          <div className="flex items-center justify-center md:justify-start gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3"><CheckCircle2 size={14} className="text-primary"/> 1. Visit Showroom</div>
+          <div className="flex items-center justify-center md:justify-start gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3"><CheckCircle2 size={14} className="text-primary"/> 2. Home Measure & Design</div>
+          <div className="flex items-center justify-center md:justify-start gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3"><CheckCircle2 size={14} className="text-primary"/> 3. Quote & Installation</div>
         </div>
       </div>
     </section>
@@ -472,6 +492,7 @@ const FALLBACK_WORK = [
 ];
 
 const Work = () => {
+  const carouselRef = useRef(null);
   const [workData, setWorkData] = useState(null);
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -492,6 +513,21 @@ const Work = () => {
     };
   });
 
+  const handleCarouselScroll = (event) => {
+    const slides = Array.from(event.currentTarget.children);
+    if (slides.length === 0) return;
+
+    const nextIndex = slides.reduce(
+      (closest, slide, index) => {
+        const distance = Math.abs(slide.offsetLeft - event.currentTarget.scrollLeft);
+        return distance < closest.distance ? { index, distance } : closest;
+      },
+      { index: 0, distance: Infinity }
+    ).index;
+
+    setActiveSlide(nextIndex);
+  };
+
   return (
     <section id="work" className="py-10 px-6 lg:px-12 bg-black text-bone">
       <div className="max-w-7xl mx-auto">
@@ -499,19 +535,22 @@ const Work = () => {
 
         {/* Mobile carousel */}
         <div
-          className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6"
-          style={{ scrollbarWidth: 'none' }}
-          onScroll={e => {
-            const el = e.currentTarget;
-            const index = Math.round(el.scrollLeft / (el.scrollWidth / images.length));
-            setActiveSlide(index);
+          ref={carouselRef}
+          className="hide-scrollbar md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch',
+            scrollPaddingLeft: '1.5rem',
+            scrollPaddingRight: '1.5rem'
           }}
+          onScroll={handleCarouselScroll}
         >
           {images.map((image, i) => (
             <div
               key={i}
-              className="snap-start flex-shrink-0 relative rounded-[2rem] h-72 overflow-hidden border border-white/10"
-              style={{ minWidth: 'calc(100vw - 3rem)', marginLeft: i === 0 ? '1.5rem' : 0 }}
+              className={`snap-start flex-shrink-0 relative rounded-[2rem] h-72 overflow-hidden border border-white/10 ${i === 0 ? 'ml-6' : ''} ${i === images.length - 1 ? 'mr-6' : ''}`}
+              style={{ width: 'min(22rem, calc(100vw - 4.5rem))' }}
             >
               <img src={image.src} className="w-full h-full object-cover" alt={image.alt} loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
@@ -762,20 +801,20 @@ const Credentials = () => {
   return (
     <section ref={sectionRef} className="py-10 px-6 lg:px-12 bg-concrete/20 border-y border-concrete">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-x divide-concrete/50">
-          <div className="text-center px-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          <div className="text-center px-4 py-6 rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0">
             <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="15">0</span>+</div>
             <p className="font-data text-xs uppercase text-black/60">Years Experience</p>
           </div>
-          <div className="text-center px-4">
+          <div className="text-center px-4 py-6 rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0">
             <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="2400">0</span>+</div>
             <p className="font-data text-xs uppercase text-black/60">Projects Completed</p>
           </div>
-          <div className="text-center px-4">
+          <div className="text-center px-4 py-6 rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0">
             <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="100">0</span>%</div>
             <p className="font-data text-xs uppercase text-black/60">Made to Measure</p>
           </div>
-          <div className="text-center px-4">
+          <div className="text-center px-4 py-6 rounded-[1.5rem] border border-concrete/40 bg-white/60 md:bg-transparent md:border-0">
             <div className="font-drama text-5xl md:text-6xl font-bold text-black mb-2"><span className="counter-val" data-target="300">0</span>+</div>
             <p className="font-data text-xs uppercase text-black/60">5-Star Recent Reviews</p>
           </div>
