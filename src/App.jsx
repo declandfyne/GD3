@@ -154,7 +154,7 @@ const Navbar = () => {
   return (
     <>
       {/* Top bar - desktop */}
-      <div className="hidden md:flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-4 md:px-8 py-2 justify-center gap-4 md:gap-6 items-center">
+      <div className={`hidden md:flex fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm text-white/70 text-xs font-data px-4 md:px-8 py-2 justify-center gap-4 md:gap-6 items-center transition-transform duration-300 ${scrolled ? '-translate-y-full' : 'translate-y-0'}`}>
         <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
           <span className="hidden md:inline">Hamilton · Burnbank Rd</span>
           <span className="md:hidden">Hamilton</span>
@@ -171,13 +171,14 @@ const Navbar = () => {
       </div>
 
       {/* Top bar - mobile */}
-      <div className="mobile-topbar md:hidden fixed top-0 left-0 right-0 z-50 bg-black/85 backdrop-blur-md border-b border-white/10 px-2.5 pb-1.5">
+      <div className={`mobile-topbar md:hidden fixed top-0 left-0 right-0 z-50 bg-black/85 backdrop-blur-md border-b border-white/10 px-2.5 pb-1.5 transition-transform duration-300 ${scrolled ? '-translate-y-full' : 'translate-y-0'}`}>
         <div className="grid grid-cols-2 gap-1.5 text-[9px] font-data text-white/70">
           <div className="rounded-xl border border-white/10 bg-white/5 px-2.5 py-1.5">
             <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white transition-colors">
               <div className={`w-1.5 h-1.5 rounded-full ${hamiltonStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
               <span className="font-medium uppercase tracking-[0.14em]">Hamilton</span>
             </a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Burnbank+Rd,+Hamilton+ML3+9AZ" target="_blank" rel="noopener noreferrer" className="mt-0.5 block text-white/55 transition-colors hover:text-white">Burnbank Rd, ML3 9AZ</a>
             <a href="tel:01698286866" className="mt-0.5 block text-white/70 transition-colors hover:text-white">01698 286866</a>
           </div>
           <div className="rounded-xl border border-white/10 bg-white/5 px-2.5 py-1.5">
@@ -185,6 +186,7 @@ const Navbar = () => {
               <div className={`w-1.5 h-1.5 rounded-full ${glasgowStatus.isOpen ? 'bg-green-500' : 'bg-red-500'}`} />
               <span className="font-medium uppercase tracking-[0.14em]">Hillington</span>
             </a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=120+Carnegie+Rd,+Hillington,+Glasgow+G52+4JZ" target="_blank" rel="noopener noreferrer" className="mt-0.5 block text-white/55 transition-colors hover:text-white">Carnegie Rd, G52 4JZ</a>
             <a href="tel:01418828008" className="mt-0.5 block text-white/70 transition-colors hover:text-white">0141 882 8008</a>
           </div>
         </div>
@@ -192,7 +194,7 @@ const Navbar = () => {
 
       <nav
         ref={navRef}
-        className={`fixed top-[4.15rem] md:top-12 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-4 py-2.5 md:px-6 md:py-3 rounded-[2rem] transition-all duration-300 w-[92%] md:w-[90%] max-w-5xl ${
+        className={`fixed ${scrolled ? 'top-4 md:top-6' : 'top-[5.1rem] md:top-16'} left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-4 py-2.5 md:px-6 md:py-3 rounded-[2rem] transition-all duration-300 w-[92%] md:w-[90%] max-w-5xl ${
           scrolled || menuOpen
             ? 'bg-bone/80 backdrop-blur-xl border border-concrete text-black shadow-premium'
             : 'bg-black/20 backdrop-blur-md text-bone shadow-lg'
