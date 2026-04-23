@@ -12,20 +12,13 @@
   padding-top: max(0.5rem, env(safe-area-inset-top));
 }
 
-.mobile-nav-offset {
-  top: calc(env(safe-area-inset-top, 0px) + 4.75rem);
-}
-
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
 .noise-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   pointer-events: none;
   z-index: 9999;
   opacity: 0.05;
