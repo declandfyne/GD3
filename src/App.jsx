@@ -7,6 +7,17 @@ import { ArrowRight, Calendar, MapPin, Phone, CheckCircle2, ChevronRight, Menu, 
 
 gsap.registerPlugin(ScrollTrigger);
 
+const fetchFromSanity = async (query, label) => {
+  try {
+    return await client.fetch(query);
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.error(`Sanity fetch failed for ${label}`, error);
+    }
+    return null;
+  }
+};
+
 const AppSkeleton = () => (
   <div className="min-h-screen bg-bone pt-32 px-6 lg:px-12 animate-pulse">
     {/* Navbar Skeleton */}
@@ -245,7 +256,7 @@ const Hero = () => {
   const [heroData, setHeroData] = useState(null);
 
   useEffect(() => {
-    client.fetch(`*[_type == "hero"][0]`).then(setHeroData);
+    fetchFromSanity(`*[_type == "hero"][0]`, 'hero').then(setHeroData);
   }, []);
 
   useEffect(() => {
@@ -366,7 +377,7 @@ const Services = () => {
   const [services, setServices] = useState(null);
 
   useEffect(() => {
-    client.fetch(`*[_type == "service"] | order(order asc)`).then(data => {
+    fetchFromSanity(`*[_type == "service"] | order(order asc)`, 'services').then(data => {
       if (data && data.length > 0) setServices(data);
     });
   }, []);
@@ -465,7 +476,7 @@ const Work = () => {
   const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
-    client.fetch(`*[_type == "workImage"] | order(order asc)`).then(data => {
+    fetchFromSanity(`*[_type == "workImage"] | order(order asc)`, 'work images').then(data => {
       if (data && data.length > 0) setWorkData(data);
     });
   }, []);
