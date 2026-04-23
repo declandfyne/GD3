@@ -618,35 +618,14 @@ const FALLBACK_WORK = [
 ];
 
 const Work = ({ mobileMetrics }) => {
-  const carouselViewportRef = useRef(null);
   const [workData, setWorkData] = useState(null);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [carouselViewportWidth, setCarouselViewportWidth] = useState(0);
 
   useEffect(() => {
     fetchFromSanity(`*[_type == "workImage"] | order(order asc)`, 'work images').then(data => {
       if (data && data.length > 0) setWorkData(data);
     });
   }, []);
-
-  useEffect(() => {
-    if (!mobileMetrics.isMobilePortrait) return;
-
-    const updateWidth = () => {
-      setCarouselViewportWidth(carouselViewportRef.current?.clientWidth ?? 0);
-    };
-
-    updateWidth();
-
-    const resizeObserver = typeof window.ResizeObserver === 'function' ? new ResizeObserver(updateWidth) : null;
-    if (resizeObserver && carouselViewportRef.current) resizeObserver.observe(carouselViewportRef.current);
-    window.addEventListener('resize', updateWidth);
-
-    return () => {
-      resizeObserver?.disconnect();
-      window.removeEventListener('resize', updateWidth);
-    };
-  }, [mobileMetrics.isMobilePortrait]);
 
   const images = FALLBACK_WORK.map((fallback, i) => {
     const sanityItem = workData?.find(s => s.order === i + 1);
@@ -659,15 +638,6 @@ const Work = ({ mobileMetrics }) => {
     };
   });
 
-  const mobileCardWidth = (() => {
-    const availableWidth = carouselViewportWidth || Math.max(mobileMetrics.viewportWidth - 48, 240);
-    if (!mobileMetrics.isMobilePortrait) return 352;
-    if (mobileMetrics.tier === 'xs') return Math.max(232, Math.min(268, availableWidth - 36));
-    if (mobileMetrics.tier === 'sm') return Math.max(248, Math.min(292, availableWidth - 40));
-    if (mobileMetrics.tier === 'md') return Math.max(276, Math.min(324, availableWidth - 48));
-    return Math.max(304, Math.min(352, availableWidth - 56));
-  })();
-  const mobileCardHeight = mobileMetrics.tier === 'xs' ? 240 : mobileMetrics.tier === 'sm' ? 252 : mobileMetrics.tier === 'md' ? 264 : 288;
   const workHeadingClass = mobileMetrics.isMobilePortrait
     ? mobileMetrics.tier === 'xs'
       ? 'text-[2.2rem]'
@@ -678,6 +648,19 @@ const Work = ({ mobileMetrics }) => {
           : 'text-5xl'
     : 'text-5xl md:text-7xl';
   const mobileCarouselGapClass = mobileMetrics.isMobilePortrait && mobileMetrics.tier === 'xs' ? 'gap-3' : 'gap-4';
+  const mobileCarouselPaddingClass = mobileMetrics.isMobilePortrait && mobileMetrics.tier === 'xs' ? 'px-3' : 'px-4';
+  const mobileCardClass = mobileMetrics.isMobilePortrait
+    ? mobileMetrics.tier === 'xs'
+      ? 'w-[82vw] aspect-[6/5]'
+      : mobileMetrics.tier === 'sm'
+        ? 'w-[84vw] aspect-[5/4]'
+        : mobileMetrics.tier === 'md'
+          ? 'w-[85vw] aspect-[4/3]'
+          : 'w-[86vw] max-w-[22rem] aspect-[4/3]'
+    : 'w-[22rem] aspect-[4/3]';
+  const mobileImageClass = mobileMetrics.isMobilePortrait && mobileMetrics.tier === 'xs'
+    ? 'object-cover object-center scale-[1.01]'
+    : 'object-cover object-center';
 
   const handleCarouselScroll = (event) => {
     const slides = Array.from(event.currentTarget.children);
@@ -703,24 +686,22 @@ const Work = ({ mobileMetrics }) => {
 
         {/* Mobile carousel */}
         <div
-          ref={carouselViewportRef}
-          className={`hide-scrollbar md:hidden flex overflow-x-auto snap-x snap-mandatory pb-4 ${mobileCarouselGapClass}`}
+          className={`hide-scrollbar mobile-carousel md:hidden flex overflow-x-auto snap-x snap-mandatory pb-4 ${mobileCarouselGapClass} ${mobileCarouselPaddingClass}`}
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
             WebkitOverflowScrolling: 'touch',
-            scrollPaddingLeft: '0px',
-            scrollPaddingRight: '0px'
+            scrollPaddingLeft: mobileMetrics.tier === 'xs' ? '0.75rem' : '1rem',
+            scrollPaddingRight: mobileMetrics.tier === 'xs' ? '0.75rem' : '1rem'
           }}
           onScroll={handleCarouselScroll}
         >
           {images.map((image, i) => (
             <div
               key={i}
-              className="snap-start flex-shrink-0 relative rounded-[2rem] overflow-hidden border border-white/10"
-              style={{ width: `${mobileCardWidth}px`, height: `${mobileCardHeight}px` }}
+              className={`snap-start flex-shrink-0 relative rounded-[2rem] overflow-hidden border border-white/10 ${mobileCardClass}`}
             >
-              <img src={image.src} className="w-full h-full object-cover" alt={image.alt} loading="lazy" />
+              <img src={image.src} className={`w-full h-full ${mobileImageClass}`} alt={image.alt} loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                 <span className="font-data text-white text-xs mb-1 uppercase">{image.subtitle}</span>
                 <h3 className="font-heading text-xl">{image.title}</h3>

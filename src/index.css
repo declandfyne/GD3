@@ -8,6 +8,19 @@
   }
 }
 
+@media (max-width: 767px) {
+  html,
+  body,
+  #root {
+    overflow-x: clip;
+  }
+
+  .mobile-carousel {
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+  }
+}
+
 .mobile-topbar {
   padding-top: max(0.5rem, env(safe-area-inset-top));
 }
